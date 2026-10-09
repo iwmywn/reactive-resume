@@ -21,9 +21,7 @@ const PARITY_PROCEDURES = {
 	"resume.renameVersion": router.resume.renameVersion,
 	"resume.deleteVersion": router.resume.deleteVersion,
 	"resume.restoreVersion": router.resume.restoreVersion,
-	"resume.setPassword": router.resume.setPassword,
 	"resume.removePassword": router.resume.removePassword,
-	"resume.verifyPassword": router.resume.verifyPassword,
 	"resume.getBySlug": router.resume.getBySlug,
 	"resume.checkSlug": router.resume.checkSlug,
 	"resume.update": router.resume.update,
@@ -148,20 +146,58 @@ const BROWSER_HANDOFFS = {
 	"auth.deleteAccount": "account",
 } as const;
 
+/** Resume share passwords are credentials too: owners set them and visitors enter them in the browser. */
+const RESUME_PASSWORD_HANDOFFS = {
+	"resume.setPassword": {
+		description:
+			"Open the resume in the editor to set, change or remove its share password under Share → Link → Require a password. Passwords stay out of tool arguments. No change is made by this tool.",
+		inputSchema: z.object({ id: z.string().min(1).describe("Resume ID. Use `list_resumes` to find valid IDs.") }),
+		url: ({ id }: Record<string, string>) => `/builder/${encodeURIComponent(id ?? "")}`,
+	},
+	"resume.verifyPassword": {
+		description:
+			"Open a password-protected public resume so the visitor can enter its password in the browser. Passwords stay out of tool arguments. No change is made by this tool.",
+		inputSchema: z.object({
+			username: z.string().min(1).describe("Username in the public resume address."),
+			slug: z.string().min(1).describe("Slug in the public resume address."),
+		}),
+		url: ({ username, slug }: Record<string, string>) =>
+			`/${encodeURIComponent(username ?? "")}/${encodeURIComponent(slug ?? "")}`,
+	},
+};
+
 const handoffAnnotations = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
-const browserToolMeta = Object.fromEntries(
-	Object.keys(BROWSER_HANDOFFS).map((path) => [
+const handoffOutputSchema = z.object({ url: z.url(), action: z.string(), requiresBrowser: z.literal(true) });
+type HandoffToolMeta = {
+	title: string;
+	description: string;
+	inputSchema: z.ZodObject;
+	outputSchema: typeof handoffOutputSchema;
+	annotations: typeof handoffAnnotations;
+};
+const browserToolMeta: Record<string, HandoffToolMeta> = Object.fromEntries([
+	...Object.keys(BROWSER_HANDOFFS).map((path) => [
 		parityToolName(path),
 		{
 			title: `Open ${path} in the app`,
 			description:
 				"Complete this workflow in the authenticated browser. Provider keys, passwords, passkeys and other account credentials stay out of tool arguments. No change is made by this tool.",
 			inputSchema: z.object({}),
-			outputSchema: z.object({ url: z.url(), action: z.string(), requiresBrowser: z.literal(true) }),
+			outputSchema: handoffOutputSchema,
 			annotations: handoffAnnotations,
 		},
 	]),
-);
+	...Object.entries(RESUME_PASSWORD_HANDOFFS).map(([path, { description, inputSchema }]) => [
+		parityToolName(path),
+		{
+			title: `Open ${path} in the app`,
+			description,
+			inputSchema,
+			outputSchema: handoffOutputSchema,
+			annotations: handoffAnnotations,
+		},
+	]),
+]);
 const accountToolMeta = {
 	title: "Open account settings",
 	description:
@@ -197,33 +233,20 @@ export function parityToolContract(path: string, procedure: AnyProcedure): Parit
 	delete inputJson.default;
 	const inputSchema = z.fromJSONSchema(inputJson);
 	if (!(inputSchema instanceof z.ZodObject)) throw new Error(`MCP input must be an object: ${path}`);
-	const expandedInput =
-		path === "resume.getBySlug"
-			? inputSchema.extend({
-					resourceCookie: z
-						.string()
-						.regex(/^resume_access_[A-Za-z0-9_-]+=[A-Za-z0-9_.-]+$/)
-						.optional()
-						.describe("Resource capability returned by api_resume_verify_password. Account cookies are not accepted."),
-				})
-			: inputSchema;
-	const properties = expandedInput.shape;
 	const boundedInput =
-		"limit" in properties
-			? expandedInput.extend({
+		"limit" in inputSchema.shape
+			? inputSchema.extend({
 					limit: z.number().int().min(1).max(100).default(20),
 					offset: z.number().int().nonnegative().default(0),
 				})
-			: expandedInput;
+			: inputSchema;
 	const outputSchema = exportPaths.has(path)
 		? z.object({ url: z.url(), requiresAuthentication: z.literal(true) })
-		: path === "resume.verifyPassword"
-			? z.object({ result: z.boolean(), resourceCookie: z.string().optional() })
-			: streamingPaths.has(path)
-				? z.object({ events: z.array(z.string()), truncated: z.boolean() })
-				: path === "resume.updates.subscribe"
-					? toWireObjectSchema(requireZod(router.resume.getById["~orpc"].outputSchema))
-					: toWireObjectSchema(requireZod(definition.outputSchema));
+		: streamingPaths.has(path)
+			? z.object({ events: z.array(z.string()), truncated: z.boolean() })
+			: path === "resume.updates.subscribe"
+				? toWireObjectSchema(requireZod(router.resume.getById["~orpc"].outputSchema))
+				: toWireObjectSchema(requireZod(definition.outputSchema));
 	const contract = { inputJson, inputSchema: boundedInput, outputSchema };
 	if (!contracts) {
 		contracts = new Map();
@@ -245,8 +268,7 @@ export const PARITY_TOOL_META: Record<
 		Object.entries(PARITY_PROCEDURES).map(([path, procedure]) => {
 			const route = procedure["~orpc"].route;
 			const readOnly =
-				(route.method === "GET" || readOnlyPosts.has(path)) &&
-				!["resume.getBySlug", "resume.verifyPassword", "aiProviders.list"].includes(path);
+				(route.method === "GET" || readOnlyPosts.has(path)) && !["resume.getBySlug", "aiProviders.list"].includes(path);
 			const contract = parityToolContract(path, procedure);
 			return [
 				parityToolName(path),
@@ -367,7 +389,7 @@ export function registerParityTools(
 				const userId = context.authentication.user.id;
 				const route = definition.route;
 				const permission =
-					route.method === "GET" || path === "resume.verifyPassword"
+					route.method === "GET"
 						? "read"
 						: route.method === "DELETE" || /^(delete|bulkDelete|purge)/i.test(route.operationId ?? "")
 							? "delete"
@@ -401,16 +423,11 @@ export function registerParityTools(
 					return json({ url: url.toString(), requiresAuthentication: true });
 				}
 				if (path === "resume.getBySlug") {
-					const { resourceCookie, ...resourceInput } = input as {
-						username: string;
-						slug: string;
-						resourceCookie?: string;
-					};
+					// Public reads never borrow the caller's browser cookies.
 					const reqHeaders = new Headers(headers);
 					reqHeaders.delete("cookie");
-					if (resourceCookie) reqHeaders.set("cookie", resourceCookie);
 					context.signal?.throwIfAborted();
-					result = await call(router.resume.getBySlug, resourceInput, {
+					result = await call(router.resume.getBySlug, input as { username: string; slug: string }, {
 						context: { ...context, reqHeaders },
 						...(context.signal && { signal: context.signal }),
 					});
@@ -431,16 +448,7 @@ export function registerParityTools(
 					}
 					result = { events, truncated };
 				}
-				const wire = encodeOutput(result);
-				const response = json(wire);
-				if (path === "resume.verifyPassword") {
-					// Password verification mints a resource cookie. Expose it explicitly for
-					// the next public-read call, never as an ambient account session cookie.
-					const cookie = context.resHeaders.get("set-cookie")?.split(";")[0];
-					if (cookie) response.structuredContent = { ...response.structuredContent, resourceCookie: cookie };
-					context.resHeaders.delete("set-cookie");
-				}
-				return response;
+				return json(encodeOutput(result));
 			}),
 		);
 	}
@@ -450,6 +458,17 @@ export function registerParityTools(
 		server.registerTool(parityToolName(path), meta, () =>
 			json({
 				url: new URL(destination ? `/dashboard/settings/${destination}` : "/dashboard", env.APP_URL).toString(),
+				action: path,
+				requiresBrowser: true,
+			}),
+		);
+	}
+	for (const [path, { url }] of Object.entries(RESUME_PASSWORD_HANDOFFS)) {
+		const meta = browserToolMeta[parityToolName(path)];
+		if (!meta) throw new Error(`Missing browser workflow contract: ${path}`);
+		server.registerTool(parityToolName(path), meta, (input) =>
+			json({
+				url: new URL(url(input as Record<string, string>), env.APP_URL).toString(),
 				action: path,
 				requiresBrowser: true,
 			}),

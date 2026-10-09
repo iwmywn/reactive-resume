@@ -73,13 +73,13 @@ it("keys JSON Schema reuse by schema identity and all SDK conversion options", (
 });
 
 it("keeps procedure aliases and different procedures' contracts distinct", () => {
-	const procedure = MCP_ROUTER.resume.verifyPassword;
+	const procedure = MCP_ROUTER.rest.documentExports.resume;
 	const ordinary = parityToolContract("ordinary", procedure);
-	const special = parityToolContract("resume.verifyPassword", procedure);
-	expect(ordinary.outputSchema.shape).not.toHaveProperty("resourceCookie");
-	expect(special.outputSchema.shape).toHaveProperty("resourceCookie");
-	expect(parityToolContract("resume.verifyPassword", procedure)).toBe(special);
+	const special = parityToolContract("rest.documentExports.resume", procedure);
+	expect(ordinary.outputSchema.shape).not.toHaveProperty("requiresAuthentication");
+	expect(special.outputSchema.shape).toHaveProperty("requiresAuthentication");
+	expect(parityToolContract("rest.documentExports.resume", procedure)).toBe(special);
 	const different = parityToolContract("ordinary", MCP_ROUTER.resume.checkSlug);
-	expect(different.inputSchema.shape).not.toHaveProperty("password");
-	expect(ordinary.inputSchema.shape).toHaveProperty("password");
+	expect(different.inputSchema.shape).not.toHaveProperty("format");
+	expect(ordinary.inputSchema.shape).toHaveProperty("format");
 });
