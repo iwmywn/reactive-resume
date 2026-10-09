@@ -215,6 +215,22 @@ type ParityToolContract = {
 	outputSchema: z.ZodObject;
 };
 const parityContracts = new WeakMap<AnyProcedure, Map<string, ParityToolContract>>();
+// The export's full contract repeats every document, application and career schema (~13k tokens);
+// the procedure still validates it, so discovery only names its parts.
+const accountExportOutputSchema = z
+	.looseObject({
+		exportedAt: z.string(),
+		user: z.looseObject({}).describe("Profile: id, name, email, username, image and timestamps."),
+		resumes: z.array(z.looseObject({})).describe("Every resume, as returned by read_resume."),
+		coverLetters: z.array(z.looseObject({})).describe("Every cover letter, as returned by read_cover_letter."),
+		applications: z.array(z.looseObject({})).describe("Every application, as returned by read_application."),
+		career: z
+			.looseObject({})
+			.describe(
+				"Career data: profile, facts, stories, artifacts, schedules, notifications, assistant threads, messages and attachments, opportunities, jobs, transcripts and workspaces.",
+			),
+	})
+	.describe("Everything in the account. Secrets such as password hashes, tokens and API keys are never included.");
 
 /** The live server and server card share static contracts, never request context or callbacks. */
 export function parityToolContract(path: string, procedure: AnyProcedure): ParityToolContract {
@@ -242,11 +258,13 @@ export function parityToolContract(path: string, procedure: AnyProcedure): Parit
 			: inputSchema;
 	const outputSchema = exportPaths.has(path)
 		? z.object({ url: z.url(), requiresAuthentication: z.literal(true) })
-		: streamingPaths.has(path)
-			? z.object({ events: z.array(z.string()), truncated: z.boolean() })
-			: path === "resume.updates.subscribe"
-				? toWireObjectSchema(requireZod(router.resume.getById["~orpc"].outputSchema))
-				: toWireObjectSchema(requireZod(definition.outputSchema));
+		: path === "auth.exportData"
+			? accountExportOutputSchema
+			: streamingPaths.has(path)
+				? z.object({ events: z.array(z.string()), truncated: z.boolean() })
+				: path === "resume.updates.subscribe"
+					? toWireObjectSchema(requireZod(router.resume.getById["~orpc"].outputSchema))
+					: toWireObjectSchema(requireZod(definition.outputSchema));
 	const contract = { inputJson, inputSchema: boundedInput, outputSchema };
 	if (!contracts) {
 		contracts = new Map();

@@ -1,5 +1,6 @@
 import { toJsonSchemaCompat } from "@modelcontextprotocol/sdk/server/zod-json-schema-compat.js";
 import z from "zod";
+import { applicationTimelineEntrySchema, postingSourceSchema } from "@reactive-resume/schema/applications/data";
 import { coverLetterStyleSchema } from "@reactive-resume/schema/cover-letter/data";
 import { resumeDataSchema } from "@reactive-resume/schema/resume/data";
 import { writableResumeDataSchema } from "@reactive-resume/schema/resume/write";
@@ -50,21 +51,44 @@ const fileOutputSchema = z.object({
 // The full resume schema (~28k tokens) is published once as the resume://_meta/schema resource.
 // Inlining it, and a letter's style (built from the same parts), made tools/list ~1.9 MB;
 // the API procedures still validate both in full.
-const resumeDataReference = {
+type JsonSchemaReference = { type: "object"; additionalProperties: true; description: string };
+const resumeDataReference: JsonSchemaReference = {
 	type: "object",
 	additionalProperties: true,
 	description:
 		"Reactive Resume data (basics, summary, sections, customSections, metadata). Full JSON Schema: the resume://_meta/schema MCP resource, also served at /schema.json on this server.",
-} as const;
-const coverLetterStyleReference = {
+};
+const coverLetterStyleReference: JsonSchemaReference = {
 	type: "object",
 	additionalProperties: true,
 	description:
 		"The letter's sender details and design: basics, picture and metadata (resume metadata without notes or layout) in the resume data shapes from the resume://_meta/schema MCP resource or /schema.json on this server, plus sectionId and itemId.",
-} as const;
-const schemaReferences = new Map<unknown, typeof resumeDataReference | typeof coverLetterStyleReference>([
+};
+const schemaReferences = new Map<unknown, JsonSchemaReference>([
 	[resumeDataSchema, resumeDataReference],
 	[coverLetterStyleSchema, coverLetterStyleReference],
+]);
+// Applications repeat their timeline and posting-source shapes in every application tool's output;
+// inputs keep them, because tools that write those fields need the full shape.
+const outputSchemaReferences = new Map<unknown, JsonSchemaReference>([
+	[
+		applicationTimelineEntrySchema,
+		{
+			type: "object",
+			additionalProperties: true,
+			description:
+				"A timeline entry: a stage change, note or interview, with id, type and at plus the fields of its type. Full schema: the application responses in this server's OpenAPI document at /api/openapi/spec.json.",
+		},
+	],
+	[
+		postingSourceSchema,
+		{
+			type: "object",
+			additionalProperties: true,
+			description:
+				"How the job description was read: method, format, URLs, retrieval times and completeness. Full schema: the application responses in this server's OpenAPI document at /api/openapi/spec.json.",
+		},
+	],
 ]);
 
 /** MCP JSON values retain the API's native dates and files through explicit wire forms. */
@@ -82,7 +106,8 @@ export function wireJsonSchema(schema: z.ZodType, io: "input" | "output" = "outp
 			throw new Error(`Unsupported MCP schema: ${zodSchema._zod.def.type}`);
 		},
 		override: ({ zodSchema, jsonSchema }) => {
-			const reference = schemaReferences.get(zodSchema);
+			const reference =
+				schemaReferences.get(zodSchema) ?? (io === "output" ? outputSchemaReferences.get(zodSchema) : undefined);
 			if (reference) {
 				for (const key of Object.keys(jsonSchema)) delete jsonSchema[key];
 				Object.assign(jsonSchema, reference);
