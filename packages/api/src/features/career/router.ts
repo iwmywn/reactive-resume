@@ -33,22 +33,46 @@ const savedItemOutput = savedItemSchema.extend({
 export const careerRouter = {
 	voice: careerVoiceRouter,
 	schedules: protectedProcedure
-		.route({ method: "GET", path: "/career/schedules", tags: ["Career"], operationId: "listCareerSchedules" })
+		.route({
+			method: "GET",
+			path: "/career/schedules",
+			tags: ["Career"],
+			operationId: "listCareerSchedules",
+			summary: "List career schedules",
+		})
 		.input(z.object({}))
 		.output(z.array(careerScheduleSchema))
 		.handler(({ context }) => careerJobs.list(context.user.id)),
 	saveSchedule: protectedProcedure
-		.route({ method: "POST", path: "/career/schedules", tags: ["Career"], operationId: "saveCareerSchedule" })
+		.route({
+			method: "POST",
+			path: "/career/schedules",
+			tags: ["Career"],
+			operationId: "saveCareerSchedule",
+			summary: "Save a career schedule",
+		})
 		.input(careerScheduleInputSchema.extend({ id: z.string().optional() }))
 		.output(careerScheduleSchema)
 		.handler(({ context, input }) => careerJobs.save(context.user.id, input)),
 	deleteSchedule: protectedProcedure
-		.route({ method: "DELETE", path: "/career/schedules/{id}", tags: ["Career"], operationId: "deleteCareerSchedule" })
+		.route({
+			method: "DELETE",
+			path: "/career/schedules/{id}",
+			tags: ["Career"],
+			operationId: "deleteCareerSchedule",
+			summary: "Delete a career schedule",
+		})
 		.input(id)
 		.output(z.void())
 		.handler(({ context, input }) => careerJobs.delete(context.user.id, input.id)),
 	notifications: protectedProcedure
-		.route({ method: "GET", path: "/career/notifications", tags: ["Career"], operationId: "listCareerNotifications" })
+		.route({
+			method: "GET",
+			path: "/career/notifications",
+			tags: ["Career"],
+			operationId: "listCareerNotifications",
+			summary: "List career notifications",
+		})
 		.input(z.object({}))
 		.output(z.array(careerNotificationSchema))
 		.handler(({ context }) => careerJobs.notifications(context.user.id)),
@@ -58,12 +82,19 @@ export const careerRouter = {
 			path: "/career/notifications/{id}/read",
 			tags: ["Career"],
 			operationId: "readCareerNotification",
+			summary: "Mark a career notification as read",
 		})
 		.input(id)
 		.output(z.void())
 		.handler(({ context, input }) => careerJobs.markRead(context.user.id, input.id)),
 	opportunities: protectedProcedure
-		.route({ method: "GET", path: "/career/opportunities", tags: ["Career"], operationId: "listCareerOpportunities" })
+		.route({
+			method: "GET",
+			path: "/career/opportunities",
+			tags: ["Career"],
+			operationId: "listCareerOpportunities",
+			summary: "List discovered opportunities",
+		})
 		.input(z.object({}))
 		.output(z.array(careerOpportunitySchema))
 		.handler(({ context }) => careerJobs.opportunities(context.user.id)),
@@ -73,6 +104,7 @@ export const careerRouter = {
 			path: "/career/opportunities/{id}",
 			tags: ["Career"],
 			operationId: "dismissCareerOpportunity",
+			summary: "Dismiss a discovered opportunity",
 		})
 		.input(id)
 		.output(z.void())
@@ -83,23 +115,42 @@ export const careerRouter = {
 			path: "/career/opportunities/{id}/track",
 			tags: ["Career"],
 			operationId: "trackCareerOpportunity",
+			summary: "Track a discovered opportunity",
 			description: "Creates an application at Saved with the posting link, summary and the preferences it matched.",
 		})
 		.input(id)
 		.output(applicationInput)
 		.handler(({ context, input }) => careerService.trackOpportunity(context.user.id, input.id)),
 	profile: protectedProcedure
-		.route({ method: "GET", path: "/career/profile", tags: ["Career"], operationId: "getCareerProfile" })
+		.route({
+			method: "GET",
+			path: "/career/profile",
+			tags: ["Career"],
+			operationId: "getCareerProfile",
+			summary: "Get career preferences",
+		})
 		.input(z.object({}).optional())
 		.output(careerProfileDataSchema)
 		.handler(({ context }) => careerService.profile(context.user.id)),
 	saveProfile: protectedProcedure
-		.route({ method: "PUT", path: "/career/profile", tags: ["Career"], operationId: "saveCareerProfile" })
+		.route({
+			method: "PUT",
+			path: "/career/profile",
+			tags: ["Career"],
+			operationId: "saveCareerProfile",
+			summary: "Save career preferences",
+		})
 		.input(careerProfileDataSchema)
 		.output(careerProfileDataSchema)
 		.handler(({ context, input }) => careerService.saveProfile(context.user.id, input)),
 	facts: protectedProcedure
-		.route({ method: "GET", path: "/career/facts", tags: ["Career"], operationId: "listCareerFacts" })
+		.route({
+			method: "GET",
+			path: "/career/facts",
+			tags: ["Career"],
+			operationId: "listCareerFacts",
+			summary: "List career facts",
+		})
 		.input(
 			careerScopeSchema.extend({
 				query: z.string().max(500).optional(),
@@ -109,12 +160,24 @@ export const careerRouter = {
 		.output(z.array(careerFactSchema))
 		.handler(({ context, input }) => careerService.facts({ userId: context.user.id, ...input })),
 	saveFact: protectedProcedure
-		.route({ method: "POST", path: "/career/facts", tags: ["Career"], operationId: "saveCareerFact" })
+		.route({
+			method: "POST",
+			path: "/career/facts",
+			tags: ["Career"],
+			operationId: "saveCareerFact",
+			summary: "Save a career fact",
+		})
 		.input(careerFactInputSchema)
 		.output(careerFactSchema.omit({ usedBy: true, company: true }).nullable())
 		.handler(({ context, input }) => careerService.saveFact(context.user.id, input)),
 	updateFact: protectedProcedure
-		.route({ method: "PATCH", path: "/career/facts/{id}", tags: ["Career"], operationId: "updateCareerFact" })
+		.route({
+			method: "PATCH",
+			path: "/career/facts/{id}",
+			tags: ["Career"],
+			operationId: "updateCareerFact",
+			summary: "Update a career fact",
+		})
 		.input(
 			id.extend({
 				text: z.string().trim().min(1).max(2000).optional(),
@@ -127,27 +190,57 @@ export const careerRouter = {
 			await careerService.updateFact(context.user.id, input);
 		}),
 	forgetFact: protectedProcedure
-		.route({ method: "DELETE", path: "/career/facts/{id}", tags: ["Career"], operationId: "forgetCareerFact" })
+		.route({
+			method: "DELETE",
+			path: "/career/facts/{id}",
+			tags: ["Career"],
+			operationId: "forgetCareerFact",
+			summary: "Forget a career fact",
+		})
 		.input(id)
 		.output(z.void())
 		.handler(({ context, input }) => careerService.forgetFact(context.user.id, input.id)),
 	stories: protectedProcedure
-		.route({ method: "GET", path: "/career/stories", tags: ["Career"], operationId: "listCareerStories" })
+		.route({
+			method: "GET",
+			path: "/career/stories",
+			tags: ["Career"],
+			operationId: "listCareerStories",
+			summary: "List career stories",
+		})
 		.input(careerScopeSchema)
 		.output(z.array(careerStorySchema))
 		.handler(({ context, input }) => careerService.stories({ userId: context.user.id, ...input })),
 	saveStory: protectedProcedure
-		.route({ method: "POST", path: "/career/stories", tags: ["Career"], operationId: "saveCareerStory" })
+		.route({
+			method: "POST",
+			path: "/career/stories",
+			tags: ["Career"],
+			operationId: "saveCareerStory",
+			summary: "Save a career story",
+		})
 		.input(careerStoryInputSchema.extend({ id: z.string().optional() }))
 		.output(careerStorySchema)
 		.handler(({ context, input: { id, ...input } }) => careerService.saveStory(context.user.id, input, id)),
 	deleteStory: protectedProcedure
-		.route({ method: "DELETE", path: "/career/stories/{id}", tags: ["Career"], operationId: "deleteCareerStory" })
+		.route({
+			method: "DELETE",
+			path: "/career/stories/{id}",
+			tags: ["Career"],
+			operationId: "deleteCareerStory",
+			summary: "Delete a career story",
+		})
 		.input(id)
 		.output(z.void())
 		.handler(({ context, input }) => careerService.deleteStory(context.user.id, input.id)),
 	savedItems: protectedProcedure
-		.route({ method: "GET", path: "/career/saved", tags: ["Career"], operationId: "listCareerSavedItems" })
+		.route({
+			method: "GET",
+			path: "/career/saved",
+			tags: ["Career"],
+			operationId: "listCareerSavedItems",
+			summary: "List saved career work",
+		})
 		.input(
 			z.object({
 				applicationId: z.string().min(1).optional(),
@@ -157,7 +250,13 @@ export const careerRouter = {
 		.output(z.array(savedItemOutput))
 		.handler(({ context, input }) => careerService.savedItems({ userId: context.user.id, ...input })),
 	deleteSavedItem: protectedProcedure
-		.route({ method: "DELETE", path: "/career/saved/{id}", tags: ["Career"], operationId: "deleteCareerSavedItem" })
+		.route({
+			method: "DELETE",
+			path: "/career/saved/{id}",
+			tags: ["Career"],
+			operationId: "deleteCareerSavedItem",
+			summary: "Delete saved career work",
+		})
 		.input(id)
 		.output(z.void())
 		.handler(({ context, input }) => careerService.deleteSavedItem(context.user.id, input.id)),
@@ -168,6 +267,7 @@ export const careerRouter = {
 			path: "/career/generate",
 			tags: ["Career"],
 			operationId: "generateCareerWork",
+			summary: "Generate AI work for an application",
 			description:
 				"Asks the default AI connection for one structured piece of work for an application (fit check, briefing, practice feedback, debrief review, employer message, answer draft). Everything but answer drafts is saved.",
 		})
@@ -182,7 +282,13 @@ export const careerRouter = {
 			generateCareer({ userId: context.user.id, ...input, ...(signal ? { signal } : {}) }),
 		),
 	applyReply: protectedProcedure
-		.route({ method: "POST", path: "/career/saved/{id}/apply", tags: ["Career"], operationId: "applyCareerReply" })
+		.route({
+			method: "POST",
+			path: "/career/saved/{id}/apply",
+			tags: ["Career"],
+			operationId: "applyCareerReply",
+			summary: "Apply suggested changes from a message",
+		})
 		.input(id.extend({ changes: z.array(z.number().int().min(0)).max(4) }))
 		.output(z.void())
 		.handler(({ context, input }) => careerService.applyReply(context.user.id, input.id, input.changes)),
@@ -192,6 +298,7 @@ export const careerRouter = {
 			path: "/career/workspace/{applicationId}",
 			tags: ["Career"],
 			operationId: "getCareerWorkspace",
+			summary: "Get an application workspace",
 		})
 		.input(applicationInput)
 		.output(careerWorkspaceSchema)
@@ -202,6 +309,7 @@ export const careerRouter = {
 			path: "/career/workspace/{applicationId}",
 			tags: ["Career"],
 			operationId: "saveCareerWorkspace",
+			summary: "Save an application workspace",
 		})
 		.input(
 			applicationInput
@@ -218,6 +326,7 @@ export const careerRouter = {
 			path: "/career/workspace/{applicationId}/submit",
 			tags: ["Career"],
 			operationId: "submitCareerApplication",
+			summary: "Mark an application as submitted",
 		})
 		.input(
 			applicationInput.extend({
@@ -235,6 +344,7 @@ export const careerRouter = {
 			path: "/career/workspace/{applicationId}/answers",
 			tags: ["Career"],
 			operationId: "snapshotCareerAnswers",
+			summary: "Save the answers sent with an application",
 			description: "Saves the workspace's answers as sent, after the application is marked as applied.",
 		})
 		.input(applicationInput)

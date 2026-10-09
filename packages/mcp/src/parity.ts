@@ -1,4 +1,5 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { ToolAnnotations } from "@modelcontextprotocol/sdk/types.js";
 import type { AnyProcedure, InferRouterInitialContext, RouterClient } from "@orpc/server";
 import type { RequestAuthentication } from "@reactive-resume/api/context";
 import { call, ORPCError } from "@orpc/server";
@@ -146,6 +147,17 @@ const BROWSER_HANDOFFS = {
 	"auth.deleteAccount": "account",
 } as const;
 
+const HANDOFF_TITLES: Record<string, string> = {
+	"aiProviders.create": "Add an AI provider in the app",
+	"aiProviders.update": "Edit an AI provider in the app",
+	"webAccess.save": "Set up web search in the app",
+	"resume.getRoot": "Open the dashboard",
+	"auth.createApiKey": "Create an API key in the app",
+	"auth.deleteAccount": "Delete your account in the app",
+	"resume.setPassword": "Set a resume's share password in the app",
+	"resume.verifyPassword": "Open a password-protected resume",
+};
+
 /** Resume share passwords are credentials too: owners set them and visitors enter them in the browser. */
 const RESUME_PASSWORD_HANDOFFS = {
 	"resume.setPassword": {
@@ -173,29 +185,31 @@ type HandoffToolMeta = {
 	description: string;
 	inputSchema: z.ZodObject;
 	outputSchema: typeof handoffOutputSchema;
-	annotations: typeof handoffAnnotations;
+	annotations: ToolAnnotations;
+};
+// Directories show annotations.title as the tool's name, so every tool repeats its title there.
+const handoffMeta = (path: string, description: string, inputSchema: z.ZodObject): HandoffToolMeta => {
+	const title = HANDOFF_TITLES[path] ?? `Open ${path} in the app`;
+	return {
+		title,
+		description,
+		inputSchema,
+		outputSchema: handoffOutputSchema,
+		annotations: { title, ...handoffAnnotations },
+	};
 };
 const browserToolMeta: Record<string, HandoffToolMeta> = Object.fromEntries([
 	...Object.keys(BROWSER_HANDOFFS).map((path) => [
 		parityToolName(path),
-		{
-			title: `Open ${path} in the app`,
-			description:
-				"Complete this workflow in the authenticated browser. Provider keys, passwords, passkeys and other account credentials stay out of tool arguments. No change is made by this tool.",
-			inputSchema: z.object({}),
-			outputSchema: handoffOutputSchema,
-			annotations: handoffAnnotations,
-		},
+		handoffMeta(
+			path,
+			"Complete this workflow in the authenticated browser. Provider keys, passwords, passkeys and other account credentials stay out of tool arguments. No change is made by this tool.",
+			z.object({}),
+		),
 	]),
 	...Object.entries(RESUME_PASSWORD_HANDOFFS).map(([path, { description, inputSchema }]) => [
 		parityToolName(path),
-		{
-			title: `Open ${path} in the app`,
-			description,
-			inputSchema,
-			outputSchema: handoffOutputSchema,
-			annotations: handoffAnnotations,
-		},
+		handoffMeta(path, description, inputSchema),
 	]),
 ]);
 const accountToolMeta = {
@@ -206,7 +220,7 @@ const accountToolMeta = {
 		page: z.enum(["profile", "authentication", "api-keys", "preferences", "account"]).default("profile"),
 	}),
 	outputSchema: z.object({ url: z.url(), requiresBrowser: z.literal(true) }),
-	annotations: handoffAnnotations,
+	annotations: { title: "Open account settings", ...handoffAnnotations },
 };
 
 type ParityToolContract = {
@@ -279,7 +293,7 @@ export const PARITY_TOOL_META: Record<
 	Pick<ReturnType<typeof parityToolContract>, "inputSchema" | "outputSchema"> & {
 		title: string;
 		description: string;
-		annotations: typeof handoffAnnotations;
+		annotations: ToolAnnotations;
 	}
 > = {
 	...Object.fromEntries(
@@ -288,14 +302,16 @@ export const PARITY_TOOL_META: Record<
 			const readOnly =
 				(route.method === "GET" || readOnlyPosts.has(path)) && !["resume.getBySlug", "aiProviders.list"].includes(path);
 			const contract = parityToolContract(path, procedure);
+			const title = route.summary ?? path;
 			return [
 				parityToolName(path),
 				{
-					title: route.summary ?? path,
+					title,
 					description: `${PARITY_TOOL_DESCRIPTIONS[path] ?? route.description ?? route.summary ?? path}${path === "resume.updates.subscribe" ? " Returns an owned snapshot; poll updatedAt for changes over stateless MCP." : ""}${streamingPaths.has(path) ? " Returns collected stream chunks, at most 500,000 characters; use the thread getter to retrieve persisted assistant replies." : ""}${exportPaths.has(path) ? " Returns an authenticated REST download URL; send the same bearer token or API key to download. Rendering occurs when downloaded." : ""}`,
 					inputSchema: contract.inputSchema,
 					outputSchema: contract.outputSchema,
 					annotations: {
+						title,
 						readOnlyHint: readOnly,
 						destructiveHint:
 							!readOnly &&

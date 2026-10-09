@@ -1,7 +1,7 @@
 {
 	"info": {
 		"title": "Reactive Resume",
-		"version": "6.0.1",
+		"version": "6.0.2",
 		"description": "Reactive Resume API. Mutations do not support Idempotency-Key. Do not automatically retry POST, PUT, PATCH or DELETE requests after a timeout: first read the resource to determine whether the operation succeeded. Existing enum values and response shapes are retained for compatibility.",
 		"license": {
 			"name": "MIT",
@@ -36951,6 +36951,7 @@
 		"/career/schedules": {
 			"get": {
 				"operationId": "listCareerSchedules",
+				"summary": "List career schedules",
 				"tags": [
 					"Career"
 				],
@@ -37146,6 +37147,7 @@
 			},
 			"post": {
 				"operationId": "saveCareerSchedule",
+				"summary": "Save a career schedule",
 				"tags": [
 					"Career"
 				],
@@ -37458,6 +37460,7 @@
 		"/career/schedules/{id}": {
 			"delete": {
 				"operationId": "deleteCareerSchedule",
+				"summary": "Delete a career schedule",
 				"tags": [
 					"Career"
 				],
@@ -37531,6 +37534,7 @@
 		"/career/notifications": {
 			"get": {
 				"operationId": "listCareerNotifications",
+				"summary": "List career notifications",
 				"tags": [
 					"Career"
 				],
@@ -37806,6 +37810,7 @@
 		"/career/notifications/{id}/read": {
 			"post": {
 				"operationId": "readCareerNotification",
+				"summary": "Mark a career notification as read",
 				"tags": [
 					"Career"
 				],
@@ -37879,6 +37884,7 @@
 		"/career/opportunities": {
 			"get": {
 				"operationId": "listCareerOpportunities",
+				"summary": "List discovered opportunities",
 				"tags": [
 					"Career"
 				],
@@ -38050,6 +38056,7 @@
 		"/career/opportunities/{id}": {
 			"delete": {
 				"operationId": "dismissCareerOpportunity",
+				"summary": "Dismiss a discovered opportunity",
 				"tags": [
 					"Career"
 				],
@@ -38123,6 +38130,7 @@
 		"/career/opportunities/{id}/track": {
 			"post": {
 				"operationId": "trackCareerOpportunity",
+				"summary": "Track a discovered opportunity",
 				"description": "Creates an application at Saved with the posting link, summary and the preferences it matched.",
 				"tags": [
 					"Career"
@@ -38213,6 +38221,7 @@
 		"/career/profile": {
 			"get": {
 				"operationId": "getCareerProfile",
+				"summary": "Get career preferences",
 				"tags": [
 					"Career"
 				],
@@ -38381,6 +38390,7 @@
 			},
 			"put": {
 				"operationId": "saveCareerProfile",
+				"summary": "Save career preferences",
 				"tags": [
 					"Career"
 				],
@@ -38660,6 +38670,7 @@
 		"/career/facts": {
 			"get": {
 				"operationId": "listCareerFacts",
+				"summary": "List career facts",
 				"tags": [
 					"Career"
 				],
@@ -38899,6 +38910,7 @@
 			},
 			"post": {
 				"operationId": "saveCareerFact",
+				"summary": "Save a career fact",
 				"tags": [
 					"Career"
 				],
@@ -39151,6 +39163,7 @@
 		"/career/facts/{id}": {
 			"patch": {
 				"operationId": "updateCareerFact",
+				"summary": "Update a career fact",
 				"tags": [
 					"Career"
 				],
@@ -39249,6 +39262,7 @@
 			},
 			"delete": {
 				"operationId": "forgetCareerFact",
+				"summary": "Forget a career fact",
 				"tags": [
 					"Career"
 				],
@@ -39322,6 +39336,7 @@
 		"/career/stories": {
 			"get": {
 				"operationId": "listCareerStories",
+				"summary": "List career stories",
 				"tags": [
 					"Career"
 				],
@@ -39520,6 +39535,7 @@
 			},
 			"post": {
 				"operationId": "saveCareerStory",
+				"summary": "Save a career story",
 				"tags": [
 					"Career"
 				],
@@ -39779,6 +39795,7 @@
 		"/career/stories/{id}": {
 			"delete": {
 				"operationId": "deleteCareerStory",
+				"summary": "Delete a career story",
 				"tags": [
 					"Career"
 				],
@@ -39852,6 +39869,7 @@
 		"/career/saved": {
 			"get": {
 				"operationId": "listCareerSavedItems",
+				"summary": "List saved career work",
 				"tags": [
 					"Career"
 				],
@@ -40947,6 +40965,7 @@
 		"/career/saved/{id}": {
 			"delete": {
 				"operationId": "deleteCareerSavedItem",
+				"summary": "Delete saved career work",
 				"tags": [
 					"Career"
 				],
@@ -41020,6 +41039,7 @@
 		"/career/generate": {
 			"post": {
 				"operationId": "generateCareerWork",
+				"summary": "Generate AI work for an application",
 				"description": "Asks the default AI connection for one structured piece of work for an application (fit check, briefing, practice feedback, debrief review, employer message, answer draft). Everything but answer drafts is saved.",
 				"tags": [
 					"Career"
@@ -42291,6 +42311,7 @@
 		"/career/saved/{id}/apply": {
 			"post": {
 				"operationId": "applyCareerReply",
+				"summary": "Apply suggested changes from a message",
 				"tags": [
 					"Career"
 				],
@@ -42388,6 +42409,7 @@
 		"/career/workspace/{applicationId}": {
 			"get": {
 				"operationId": "getCareerWorkspace",
+				"summary": "Get an application workspace",
 				"tags": [
 					"Career"
 				],
@@ -42571,6 +42593,7 @@
 			},
 			"patch": {
 				"operationId": "saveCareerWorkspace",
+				"summary": "Save an application workspace",
 				"tags": [
 					"Career"
 				],
@@ -42966,6 +42989,7 @@
 		"/career/workspace/{applicationId}/submit": {
 			"post": {
 				"operationId": "submitCareerApplication",
+				"summary": "Mark an application as submitted",
 				"tags": [
 					"Career"
 				],
@@ -43125,6 +43149,7 @@
 		"/career/workspace/{applicationId}/answers": {
 			"post": {
 				"operationId": "snapshotCareerAnswers",
+				"summary": "Save the answers sent with an application",
 				"description": "Saves the workspace's answers as sent, after the application is marked as applied.",
 				"tags": [
 					"Career"
