@@ -30,7 +30,9 @@ export type JsonSchema = {
 
 const defaultPaths: DocumentationPaths = {
 	jsonSchemaGuide: fileURLToPath(new URL("../../docs/guides/json-resume-schema.mdx", import.meta.url)),
-	skillSchemaReference: fileURLToPath(new URL("../../skills/resume-builder/references/schema.md", import.meta.url)),
+	skillSchemaReference: fileURLToPath(
+		new URL("../../plugins/reactive-resume/skills/resume-builder/references/schema.md", import.meta.url),
+	),
 };
 
 const markdown = (value: unknown) => String(value).replaceAll("|", "\\|").replaceAll(/\r?\n/g, " ");

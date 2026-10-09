@@ -49,7 +49,7 @@
 		"migrations/**",
 		"docs/spec.json",
 		"docs/guides/json-resume-schema.mdx",
-		"skills/resume-builder/references/schema.md"
+		"plugins/reactive-resume/skills/resume-builder/references/schema.md"
 	],
 	"overrides": [
 		{
