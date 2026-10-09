@@ -13,6 +13,7 @@ Reactive Resume is open-source and can be operated in different ways (for exampl
 - **Contact**: hello@amruthpillai.com
 - **Service URL**: https://rxresu.me
 - **Effective date**: 2023-01-01
+- **Last updated**: 2026-10-09
 
 If you are self-hosting, **you** are the Service Operator and responsible for compliance (including configuring email delivery, storage, and logging appropriately).
 
@@ -34,6 +35,7 @@ Reactive Resume is a resume builder that lets you:
 - Track job applications, including notes, contacts, interviews, and the documents you sent
 - Upload files such as profile pictures (and other assets used in a resume)
 - Optionally connect your own AI provider (e.g., OpenAI, Anthropic, Google Gemini, or another supported provider) to use AI features such as the assistant
+- Optionally connect AI agents and apps (for example, Claude, ChatGPT, Codex, or Cursor) to your account through the Service's MCP server or API
 
 ---
 
@@ -98,6 +100,14 @@ If the Service Operator enables API key functionality, the Service can store:
 - API key metadata and rate limit counters
 - A hashed form of the API key, used to verify it
 
+### Connected AI agents and applications
+
+If you connect an AI agent or application to your account (for example, Claude, ChatGPT, Codex, Cursor, or the Reactive Resume plugin) through the Service's MCP server or API, the Service stores:
+
+- The application's registration details, such as its name and redirect addresses
+- Your consent to that application, the permissions (scopes) you granted, and the tokens needed to keep the connection working
+- Rate limit counters for requests made through the connection
+
 ### Local-only preferences and settings
 
 Some settings are stored on your device:
@@ -148,6 +158,18 @@ If configured, uploaded files may be stored in an S3-compatible provider or in V
 
 If you sign in via OAuth (Google/GitHub/LinkedIn/custom), those providers receive authentication requests and return profile information (such as email/name) to the Service, as permitted by your provider settings.
 
+### AI agents and applications you connect (optional)
+
+When you connect an AI agent or application to your account and approve its access, it can read and change the data that its permissions cover: your profile (name, email address, and username), resumes, cover letters, job applications (including contacts, notes, and interviews), version history, document statistics, and saved career information such as facts, stories, and offers. The Service sends this data to the application only when the application requests it on your behalf.
+
+Once data reaches the application, it is processed by that application's provider (for example, Anthropic for Claude or OpenAI for ChatGPT and Codex) under that provider's own terms and privacy policy, not this one. The Service Operator does not control how those providers store or use it. The Service does not sell this data or use it for advertising.
+
+You can see and revoke connected applications at any time under **Settings → AI & developer → Connected applications**. Revoking access invalidates the application's existing access and refresh tokens.
+
+### Job posting pages (optional)
+
+When you ask the Service to fill in an application from a job posting link, the Service fetches that public page. If you or the Service Operator configure a web access provider (Firecrawl, Tavily, or Exa), the link or your search terms are sent to that provider to read or search the page.
+
 ### AI providers (optional, user-supplied)
 
 If you enable AI features and provide your own API key, the Service stores your provider settings and stores the API key encrypted. When you use AI features, the Service sends prompts, the relevant document content, and any files you attach to your selected AI provider (for example, OpenAI, Anthropic, or Google Gemini), according to your use of those features and the provider's policies. The Service stores your assistant conversations, attachments, and proposed changes in your account until you delete them or your account.
@@ -163,6 +185,7 @@ As a baseline:
 - Account data and resumes are retained until you delete them (or your account is deleted).
 - Session and security data may be retained as needed for authentication and security.
 - Uploaded files are retained until deleted (for example, when you remove a picture or delete a resume/account).
+- Connected application registrations, consents, and tokens are retained until you revoke access, the tokens expire, or your account is deleted.
 - Documents you move to the Trash are deleted permanently after 30 days, unless you restore or delete them sooner.
 
 The Service Operator may also retain backups and logs for limited periods.
