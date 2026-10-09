@@ -274,10 +274,10 @@ Prompts are ready-made instructions your client can start from. Each takes a res
 
 ## Resources
 
-| URI                     | Contents                                                                                                                                                                            |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `resume://_meta/schema` | The resume data JSON Schema, listed in `resources/list` and also served at `/schema.json`. Clients use it to build valid patches; tool schemas point to it instead of repeating it. |
-| `resume://{id}`         | One resume's full data as JSON. This is a resource template (`resources/templates/list`); find IDs with `list_resumes`.                                                             |
+| URI                     | Contents                                                                                                                                                                                                                            |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `resume://_meta/schema` | The resume data JSON Schema, listed in `resources/list` and also served at `/schema.json`. Clients use it to build valid patches; tool schemas point to it instead of repeating it, for resume data and for a cover letter's style. |
+| `resume://{id}`         | One resume's full data as JSON. This is a resource template (`resources/templates/list`); find IDs with `list_resumes`.                                                                                                             |
 
 Your instance also publishes a server card at `/.well-known/mcp/server-card.json` that summarizes the tools, prompts and resources, for clients that discover servers without connecting.
 
