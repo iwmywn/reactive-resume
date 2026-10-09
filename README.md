@@ -41,9 +41,6 @@ Create a free account, import an existing resume or start fresh, and see the fin
 
 You own your data. The codebase is open source under the MIT license, with no tracking, no ads, and no paid tier. Optional AI features use a provider you connect; hosting and provider usage may have their own costs.
 
-> [!NOTE]
-> This branch contains the upcoming **v6** release. Read [what's new in v6](docs/guides/whats-new-in-v6.mdx) and the [release notes](docs/changelog/index.mdx) for the full changes. Existing self-hosted installations should follow [Migrating from v5](docs/self-hosting/upgrading-to-v6.mdx).
-
 ![Reactive Resume v6 editor with Write, Design, and Check modes and a live PDF preview](docs/images/getting-started/editor-overview.webp)
 
 ## Features
