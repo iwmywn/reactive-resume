@@ -357,7 +357,7 @@ const BASE_TOOL_META = {
 		inputSchema: wireInput(
 			z.strictObject({
 				data: z
-					.unknown()
+					.looseObject({})
 					.describe("Complete ResumeData JSON (same shape as `read_resume` body or `resume://_meta/schema`)."),
 			}),
 		),
