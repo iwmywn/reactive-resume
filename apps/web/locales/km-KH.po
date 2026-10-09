@@ -2588,6 +2588,10 @@ msgstr "ជម្រះផ្នែក"
 msgid "Clear selection"
 msgstr "សម្អាតការជ្រើសរើស"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "ចុចអ្វីនៅលើទំព័រដើម្បីធ្វើរចនាប័ទ្មវា។ ច្បាប់ដែលអ្នកស្ថិតនៅក្នុងត្រូវបានគូសបញ្ជាក់នៅលើទំព័រ។"
@@ -5198,6 +5202,10 @@ msgstr "ចំណាត់ថ្នាក់"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "Greek"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "ការចូល និងសុវត្ថិភាព"
 msgid "Sign-in didn't complete"
 msgstr "ការចូលមិនបានបញ្ចប់"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "ចូលជា {email}"
@@ -12066,6 +12078,10 @@ msgstr "ប្រើចន្លោះពី ៦ ទៅ ៦៤ តួអក្�
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "ប្រើពណ៌ {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

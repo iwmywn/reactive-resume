@@ -21,6 +21,8 @@ export const coverLetter = pg.pgTable(
 		name: pg.text("name").notNull(),
 		recipient: pg.text("recipient").notNull().default(""),
 		content: pg.text("content").notNull().default(""),
+		greeting: pg.text("greeting"),
+		signOff: pg.text("sign_off"),
 		style: pg.jsonb("style").$type<CoverLetterStyle>().notNull(),
 		// Structured letters compose recipient, greeting and sign-off from these; older letters stay freeform.
 		layout: pg.text("layout").$type<CoverLetterLayout>().notNull().default("freeform"),
@@ -56,6 +58,8 @@ export type CoverLetterVersionData = {
 	name: string;
 	recipient: string;
 	content: string;
+	greeting?: string | null;
+	signOff?: string | null;
 	style: CoverLetterStyle;
 	layout: CoverLetterLayout;
 	recipientName: string;

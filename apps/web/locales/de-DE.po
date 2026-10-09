@@ -2588,6 +2588,10 @@ msgstr "Abschnitt löschen"
 msgid "Clear selection"
 msgstr "Auswahl löschen"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr "Leere die Anrede oder Grußformel, um sie wegzulassen. Eine leere Grußformel entfernt auch die automatische Unterschrift."
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "Klicken Sie auf eine beliebige Stelle auf der Seite, um sie zu formatieren. Die Regel, der Sie unterliegen, ist auf der Seite aufgeführt."
@@ -5199,6 +5203,10 @@ msgstr "Note"
 msgid "Greek"
 msgstr "Griechisch"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr "Anrede"
+
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
 msgstr "Rasteransicht"
@@ -5975,7 +5983,7 @@ msgstr "Khmer"
 
 #: src/features/letters/compose.ts
 msgid "Kind regards,"
-msgstr "Mit freundlichen Grüße,"
+msgstr "Mit freundlichen Grüßen"
 
 #: src/routes/dashboard/career/knowledge/route.tsx
 #: src/routes/dashboard/career/route.tsx
@@ -10157,6 +10165,10 @@ msgstr "Anmeldung und Sicherheit"
 msgid "Sign-in didn't complete"
 msgstr "Anmeldung nicht abgeschlossen"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr "Grußformel"
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "Angemeldet als {email}"
@@ -12066,6 +12078,10 @@ msgstr "Verwenden Sie zwischen 6 und 64 Zeichen."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "Verwenden Sie die Farbe {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr "Standard verwenden"
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

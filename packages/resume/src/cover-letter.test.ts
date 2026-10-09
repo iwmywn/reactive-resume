@@ -75,6 +75,42 @@ describe("independent cover letters", () => {
 		formatDate: (date: string) => `on ${date}`,
 	};
 
+	it.each([
+		{
+			greeting: "Hallo <Dana>,",
+			signOff: "Vielen Dank!",
+			expected: "<p>Hallo &lt;Dana&gt;,</p><p>Body</p><p>Vielen Dank!</p>",
+		},
+		{
+			greeting: null,
+			signOff: "Kind regards,\nJordan <Reyes>\n+49 555 0100\njordan@example.com",
+			expected:
+				"<p>Dear hiring team,</p><p>Body</p><p>Kind regards,<br />Jordan &lt;Reyes&gt;<br />+49 555 0100<br />jordan@example.com</p>",
+		},
+		{ greeting: "", signOff: "", expected: "<p>Body</p>" },
+		{ greeting: "  ", signOff: "  ", expected: "<p>Body</p>" },
+		{ greeting: null, signOff: null, expected: "<p>Dear hiring team,</p><p>Body</p><p>Kind regards,<br />Jordan</p>" },
+	])("respects custom or omitted greeting and sign-off: $greeting / $signOff", ({ greeting, signOff, expected }) => {
+		const style = copyCoverLetterStyle(defaultResumeData);
+		style.basics.name = "Jordan";
+		expect(
+			composeCoverLetter(
+				{
+					layout: "structured",
+					recipient: "",
+					content: "<p>Body</p>",
+					recipientName: "",
+					recipientCompany: "",
+					letterDate: null,
+					style,
+					greeting,
+					signOff,
+				},
+				words,
+			).content,
+		).toBe(expected);
+	});
+
 	it("composes structured letters around the body and leaves freeform letters as written", () => {
 		const style = copyCoverLetterStyle(defaultResumeData);
 		style.basics.name = "Jordan <Reyes>";

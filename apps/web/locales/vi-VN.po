@@ -2588,6 +2588,10 @@ msgstr "Xóa phần"
 msgid "Clear selection"
 msgstr "Xóa lựa chọn"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "Nhấp vào bất cứ điều gì trên trang để tạo kiểu cho nó. Quy tắc bạn đang tham gia được nêu trên trang."
@@ -5198,6 +5202,10 @@ msgstr "Điểm số"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "Tiếng Hy Lạp"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "Đăng nhập và bảo mật"
 msgid "Sign-in didn't complete"
 msgstr "Đăng nhập chưa hoàn tất"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "Đã đăng nhập bằng {email}"
@@ -12066,6 +12078,10 @@ msgstr "Sử dụng từ 6 đến 64 ký tự."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "Sử dụng màu {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

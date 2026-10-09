@@ -11,7 +11,6 @@ import { toast } from "@reactive-resume/ui/components/toast";
 import { useBreakpoint } from "@reactive-resume/ui/hooks/use-breakpoint";
 import { downloadWithAnchor } from "@reactive-resume/utils/file";
 import { cn } from "@reactive-resume/utils/style";
-import { useLetterWords } from "@/features/letters/compose";
 import { createLetterFile, letterFileName } from "@/features/letters/export";
 import { useLetterEditorStore } from "@/features/letters/store";
 import { useEditorStore } from "@/features/resume/editor/store";
@@ -96,7 +95,6 @@ const PAUSE_BETWEEN_FILES_MS = 400;
  */
 function LetterDownloadTab() {
 	const letter = useLetterEditorStore((state) => state.letter);
-	const words = useLetterWords();
 	const { data: resumes } = useQuery(orpc.resume.list.queryOptions({ input: {} }));
 	const [format, setFormat] = useState<LetterFormat>("pdf");
 	const [fileName, setFileName] = useState<string | null>(null);
@@ -126,12 +124,12 @@ function LetterDownloadTab() {
 		),
 	];
 	const selected = formats.find((option) => option.id === format) ?? (formats[0] as DownloadFormat<LetterFormat>);
-	const name = fileName ?? letterFileName(letter, words);
+	const name = fileName ?? letterFileName(letter);
 
 	const download = async (as: LetterFormat) => {
 		const bothId = as === "both" ? resumeId : null;
 		const extension = formats.find((option) => option.id === as)?.extension ?? ".pdf";
-		const file = `${sanitizeFileName(name) || letterFileName(letter, words)}${extension}`;
+		const file = `${sanitizeFileName(name) || letterFileName(letter)}${extension}`;
 		setState("busy");
 		try {
 			if (bothId) {
@@ -139,10 +137,10 @@ function LetterDownloadTab() {
 				downloadWithAnchor(await createExportFile(resume, "pdf"), `${getDefaultFileName(resume)}.pdf`);
 				// Two downloads in a row are more reliable a moment apart.
 				await new Promise((resolve) => window.setTimeout(resolve, PAUSE_BETWEEN_FILES_MS));
-				downloadWithAnchor(await createLetterFile(letter, words, "pdf"), `${letterFileName(letter, words)}.pdf`);
+				downloadWithAnchor(await createLetterFile(letter, "pdf"), `${letterFileName(letter)}.pdf`);
 				toast.add({ description: t`Downloaded your resume and this letter` });
 			} else if (as !== "both") {
-				downloadWithAnchor(await createLetterFile(letter, words, as), file);
+				downloadWithAnchor(await createLetterFile(letter, as), file);
 				toast.add({ description: t`Downloaded ${file}` });
 			}
 			setState("done");

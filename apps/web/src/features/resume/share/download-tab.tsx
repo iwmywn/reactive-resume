@@ -16,7 +16,6 @@ import { toast } from "@reactive-resume/ui/components/toast";
 import { downloadWithAnchor } from "@reactive-resume/utils/file";
 import { cn } from "@reactive-resume/utils/style";
 import { applicationsListQueryOptions } from "@/features/applications/queries";
-import { useLetterWords } from "@/features/letters/compose";
 import { createLetterFile, letterFileName } from "@/features/letters/export";
 import { useCurrentResume } from "@/features/resume/builder/draft";
 import { useOpenIssueCount } from "@/features/resume/editor/check/use-check";
@@ -244,7 +243,6 @@ type DownloadTabProps = {
 export function DownloadTab({ onReview }: DownloadTabProps) {
 	const resume = useCurrentResume();
 	const issues = useOpenIssueCount();
-	const words = useLetterWords();
 	const linkedLetter = useLinkedLetter(resume);
 	const headerId = useId();
 	const [format, setFormat] = useState<ExportFormat>("pdf");
@@ -266,7 +264,7 @@ export function DownloadTab({ onReview }: DownloadTabProps) {
 			downloadWithAnchor(blob, file);
 			if (letterId) {
 				const letter = await client.coverLetters.getById({ id: letterId });
-				downloadWithAnchor(await createLetterFile(letter, words, as), `${letterFileName(letter, words)}${extension}`);
+				downloadWithAnchor(await createLetterFile(letter, as), `${letterFileName(letter)}${extension}`);
 				toast.add({ description: t`Downloaded ${file} and the cover letter` });
 			} else {
 				toast.add({ description: t`Downloaded ${file}` });

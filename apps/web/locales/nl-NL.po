@@ -2588,6 +2588,10 @@ msgstr "Duidelijk gedeelte"
 msgid "Clear selection"
 msgstr "Selectie wissen"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "Klik op iets op de pagina om deze op te maken. De regel waar u zich aan houdt, wordt beschreven op de pagina."
@@ -5198,6 +5202,10 @@ msgstr "Cijfer"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "Grieks"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "Inloggen en beveiliging"
 msgid "Sign-in didn't complete"
 msgstr "Inloggen is niet voltooid"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "Ingelogd als {email}"
@@ -12066,6 +12078,10 @@ msgstr "Gebruik tussen de 6 en 64 tekens."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "Gebruik kleur {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

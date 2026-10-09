@@ -50,7 +50,6 @@ export function LetterPage() {
 	const letter = useLetterEditorStore((state) => state.letter);
 	const draft = useLetterEditorStore((state) => state.draft);
 	const assistantProposals = useEditorStore((state) => (state.assistantOpen ? state.assistantProposals : NONE));
-	const words = useLetterWords();
 	const { i18n } = useLingui();
 	const reducedMotion = useReducedMotion();
 	const previewTemplate = useEditorStore((state) => state.previewTemplate);
@@ -67,6 +66,7 @@ export function LetterPage() {
 		enabled: Boolean(letter) && historyVersionId !== null,
 	});
 	const viewing = historyVersionId !== null && version?.id === historyVersionId ? version : null;
+	const words = useLetterWords((viewing?.data.style ?? letter?.style)?.metadata.page.locale ?? "en-US");
 	// A viewed version keeps its own page format.
 	const { canvasRef, fitScale, pageScale } = usePageScale(
 		(viewing?.data.style ?? letter?.style)?.metadata.page.format ?? "a4",

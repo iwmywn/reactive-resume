@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import z from "zod";
 import { toast } from "@reactive-resume/ui/components/toast";
 import { LetterShell } from "./-components/letter-shell";
+import { letterWordsQueryOptions } from "@/features/letters/compose";
 import { useLetterEditorStore } from "@/features/letters/store";
 import { orpc } from "@/libs/orpc/client";
 import { createNoindexFollowMeta } from "@/libs/seo";
@@ -33,6 +34,7 @@ export const Route = createFileRoute("/builder/letter/$coverLetterId")({
 			...orpc.coverLetters.getById.queryOptions({ input: { id: params.coverLetterId } }),
 			staleTime: 0,
 		});
+		await context.queryClient.ensureQueryData(letterWordsQueryOptions(letter.style.metadata.page.locale));
 		return { name: letter.name };
 	},
 	head: ({ loaderData }) => ({

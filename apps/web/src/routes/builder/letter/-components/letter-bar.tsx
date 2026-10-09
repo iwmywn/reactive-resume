@@ -21,7 +21,6 @@ import { useBreakpoint } from "@reactive-resume/ui/hooks/use-breakpoint";
 import { downloadWithAnchor } from "@reactive-resume/utils/file";
 import { cn } from "@reactive-resume/utils/style";
 import { AssistantButton } from "@/features/assistant/assistant-button";
-import { useLetterWords } from "@/features/letters/compose";
 import { createLetterFile, letterFileName } from "@/features/letters/export";
 import { useLetterEditorStore } from "@/features/letters/store";
 import { BackLink, DocumentMenuTrigger, DrawerControls } from "@/features/resume/editor/chrome";
@@ -100,7 +99,6 @@ export function LetterBar({ layout, pinnable }: LetterBarProps) {
 
 /** Download PDF: the letter as it prints, with the sender's header, named First-Last-Cover-Letter.pdf. */
 export function useDownloadLetter() {
-	const words = useLetterWords();
 	const [busy, setBusy] = useState(false);
 
 	const run = async () => {
@@ -109,8 +107,8 @@ export function useDownloadLetter() {
 		setBusy(true);
 		const toastId = toast.add({ type: "loading", description: t`Generating your PDF...` });
 		try {
-			const blob = await createLetterFile(letter, words, "pdf");
-			downloadWithAnchor(blob, `${letterFileName(letter, words)}.pdf`);
+			const blob = await createLetterFile(letter, "pdf");
+			downloadWithAnchor(blob, `${letterFileName(letter)}.pdf`);
 		} catch (error) {
 			toast.add({
 				type: "error",

@@ -2588,6 +2588,10 @@ msgstr "Rensa avsnitt"
 msgid "Clear selection"
 msgstr "Rensa valet"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "Klicka på vad som helst på sidan för att utforma den. Regeln du är i beskrivs på sidan."
@@ -5198,6 +5202,10 @@ msgstr "Betyg"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "Grekiska"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "Inloggning och säkerhet"
 msgid "Sign-in didn't complete"
 msgstr "Inloggningen slutfördes inte"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "Inloggad som {email}"
@@ -12066,6 +12078,10 @@ msgstr "Använd mellan 6 och 64 tecken."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "Använd färg {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

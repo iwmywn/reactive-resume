@@ -2588,6 +2588,10 @@ msgstr "विभाग साफ करा"
 msgid "Clear selection"
 msgstr "निवड साफ करा"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "पृष्ठावरील कोणत्याही गोष्टीला शैली देण्यासाठी त्यावर क्लिक करा. तुम्ही ज्या नियमात आहात ते पृष्ठावर दिलेले आहे."
@@ -5198,6 +5202,10 @@ msgstr "ग्रेड"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "ग्रीक"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "साइन इन आणि सुरक्षा"
 msgid "Sign-in didn't complete"
 msgstr "साइन इन पूर्ण झाले नाही"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "जसे म्हणून साइन इन केले {email}"
@@ -12066,6 +12078,10 @@ msgstr "६ ते ६४ अक्षरांदरम्यान वाप�
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "रंग वापरा {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

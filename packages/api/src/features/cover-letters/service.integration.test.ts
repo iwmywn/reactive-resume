@@ -53,7 +53,11 @@ describe.skipIf(!process.env.COVER_LETTER_TEST_DATABASE_URL)("cover-letter owned
 			`CREATE TABLE "user" (id text PRIMARY KEY); CREATE TABLE resume (id text PRIMARY KEY, user_id text, data jsonb); CREATE TABLE application (id text PRIMARY KEY, user_id text, company text NOT NULL DEFAULT '', contacts jsonb NOT NULL DEFAULT '[]', cover_letter_id text, updated_at timestamptz, resume_id text, status text DEFAULT 'saved', sent_resume_version_id text);`,
 		);
 		// The migrations that shape the letter tables, in order.
-		for (const name of ["20260905121445_cover_letter_library", "20261001042749_v6_release"]) {
+		for (const name of [
+			"20260905121445_cover_letter_library",
+			"20261001042749_v6_release",
+			"20261009132123_left_proteus",
+		]) {
 			const migration = await readFile(
 				new URL(`../../../../../migrations/${name}/migration.sql`, import.meta.url),
 				"utf8",
@@ -171,6 +175,48 @@ describe.skipIf(!process.env.COVER_LETTER_TEST_DATABASE_URL)("cover-letter owned
 		]);
 		expect(results.filter((result) => result.status === "fulfilled")).toHaveLength(1);
 		expect(results.find((result) => result.status === "rejected")).toMatchObject({ reason: { code: "CONFLICT" } });
+	});
+
+	it("preserves custom and omitted letter framing through saves, copies, JSON and history", async () => {
+		const { coverLettersRouter } = await import("./router");
+		const client = createRouterClient(coverLettersRouter, { context: { user: { id: "alice" } } as never });
+		const created = await client.create({ name: "Custom framing", greeting: "Hallo Dana,", signOff: "Vielen Dank!" });
+		const custom = { greeting: "Hallo Dana,", signOff: "Vielen Dank!" };
+		expect(await client.getById({ id: created.id })).toMatchObject(custom);
+		expect(await client.duplicate({ id: created.id })).toMatchObject(custom);
+		const document = await client.export({ id: created.id });
+		expect(document).toMatchObject(custom);
+		expect(await client.import({ document })).toMatchObject(custom);
+		const named = await client.createVersion({ id: created.id, name: "Custom" });
+		expect((await client.getVersion({ id: created.id, versionId: named.id })).data).toMatchObject(custom);
+		const omitted = await client.update({
+			id: created.id,
+			expectedRevision: created.revision,
+			greeting: "",
+			signOff: "",
+		});
+		expect(await client.getById({ id: created.id })).toMatchObject({ greeting: "", signOff: "" });
+		const reset = await client.update({
+			id: created.id,
+			expectedRevision: omitted.revision,
+			greeting: null,
+			signOff: null,
+		});
+		expect(reset).toMatchObject({ greeting: null, signOff: null });
+		expect(await client.restoreVersion({ id: created.id, versionId: named.id })).toMatchObject(custom);
+		// Existing backups and history have no framing fields: restoring them returns to automatic defaults.
+		const { greeting: _greeting, signOff: _signOff, ...oldDocument } = document;
+		expect(await client.import({ document: oldDocument as typeof document })).toMatchObject({
+			greeting: null,
+			signOff: null,
+		});
+		await getPool().query("UPDATE cover_letter_version SET data = data - 'greeting' - 'signOff' WHERE id=$1", [
+			named.id,
+		]);
+		expect(await client.restoreVersion({ id: created.id, versionId: named.id })).toMatchObject({
+			greeting: null,
+			signOff: null,
+		});
 	});
 
 	it("saves letters a resume still carries as linked letters, once, and leaves the resume without them", async () => {
@@ -347,10 +393,11 @@ describe.skipIf(!process.env.COVER_LETTER_TEST_DATABASE_URL)("cover-letter owned
 		const changed = structuredClone(defaultResumeData);
 		changed.basics.name = "New sender";
 		changed.metadata.template = "gengar";
+		changed.metadata.page.locale = "de-DE";
 		await getPool().query("UPDATE resume SET data=$1 WHERE id='alice-resume'", [changed]);
 		expect((await service.getById({ userId: "alice", id: created.id })).style).toMatchObject({
 			basics: { name: "New sender" },
-			metadata: { template: "gengar" },
+			metadata: { template: "gengar", page: { locale: "de-DE" } },
 		});
 
 		const unlinked = await service.update({
@@ -374,7 +421,13 @@ describe.skipIf(!process.env.COVER_LETTER_TEST_DATABASE_URL)("cover-letter owned
 
 		// Choosing a template of the letter's own ends the design link, keeping the rest of the design as it read.
 		const own = await service.update({ userId: "alice", id: created.id, expectedRevision: 2, template: "ditto" });
-		expect(own).toMatchObject({ designLinked: false, style: { metadata: { template: "ditto" } } });
+		expect(own).toMatchObject({
+			designLinked: false,
+			style: { metadata: { template: "ditto", page: { locale: "de-DE" } } },
+		});
+		changed.metadata.page.locale = "en-US";
+		await getPool().query("UPDATE resume SET data=$1 WHERE id='alice-resume'", [changed]);
+		expect((await service.getById({ userId: "alice", id: created.id })).style.metadata.page.locale).toBe("de-DE");
 
 		await expect(
 			service.update({ userId: "alice", id: created.id, expectedRevision: 3, resumeId: null, senderLinked: true }),

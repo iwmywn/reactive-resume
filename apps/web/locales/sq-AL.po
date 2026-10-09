@@ -2588,6 +2588,10 @@ msgstr "Pastro seksionin"
 msgid "Clear selection"
 msgstr "Fshij përzgjedhjen"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "Klikoni çdo gjë në faqe për ta stiluar atë. Rregulli në të cilin jeni është përshkruar në faqe."
@@ -5198,6 +5202,10 @@ msgstr "Nota / Vlerësimi"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "Greqisht"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "Identifikimi dhe siguria"
 msgid "Sign-in didn't complete"
 msgstr "Hyrja nuk u përfundua"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "Identifikuar si {email}"
@@ -12066,6 +12078,10 @@ msgstr "Përdorni midis 6 dhe 64 karaktereve."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "Përdor ngjyrën {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

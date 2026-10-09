@@ -122,7 +122,12 @@ export type LetterWords = {
 type ComposableLetter = Pick<
 	CoverLetter,
 	"layout" | "recipient" | "content" | "recipientName" | "recipientCompany" | "letterDate" | "style"
->;
+> &
+	Partial<Pick<CoverLetter, "greeting" | "signOff">>;
+
+/** The automatic signature includes the sender; custom signatures replace this whole block. */
+export const defaultCoverLetterSignOff = (letter: Pick<CoverLetter, "style">, words: LetterWords) =>
+	[words.signOff, letter.style.basics.name.trim()].filter(Boolean).join("\n");
 
 /**
  * A letter's recipient block and body as the page shows them. Structured letters compose the recipient (name or
@@ -138,14 +143,15 @@ export function composeCoverLetter(letter: ComposableLetter, words: LetterWords)
 		.join("<br />");
 	const date = letter.letterDate ? `<p>${escapeHtml(words.formatDate(letter.letterDate))}</p>` : "";
 	const name = greetingName(letter.recipientName);
-	const sender = letter.style.basics.name.trim();
+	const greeting = letter.greeting ?? (name ? words.greeting(name) : words.teamGreeting);
+	const signOff = letter.signOff ?? defaultCoverLetterSignOff(letter, words);
 
 	return {
 		recipient: `<p>${to}</p>${date}`,
 		content: [
-			`<p>${escapeHtml(name ? words.greeting(name) : words.teamGreeting)}</p>`,
+			greeting.trim() ? coverLetterTextToHtml(greeting) : "",
 			letter.content,
-			`<p>${escapeHtml(words.signOff)}${sender ? `<br />${escapeHtml(sender)}` : ""}</p>`,
+			signOff.trim() ? `<p>${escapeHtml(signOff).replaceAll("\n", "<br />")}</p>` : "",
 		].join(""),
 	};
 }

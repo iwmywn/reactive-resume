@@ -123,6 +123,20 @@ const coverLetterEditableFieldsSchema = {
 		.max(100_000)
 		.optional()
 		.describe("Body HTML. Structured letters add the greeting and sign-off around it, so leave those out."),
+	greeting: z
+		.string()
+		.max(2_000)
+		.nullable()
+		.optional()
+		.describe("Custom greeting; null restores the document language default, empty omits it."),
+	signOff: z
+		.string()
+		.max(2_000)
+		.nullable()
+		.optional()
+		.describe(
+			"Custom signature including name and optional contact details; null restores the document language default with the sender's name, empty omits it.",
+		),
 	recipientName: z
 		.string()
 		.max(200)

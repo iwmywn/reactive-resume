@@ -2588,6 +2588,10 @@ msgstr "Vymazat sekci"
 msgid "Clear selection"
 msgstr "Vymazat výběr"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "Chcete-li upravit styl stránky, klikněte na cokoli na stránce. Pravidlo, ve kterém se nacházíte, je uvedeno na stránce."
@@ -5198,6 +5202,10 @@ msgstr "Prospěch"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "Řečtina"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "Přihlášení a zabezpečení"
 msgid "Sign-in didn't complete"
 msgstr "Přihlášení se nedokončilo"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "Jste přihlášeni jako {email}"
@@ -12066,6 +12078,10 @@ msgstr "Zadejte 6 až 64 znaků."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "Použijte barvu {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

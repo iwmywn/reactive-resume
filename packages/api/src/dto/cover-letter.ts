@@ -12,7 +12,10 @@ import { paginationShape } from "../pagination";
 
 const idSchema = z.object({ id: z.string().min(1) });
 const revisionSchema = idSchema.extend({ expectedRevision: z.number().int().min(1) });
-const editableSchema = coverLetterContentSchema.pick({ name: true, recipient: true, content: true });
+const editableSchema = coverLetterContentSchema.pick({ name: true, recipient: true, content: true }).extend({
+	greeting: coverLetterContentSchema.shape.greeting.unwrap().optional(),
+	signOff: coverLetterContentSchema.shape.signOff.unwrap().optional(),
+});
 const recipientFieldsSchema = coverLetterContentSchema.pick({
 	recipientName: true,
 	recipientCompany: true,
@@ -33,6 +36,8 @@ const letterVersionSchema = letterVersionSummarySchema.extend({
 		name: z.string(),
 		recipient: z.string(),
 		content: z.string(),
+		greeting: coverLetterContentSchema.shape.greeting,
+		signOff: coverLetterContentSchema.shape.signOff,
 		style: coverLetterStyleSchema,
 		layout: coverLetterLayoutSchema,
 		recipientName: z.string(),

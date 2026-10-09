@@ -9,6 +9,8 @@ const letterVersionData = (letter: CoverLetter): CoverLetterVersionData => ({
 	name: letter.name,
 	recipient: letter.recipient,
 	content: letter.content,
+	greeting: letter.greeting,
+	signOff: letter.signOff,
 	style: letter.style,
 	layout: letter.layout,
 	recipientName: letter.recipientName,

@@ -2588,6 +2588,10 @@ msgstr "Bölməni təmizləyin"
 msgid "Clear selection"
 msgstr "Seçimi təmizləyin"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "Forma vermək üçün səhifədəki hər hansı bir şeyə klikləyin. Daxil olduğunuz qayda səhifədə təsvir edilmişdir."
@@ -5198,6 +5202,10 @@ msgstr "Qiymət"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "Yunan"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "Giriş və təhlükəsizlik"
 msgid "Sign-in didn't complete"
 msgstr "Giriş tamamlanmadı"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "{email} kimi daxil olub"
@@ -12066,6 +12078,10 @@ msgstr "6 ilə 64 simvol arasında istifadə edin."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "Rəngdən istifadə edin {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

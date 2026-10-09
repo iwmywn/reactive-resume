@@ -2588,6 +2588,10 @@ msgstr "ವಿಭಾಗವನ್ನು ತೆರವುಗೊಳಿಸಿ"
 msgid "Clear selection"
 msgstr "ಆಯ್ಕೆಯನ್ನು ತೆರವುಗೊಳಿಸಿ"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "ಅದನ್ನು ಸ್ಟೈಲ್ ಮಾಡಲು ಪುಟದಲ್ಲಿರುವ ಯಾವುದನ್ನಾದರೂ ಕ್ಲಿಕ್ ಮಾಡಿ. ನೀವು ಇರುವ ನಿಯಮವನ್ನು ಪುಟದಲ್ಲಿ ವಿವರಿಸಲಾಗಿದೆ."
@@ -5198,6 +5202,10 @@ msgstr "ಗ್ರೇಡ್"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "ಗ್ರೀಕ್"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "ಸೈನ್ ಇನ್ ಮತ್ತು ಭದ್ರತೆ"
 msgid "Sign-in didn't complete"
 msgstr "ಸೈನ್ ಇನ್ ಪೂರ್ಣಗೊಂಡಿಲ್ಲ"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "{email} ಎಂದು ಸೈನ್ ಇನ್ ಮಾಡಲಾಗಿದೆ"
@@ -12066,6 +12078,10 @@ msgstr "6 ಮತ್ತು 64 ಅಕ್ಷರಗಳ ನಡುವೆ ಬಳಸಿ.
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "{color} ಬಣ್ಣವನ್ನು ಬಳಸಿ"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

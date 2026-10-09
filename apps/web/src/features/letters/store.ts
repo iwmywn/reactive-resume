@@ -12,7 +12,10 @@ type LetterMetadata = CoverLetter["style"]["metadata"];
  * setting it ends the design link.
  */
 export type LetterEdits = Partial<
-	Pick<CoverLetter, "name" | "recipient" | "content" | "recipientName" | "recipientCompany" | "letterDate">
+	Pick<
+		CoverLetter,
+		"name" | "recipient" | "content" | "greeting" | "signOff" | "recipientName" | "recipientCompany" | "letterDate"
+	>
 > & { metadata?: Partial<Pick<LetterMetadata, "typography" | "design" | "page">> };
 
 const mergeEdits = (edits: LetterEdits, next: LetterEdits): LetterEdits =>

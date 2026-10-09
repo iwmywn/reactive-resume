@@ -2588,6 +2588,10 @@ msgstr "বিভাগ পরিষ্কার করুন"
 msgid "Clear selection"
 msgstr "নির্বাচন পরিষ্কার করুন"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "এটি স্টাইল করতে পৃষ্ঠায় যেকোনো কিছুতে ক্লিক করুন। আপনি যে নিয়মে আছেন তা পৃষ্ঠায় বর্ণিত আছে।"
@@ -5198,6 +5202,10 @@ msgstr "গ্রেড"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "গ্রিক"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "সাইন ইন এবং নিরাপত্তা"
 msgid "Sign-in didn't complete"
 msgstr "সাইন ইন সম্পূর্ণ হয়নি"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "হিসাবে সাইন ইন করেছেন {email}"
@@ -12066,6 +12078,10 @@ msgstr "৬ থেকে ৬৪ অক্ষরের মধ্যে ব্য�
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "রঙ ব্যবহার করুন {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

@@ -2588,6 +2588,10 @@ msgstr "Počisti razdelek"
 msgid "Clear selection"
 msgstr "Počisti izbor"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "Kliknite kar koli na strani, da jo oblikujete. Pravilo, ki ga uporabljate, je opisano na strani."
@@ -5198,6 +5202,10 @@ msgstr "Ocena"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "Grščina"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "Prijava in varnost"
 msgid "Sign-in didn't complete"
 msgstr "Prijava ni bila dokončana"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "Prijavljen kot {email}"
@@ -12066,6 +12078,10 @@ msgstr "Uporabite med 6 in 64 znakov."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "Uporaba barve {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"title": "Reactive Resume",
-		"version": "6.0.0",
+		"version": "6.0.1",
 		"description": "Reactive Resume API. Mutations do not support Idempotency-Key. Do not automatically retry POST, PUT, PATCH or DELETE requests after a timeout: first read the resource to determine whether the operation succeeded. Existing enum values and response shapes are retained for compatibility.",
 		"license": {
 			"name": "MIT",
@@ -32704,6 +32704,32 @@
 														"type": "string",
 														"maxLength": 100000
 													},
+													"greeting": {
+														"anyOf": [
+															{
+																"type": "string",
+																"maxLength": 2000
+															},
+															{
+																"type": "null"
+															}
+														],
+														"default": null,
+														"description": "Custom greeting; null uses the document language default, empty omits it."
+													},
+													"signOff": {
+														"anyOf": [
+															{
+																"type": "string",
+																"maxLength": 2000
+															},
+															{
+																"type": "null"
+															}
+														],
+														"default": null,
+														"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
+													},
 													"style": {
 														"type": "object",
 														"properties": {
@@ -43260,6 +43286,32 @@
 														"type": "string",
 														"maxLength": 100000
 													},
+													"greeting": {
+														"anyOf": [
+															{
+																"type": "string",
+																"maxLength": 2000
+															},
+															{
+																"type": "null"
+															}
+														],
+														"default": null,
+														"description": "Custom greeting; null uses the document language default, empty omits it."
+													},
+													"signOff": {
+														"anyOf": [
+															{
+																"type": "string",
+																"maxLength": 2000
+															},
+															{
+																"type": "null"
+															}
+														],
+														"default": null,
+														"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
+													},
 													"style": {
 														"type": "object",
 														"properties": {
@@ -43967,6 +44019,28 @@
 										"maxLength": 100000,
 										"default": ""
 									},
+									"greeting": {
+										"anyOf": [
+											{
+												"type": "string",
+												"maxLength": 2000
+											},
+											{
+												"type": "null"
+											}
+										]
+									},
+									"signOff": {
+										"anyOf": [
+											{
+												"type": "string",
+												"maxLength": 2000
+											},
+											{
+												"type": "null"
+											}
+										]
+									},
 									"resumeId": {
 										"type": "string",
 										"minLength": 1,
@@ -44055,6 +44129,32 @@
 										"content": {
 											"type": "string",
 											"maxLength": 100000
+										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
 										},
 										"style": {
 											"type": "object",
@@ -44764,6 +44864,32 @@
 										"content": {
 											"type": "string",
 											"maxLength": 100000
+										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
 										},
 										"style": {
 											"type": "object",
@@ -45476,6 +45602,28 @@
 										"type": "string",
 										"maxLength": 100000
 									},
+									"greeting": {
+										"anyOf": [
+											{
+												"type": "string",
+												"maxLength": 2000
+											},
+											{
+												"type": "null"
+											}
+										]
+									},
+									"signOff": {
+										"anyOf": [
+											{
+												"type": "string",
+												"maxLength": 2000
+											},
+											{
+												"type": "null"
+											}
+										]
+									},
 									"template": {
 										"enum": [
 											"azurill",
@@ -45828,6 +45976,32 @@
 										"content": {
 											"type": "string",
 											"maxLength": 100000
+										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
 										},
 										"style": {
 											"type": "object",
@@ -46633,6 +46807,28 @@
 										"type": "string",
 										"maxLength": 100000
 									},
+									"greeting": {
+										"anyOf": [
+											{
+												"type": "string",
+												"maxLength": 2000
+											},
+											{
+												"type": "null"
+											}
+										]
+									},
+									"signOff": {
+										"anyOf": [
+											{
+												"type": "string",
+												"maxLength": 2000
+											},
+											{
+												"type": "null"
+											}
+										]
+									},
 									"template": {
 										"enum": [
 											"azurill",
@@ -46985,6 +47181,32 @@
 										"content": {
 											"type": "string",
 											"maxLength": 100000
+										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
 										},
 										"style": {
 											"type": "object",
@@ -47720,6 +47942,32 @@
 											"type": "string",
 											"maxLength": 100000
 										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
+										},
 										"style": {
 											"type": "object",
 											"properties": {
@@ -48446,6 +48694,32 @@
 											"type": "string",
 											"maxLength": 100000
 										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
+										},
 										"style": {
 											"type": "object",
 											"properties": {
@@ -49155,6 +49429,32 @@
 											"type": "string",
 											"maxLength": 100000
 										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
+										},
 										"style": {
 											"type": "object",
 											"properties": {
@@ -49804,6 +50104,32 @@
 												"type": "string",
 												"maxLength": 100000
 											},
+											"greeting": {
+												"anyOf": [
+													{
+														"type": "string",
+														"maxLength": 2000
+													},
+													{
+														"type": "null"
+													}
+												],
+												"default": null,
+												"description": "Custom greeting; null uses the document language default, empty omits it."
+											},
+											"signOff": {
+												"anyOf": [
+													{
+														"type": "string",
+														"maxLength": 2000
+													},
+													{
+														"type": "null"
+													}
+												],
+												"default": null,
+												"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
+											},
 											"style": {
 												"type": "object",
 												"properties": {
@@ -50398,6 +50724,32 @@
 										"content": {
 											"type": "string",
 											"maxLength": 100000
+										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
 										},
 										"style": {
 											"type": "object",
@@ -51454,6 +51806,32 @@
 												"content": {
 													"type": "string"
 												},
+												"greeting": {
+													"anyOf": [
+														{
+															"type": "string",
+															"maxLength": 2000
+														},
+														{
+															"type": "null"
+														}
+													],
+													"default": null,
+													"description": "Custom greeting; null uses the document language default, empty omits it."
+												},
+												"signOff": {
+													"anyOf": [
+														{
+															"type": "string",
+															"maxLength": 2000
+														},
+														{
+															"type": "null"
+														}
+													],
+													"default": null,
+													"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
+												},
 												"style": {
 													"type": "object",
 													"properties": {
@@ -52346,6 +52724,32 @@
 										"content": {
 											"type": "string",
 											"maxLength": 100000
+										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
 										},
 										"style": {
 											"type": "object",
@@ -96013,6 +96417,32 @@
 											"type": "string",
 											"maxLength": 100000
 										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
+										},
 										"style": {
 											"type": "object",
 											"properties": {
@@ -96713,6 +97143,32 @@
 												"type": "string",
 												"maxLength": 100000
 											},
+											"greeting": {
+												"anyOf": [
+													{
+														"type": "string",
+														"maxLength": 2000
+													},
+													{
+														"type": "null"
+													}
+												],
+												"default": null,
+												"description": "Custom greeting; null uses the document language default, empty omits it."
+											},
+											"signOff": {
+												"anyOf": [
+													{
+														"type": "string",
+														"maxLength": 2000
+													},
+													{
+														"type": "null"
+													}
+												],
+												"default": null,
+												"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
+											},
 											"style": {
 												"type": "object",
 												"properties": {
@@ -97307,6 +97763,32 @@
 										"content": {
 											"type": "string",
 											"maxLength": 100000
+										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
 										},
 										"style": {
 											"type": "object",
@@ -98041,6 +98523,32 @@
 										"content": {
 											"type": "string",
 											"maxLength": 100000
+										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
 										},
 										"style": {
 											"type": "object",
@@ -98927,6 +99435,32 @@
 										"content": {
 											"type": "string",
 											"maxLength": 100000
+										},
+										"greeting": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom greeting; null uses the document language default, empty omits it."
+										},
+										"signOff": {
+											"anyOf": [
+												{
+													"type": "string",
+													"maxLength": 2000
+												},
+												{
+													"type": "null"
+												}
+											],
+											"default": null,
+											"description": "Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it."
 										},
 										"style": {
 											"type": "object",

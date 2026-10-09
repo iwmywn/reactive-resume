@@ -2588,6 +2588,10 @@ msgstr "섹션 지우기"
 msgid "Clear selection"
 msgstr "선택 해제"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "스타일을 지정하려면 페이지의 아무 항목이나 클릭하세요. 귀하가 속한 규칙은 페이지에 설명되어 있습니다."
@@ -5198,6 +5202,10 @@ msgstr "성적"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "그리스어"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "로그인 및 보안"
 msgid "Sign-in didn't complete"
 msgstr "로그인이 완료되지 않았습니다"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "{email}(으)로 로그인됨"
@@ -12066,6 +12078,10 @@ msgstr "6자에서 64자 사이로 입력하십시오."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "색상 사용 {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

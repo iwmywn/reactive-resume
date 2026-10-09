@@ -31,6 +31,8 @@ type CreateInput = {
 	name: string;
 	recipient?: string | undefined;
 	content?: string | undefined;
+	greeting?: string | null | undefined;
+	signOff?: string | null | undefined;
 	resumeId?: string | undefined;
 	applicationId?: string | undefined;
 	template?: Template | undefined;
@@ -159,6 +161,8 @@ async function insert(
 		name: string;
 		recipient: string;
 		content: string;
+		greeting?: string | null | undefined;
+		signOff?: string | null | undefined;
 		style: CoverLetterStyle;
 		layout?: CoverLetterLayout | undefined;
 		recipientName?: string | undefined;
@@ -271,6 +275,8 @@ export const coverLetterService = {
 					name: input.name,
 					recipient: input.recipient ?? "",
 					content: input.content ?? "",
+					greeting: input.greeting ?? null,
+					signOff: input.signOff ?? null,
 					style,
 					layout: input.layout ?? (input.recipient?.trim() ? "freeform" : "structured"),
 					recipientName: input.recipientName ?? application?.contacts[0]?.name ?? "",
@@ -337,6 +343,8 @@ export const coverLetterService = {
 			changes.recipient = sanitizeCoverLetterHtml(coverLetterContentSchema.shape.recipient.parse(input.recipient));
 		if (input.content !== undefined)
 			changes.content = sanitizeCoverLetterHtml(coverLetterContentSchema.shape.content.parse(input.content));
+		if (input.greeting !== undefined) changes.greeting = coverLetterContentSchema.shape.greeting.parse(input.greeting);
+		if (input.signOff !== undefined) changes.signOff = coverLetterContentSchema.shape.signOff.parse(input.signOff);
 		if (input.recipientName !== undefined) changes.recipientName = input.recipientName.trim();
 		if (input.recipientCompany !== undefined) changes.recipientCompany = input.recipientCompany.trim();
 		if (input.letterDate !== undefined) changes.letterDate = input.letterDate;
@@ -432,6 +440,8 @@ export const coverLetterService = {
 				name: data.name,
 				recipient: data.recipient,
 				content: data.content,
+				greeting: data.greeting ?? null,
+				signOff: data.signOff ?? null,
 				style: data.style,
 				layout: data.layout,
 				recipientName: data.recipientName,

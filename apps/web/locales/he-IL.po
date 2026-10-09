@@ -2588,6 +2588,10 @@ msgstr "נקה סעיף"
 msgid "Clear selection"
 msgstr "נקה את הבחירה"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature."
+msgstr ""
+
 #: src/features/resume/stylesheet/editor.tsx
 msgid "Click anything on the page to style it. The rule you're in is outlined on the page."
 msgstr "לחץ על כל דבר בדף כדי לעצב אותו. הכלל שבו אתה נמצא מתואר בדף."
@@ -5198,6 +5202,10 @@ msgstr "ציון"
 #: src/libs/locale.ts
 msgid "Greek"
 msgstr "יוונית"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Greeting"
+msgstr ""
 
 #: src/features/documents/documents-page.tsx
 msgid "Grid"
@@ -10157,6 +10165,10 @@ msgstr "כניסה ואבטחה"
 msgid "Sign-in didn't complete"
 msgstr "ההתחברות לא הושלמה"
 
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Sign-off"
+msgstr ""
+
 #: src/features/auth/pages/consent.tsx
 msgid "Signed in as {email}"
 msgstr "מחובר בתור {email}"
@@ -12066,6 +12078,10 @@ msgstr "יש להשתמש ב-6 עד 64 תווים."
 #: src/routes/builder/$resumeId/-sidebar/right/sections/design.tsx
 msgid "Use color {color}"
 msgstr "השתמש בצבע {color}"
+
+#: src/routes/builder/letter/-components/write-panel.tsx
+msgid "Use default"
+msgstr ""
 
 #. placeholder {0}: resume?.name ?? t`the resume`
 #: src/routes/builder/letter/-components/write-panel.tsx

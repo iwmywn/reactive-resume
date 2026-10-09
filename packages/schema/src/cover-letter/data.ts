@@ -22,6 +22,22 @@ export const coverLetterContentSchema = z.object({
 	/** Freeform letters' recipient block, as rich text. Structured letters use the fields below instead. */
 	recipient: z.string().max(20_000),
 	content: z.string().max(100_000),
+	greeting: z
+		.string()
+		.trim()
+		.max(2_000)
+		.nullable()
+		.default(null)
+		.describe("Custom greeting; null uses the document language default, empty omits it."),
+	signOff: z
+		.string()
+		.trim()
+		.max(2_000)
+		.nullable()
+		.default(null)
+		.describe(
+			"Custom signature including name and optional contact details; null uses the document language default with the sender's name, empty omits it.",
+		),
 	style: coverLetterStyleSchema,
 	layout: coverLetterLayoutSchema.default("freeform"),
 	recipientName: z.string().trim().max(200).default("").describe("Who the letter is to: a person, or a team."),

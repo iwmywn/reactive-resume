@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { useReducedMotion } from "motion/react";
 import { useId, useRef, useState } from "react";
-import { coverLetterTextToHtml, greetingName } from "@reactive-resume/resume/cover-letter";
+import { coverLetterTextToHtml, defaultCoverLetterSignOff, greetingName } from "@reactive-resume/resume/cover-letter";
 import { Button, buttonVariants } from "@reactive-resume/ui/components/button";
 import {
 	DropdownMenu,
@@ -23,6 +23,7 @@ import { Input } from "@reactive-resume/ui/components/input";
 import { Label } from "@reactive-resume/ui/components/label";
 import { NativeSelect } from "@reactive-resume/ui/components/native-select";
 import { SwitchRow } from "@reactive-resume/ui/components/switch";
+import { Textarea } from "@reactive-resume/ui/components/textarea";
 import { toast } from "@reactive-resume/ui/components/toast";
 import { cn } from "@reactive-resume/utils/style";
 import { templates } from "@/dialogs/resume/template/data";
@@ -351,7 +352,7 @@ function FromSection({ letter, disabled }: { letter: CoverLetter; disabled: bool
  * shows on a green wash until it's kept: it never replaces typed text by itself.
  */
 function BodySection({ letter, application, disabled }: LetterSectionProps) {
-	const words = useLetterWords();
+	const words = useLetterWords(letter.style.metadata.page.locale);
 	const edit = useLetterEditorStore((state) => state.edit);
 	const draft = useLetterEditorStore((state) => state.draft);
 	const [writing, setWriting] = useState(false);
@@ -361,7 +362,14 @@ function BodySection({ letter, application, disabled }: LetterSectionProps) {
 
 	return (
 		<Section id="letter-body" title={<Trans>Letter</Trans>}>
-			{structured && <p className="text-sm text-ink-2">{name ? words.greeting(name) : words.teamGreeting}</p>}
+			{structured && (
+				<LetterFramingField
+					letter={letter}
+					field="greeting"
+					defaultValue={name ? words.greeting(name) : words.teamGreeting}
+					disabled={disabled}
+				/>
+			)}
 
 			{draft.phase !== "idle" ? (
 				<DraftBox
@@ -398,17 +406,52 @@ function BodySection({ letter, application, disabled }: LetterSectionProps) {
 			)}
 
 			{structured && (
-				<p className="text-sm text-ink-2">
-					{words.signOff}
-					{letter.style.basics.name && (
-						<>
-							<br />
-							{letter.style.basics.name}
-						</>
-					)}
-				</p>
+				<>
+					<LetterFramingField
+						letter={letter}
+						field="signOff"
+						defaultValue={defaultCoverLetterSignOff(letter, words)}
+						disabled={disabled}
+					/>
+					<p className="text-xs text-ink-3">
+						<Trans>
+							Clear the greeting or sign-off to omit it. Clearing the sign-off also removes the automatic signature.
+						</Trans>
+					</p>
+				</>
 			)}
 		</Section>
+	);
+}
+
+type LetterFramingFieldProps = {
+	letter: CoverLetter;
+	field: "greeting" | "signOff";
+	defaultValue: string;
+	disabled: boolean;
+};
+
+function LetterFramingField({ letter, field, defaultValue, disabled }: LetterFramingFieldProps) {
+	const id = useId();
+	const edit = useLetterEditorStore((state) => state.edit);
+	return (
+		<div className="grid gap-1.5">
+			<div className="flex items-center justify-between gap-2">
+				<Label htmlFor={id}>{field === "greeting" ? <Trans>Greeting</Trans> : <Trans>Sign-off</Trans>}</Label>
+				{letter[field] !== null && (
+					<Button variant="ghost" size="sm" disabled={disabled} onClick={() => edit({ [field]: null })}>
+						<Trans>Use default</Trans>
+					</Button>
+				)}
+			</div>
+			<Textarea
+				id={id}
+				value={letter[field] ?? defaultValue}
+				maxLength={2_000}
+				disabled={disabled}
+				onChange={(event) => edit({ [field]: event.target.value })}
+			/>
+		</div>
 	);
 }
 

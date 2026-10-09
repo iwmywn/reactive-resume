@@ -17,6 +17,8 @@ const letter: CoverLetter = {
 	name: "Letter",
 	recipient: "",
 	content: "<p>Mine</p>",
+	greeting: null,
+	signOff: null,
 	style: copyCoverLetterStyle(defaultResumeData),
 	layout: "structured",
 	recipientName: "",
