@@ -61,6 +61,7 @@ export const documentExports = {
 			tags: ["Resumes"],
 			operationId: "exportResumeFile",
 			summary: "Download a resume in PDF, DOCX, Markdown or JSON",
+			description: "Renders the resume as a file in the chosen format.",
 			outputStructure: "detailed",
 		})
 		.input(exportInput)
@@ -78,7 +79,7 @@ export const documentExports = {
 			operationId: "exportCoverLetterFile",
 			summary: "Download a cover letter in PDF, DOCX, Markdown or JSON",
 			description:
-				"Uses live linked sender/design details. Structured letter greetings default to English; supply words to localize them. Dates use the document locale.",
+				"Renders the cover letter as a file in the chosen format. Linked sender details and design come live from its resume. Structured letter greetings default to English; pass `words` to localize them. Dates use the document's locale.",
 			outputStructure: "detailed",
 		})
 		.input(

@@ -234,7 +234,7 @@
 			"post": {
 				"operationId": "parseResumePdf",
 				"summary": "Parse a PDF file into resume data",
-				"description": "Extracts structured resume data from a PDF file using the specified AI provider. The file should be sent as a base64-encoded string along with AI provider credentials. Returns a complete ResumeData object. Requires authentication.",
+				"description": "Extracts structured resume data from a PDF file with one of the user's saved AI providers: the one named by `aiProviderId`, or their default. Send the file as a base64-encoded string. Returns a complete ResumeData object and saves nothing.",
 				"tags": [
 					"AI"
 				],
@@ -4682,7 +4682,7 @@
 			"post": {
 				"operationId": "parseResumeDocx",
 				"summary": "Parse a DOCX file into resume data",
-				"description": "Extracts structured resume data from a DOCX or DOC file using the specified AI provider. The file should be sent as a base64-encoded string along with AI provider credentials and the document's media type. Returns a complete ResumeData object. Requires authentication.",
+				"description": "Extracts structured resume data from a DOCX or DOC file with one of the user's saved AI providers: the one named by `aiProviderId`, or their default. Send the file as a base64-encoded string with the document's media type. Returns a complete ResumeData object and saves nothing.",
 				"tags": [
 					"AI"
 				],
@@ -85076,6 +85076,7 @@
 			"get": {
 				"operationId": "exportResumeFile",
 				"summary": "Download a resume in PDF, DOCX, Markdown or JSON",
+				"description": "Renders the resume as a file in the chosen format.",
 				"tags": [
 					"Resumes"
 				],
@@ -85180,7 +85181,7 @@
 			"get": {
 				"operationId": "exportCoverLetterFile",
 				"summary": "Download a cover letter in PDF, DOCX, Markdown or JSON",
-				"description": "Uses live linked sender/design details. Structured letter greetings default to English; supply words to localize them. Dates use the document locale.",
+				"description": "Renders the cover letter as a file in the chosen format. Linked sender details and design come live from its resume. Structured letter greetings default to English; pass `words` to localize them. Dates use the document's locale.",
 				"tags": [
 					"Cover Letters"
 				],
@@ -104428,7 +104429,7 @@
 			"post": {
 				"operationId": "createPdfParse",
 				"summary": "Parse a PDF file into resume data",
-				"description": "Extracts structured resume data from a PDF file using the specified AI provider. The file should be sent as a base64-encoded string along with AI provider credentials. Returns a complete ResumeData object. Requires authentication.",
+				"description": "Extracts structured resume data from a PDF file with one of the user's saved AI providers: the one named by `aiProviderId`, or their default. Send the file as a base64-encoded string. Returns a complete ResumeData object and saves nothing.",
 				"tags": [
 					"AI"
 				],
@@ -108876,7 +108877,7 @@
 			"post": {
 				"operationId": "createDocxParse",
 				"summary": "Parse a DOCX file into resume data",
-				"description": "Extracts structured resume data from a DOCX or DOC file using the specified AI provider. The file should be sent as a base64-encoded string along with AI provider credentials and the document's media type. Returns a complete ResumeData object. Requires authentication.",
+				"description": "Extracts structured resume data from a DOCX or DOC file with one of the user's saved AI providers: the one named by `aiProviderId`, or their default. Send the file as a base64-encoded string with the document's media type. Returns a complete ResumeData object and saves nothing.",
 				"tags": [
 					"AI"
 				],

@@ -317,7 +317,7 @@ export const PARITY_TOOL_META: Record<
 				parityToolName(path),
 				{
 					title,
-					description: `${sentence(PARITY_TOOL_DESCRIPTIONS[path] ?? route.description ?? route.summary ?? path)}${path.startsWith("agent.messages.") && streamingPaths.has(path) ? " Returns collected stream chunks, at most 500,000 characters; use the thread getter to retrieve persisted assistant replies." : ""}${exportPaths.has(path) ? " Returns an authenticated REST download URL; send the same bearer token or API key to download. Rendering occurs when downloaded." : ""}`,
+					description: `${sentence(PARITY_TOOL_DESCRIPTIONS[path] ?? route.description ?? route.summary ?? path)}${path.startsWith("agent.messages.") && streamingPaths.has(path) ? " Returns collected stream chunks, at most 500,000 characters; use the thread getter to retrieve persisted assistant replies." : ""}${exportPaths.has(path) ? " Returns a download link rather than the file. Opening it requires authentication as this account, so it suits API clients; the file is rendered when the link is opened." : ""}${path === "rest.documentExports.resume" ? " For a PDF link the user can open directly, use `download_resume_pdf`." : ""}`,
 					inputSchema: contract.inputSchema,
 					outputSchema: contract.outputSchema,
 					annotations: {

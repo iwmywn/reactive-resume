@@ -51,7 +51,7 @@ export const aiRouter = {
 			operationId: "parseResumePdf",
 			summary: "Parse a PDF file into resume data",
 			description:
-				"Extracts structured resume data from a PDF file using the specified AI provider. The file should be sent as a base64-encoded string along with AI provider credentials. Returns a complete ResumeData object. Requires authentication.",
+				"Extracts structured resume data from a PDF file with one of the user's saved AI providers: the one named by `aiProviderId`, or their default. Send the file as a base64-encoded string. Returns a complete ResumeData object and saves nothing.",
 			successDescription: "The PDF was successfully parsed into structured resume data.",
 		})
 		.input(z.object({ aiProviderId: z.string().optional(), file: fileInputSchema }))
@@ -81,7 +81,7 @@ export const aiRouter = {
 			operationId: "parseResumeDocx",
 			summary: "Parse a DOCX file into resume data",
 			description:
-				"Extracts structured resume data from a DOCX or DOC file using the specified AI provider. The file should be sent as a base64-encoded string along with AI provider credentials and the document's media type. Returns a complete ResumeData object. Requires authentication.",
+				"Extracts structured resume data from a DOCX or DOC file with one of the user's saved AI providers: the one named by `aiProviderId`, or their default. Send the file as a base64-encoded string with the document's media type. Returns a complete ResumeData object and saves nothing.",
 			successDescription: "The DOCX was successfully parsed into structured resume data.",
 		})
 		.input(
