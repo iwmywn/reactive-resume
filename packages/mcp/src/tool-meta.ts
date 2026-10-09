@@ -425,12 +425,12 @@ const BASE_TOOL_META = {
 		annotations: { ...WRITE_NON_IDEMPOTENT, destructiveHint: true, openWorldHint: true },
 	},
 	[T.updateResume]: {
-		title: "Update Resume (metadata)",
+		title: "Update Resume",
 		description: [
-			"Update resume display name, URL slug, tags, visibility, download settings, or full document data.",
-			"Prefer JSON Patch with expectedUpdatedAt for content edits to avoid overwriting concurrent changes.",
+			"Update a resume's settings (display name, URL slug, tags, public visibility, download buttons), or replace its whole content with `data`.",
+			`For content edits prefer \`${T.patchResume}\` with expectedUpdatedAt, which changes only what it targets and avoids overwriting concurrent changes.`,
 			`Locked resumes cannot be updated. Ask the user before unlocking with \`${T.unlockResume}\`.`,
-			"Use the account security workflow to manage password protection.",
+			"To set a share password, `api_resume_set_password` opens the resume in the app.",
 			"",
 			"Always returns your canonical share URL (`{app}/{username}/{slug}`). Anonymous viewers can use it only when `isPublic` is true; password protection from the web app still applies.",
 		].join("\n"),

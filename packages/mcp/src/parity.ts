@@ -137,11 +137,12 @@ const destructiveWrites = new Set([
 	"career.applyReply",
 	"agent.messages.stop",
 ]);
-// Changes what a public resume link shows, or sends content to the user's AI provider.
+// Changes what a public resume link or uploaded file URL shows, or sends content to the user's AI provider.
 const openWorldPaths = new Set([
 	"resume.update",
 	"resume.restoreVersion",
 	"resume.removePassword",
+	"rest.fileUpload",
 	"coverLetters.draft",
 	"career.saveSchedule",
 	"agent.messages.send",
