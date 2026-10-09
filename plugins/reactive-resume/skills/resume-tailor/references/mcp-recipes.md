@@ -18,10 +18,10 @@ Tool sequences and JSON Patch recipes for tailoring inside Reactive Resume. Use 
 
 | `resumeId` | `jobDescription` | `sentResumeVersionId` | Path                                                                                         |
 | ---------- | ---------------- | --------------------- | -------------------------------------------------------------------------------------------- |
-| set        | set              | empty                 | A (full) or A-quick (summary only, AI)                                                       |
+| present    | present          | empty                 | A (full) or A-quick (summary only, AI)                                                       |
 | empty      | any              | empty                 | Choose a base with `list_resumes`, then A: the copy links itself because no resume is linked |
 | any        | empty            | empty                 | Get the JD first (below), then A or B                                                        |
-| any        | any              | set                   | Already submitted (section 5)                                                                |
+| any        | any              | present               | Already submitted (section 5)                                                                |
 
 **Missing JD:** if the application has a `sourceUrl`, call `api_applications_ai_parse_posting {input: <url>}` (read-only, works without AI). On 422 `POSTING_UNREADABLE`, ask the user to paste the text. Show the parsed `jobDescription` and `requirements`, and on a yes save them with `update_application {id, jobDescription, requirements}`. `requirements` from the parser are a starting list; still build your own table.
 
