@@ -57,10 +57,11 @@ turn on an optional feature.
 
 ## Sign-in
 
-| Variable                   | Default                  | Description                                                                                                                                                                    |
-| -------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `BETTER_AUTH_API_KEY`      | unset                    | Connects the instance to the Better Auth dashboard service. Most instances leave it empty.                                                                                     |
-| `BETTER_AUTH_INTERNAL_URL` | `http://127.0.0.1:$PORT` | Address the server uses to reach itself when it verifies OAuth access tokens from API and MCP clients. Set it only if the server cannot reach itself on `127.0.0.1` at `PORT`. |
+| Variable                      | Default                  | Description                                                                                                                                                                                            |
+| ----------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BETTER_AUTH_API_KEY`         | unset                    | Connects the instance to the Better Auth dashboard service. Most instances leave it empty.                                                                                                             |
+| `OPENAI_APPS_CHALLENGE_TOKEN` | unset                    | Domain verification token from the OpenAI plugin portal, served as plain text at `/.well-known/openai-apps-challenge`. Only needed to publish your instance's MCP server as a ChatGPT or Codex plugin. |
+| `BETTER_AUTH_INTERNAL_URL`    | `http://127.0.0.1:$PORT` | Address the server uses to reach itself when it verifies OAuth access tokens from API and MCP clients. Set it only if the server cannot reach itself on `127.0.0.1` at `PORT`.                         |
 
 ### Social sign-in
 

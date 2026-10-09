@@ -7,6 +7,13 @@ import { appVersion } from "../app-version";
 export const handleOAuthAuthorizationServer = oauthProviderAuthServerMetadata(auth);
 export const handleOpenIdConfiguration = oauthProviderOpenIdConfigMetadata(auth);
 
+export function handleOpenAiAppsChallenge() {
+	if (!env.OPENAI_APPS_CHALLENGE_TOKEN) return new Response("Not Found", { status: 404 });
+	return new Response(env.OPENAI_APPS_CHALLENGE_TOKEN, {
+		headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" },
+	});
+}
+
 export function handleWellKnownFallback() {
 	return new Response("OK", { status: 200 });
 }

@@ -94,6 +94,8 @@ export const env = createEnv({
 		// Authentication
 		AUTH_SECRET: z.string().min(1),
 		BETTER_AUTH_API_KEY: z.string().min(1).optional(),
+		// Domain verification token from the OpenAI plugin portal, served at /.well-known/openai-apps-challenge.
+		OPENAI_APPS_CHALLENGE_TOKEN: z.string().trim().min(1).optional(),
 
 		// Social Auth (Google)
 		GOOGLE_CLIENT_ID: z.string().min(1).optional(),

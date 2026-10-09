@@ -16,6 +16,7 @@ import {
 	handleOAuthAuthorizationServer,
 	handleOAuthProtectedResource,
 	handleOpenIdConfiguration,
+	handleOpenAiAppsChallenge,
 	handleWellKnownFallback,
 } from "../openapi/metadata";
 import { handleRpc } from "../rpc/handler";
@@ -115,6 +116,7 @@ export function createApp(options: AppOptions = {}) {
 	app.get("/.well-known/openid-configuration", (c) => handleOpenIdConfiguration(c.req.raw));
 	app.get("/.well-known/oauth-protected-resource", () => handleOAuthProtectedResource());
 	app.get("/.well-known/oauth-protected-resource/*", () => handleOAuthProtectedResource());
+	app.get("/.well-known/openai-apps-challenge", () => handleOpenAiAppsChallenge());
 	app.all("/.well-known/*", () => handleWellKnownFallback());
 
 	app.on(["GET", "HEAD"], "/robots.txt", (c) => handleRobots({ head: c.req.method === "HEAD" }));
