@@ -188,9 +188,31 @@ describe("OAuth callback after two-factor verification", () => {
 		fireEvent.change(input, { target: { value: code } });
 		fireEvent.submit(form);
 		await waitFor(() =>
-			expect(mocks.verifyBackupCode).toHaveBeenCalledWith(expect.objectContaining({ code: "82cNK-qaOiN" })),
+			expect(mocks.verifyBackupCode).toHaveBeenCalledWith(
+				expect.objectContaining({ code: "82cNK-qaOiN", trustDevice: false }),
+			),
 		);
 	});
+
+	it.each([false, true])("trusts the device only when selected (backup: %s)", async (backup) => {
+		const { container } = render(
+			<I18nProvider i18n={i18n}>{backup ? <VerifyTwoFactorBackupPage /> : <VerifyTwoFactorPage />}</I18nProvider>,
+		);
+		const input = container.querySelector('input[name="code"]');
+		const checkbox = screen.getByRole("checkbox", { name: "Trust this device for 30 days" });
+		const form = container.querySelector("form");
+		if (!input || !form) throw new Error("Verification form is missing");
+
+		fireEvent.change(input, { target: { value: backup ? "82cNK-qaOiN" : "123456" } });
+		fireEvent.click(checkbox);
+		fireEvent.submit(form);
+		await waitFor(() =>
+			expect(backup ? mocks.verifyBackupCode : mocks.verifyTotp).toHaveBeenCalledWith(
+				expect.objectContaining({ code: backup ? "82cNK-qaOiN" : "123456", trustDevice: true }),
+			),
+		);
+	});
+
 	it.each([false, true])("resumes the callback after verifying a code (backup: %s)", async (backup) => {
 		const { container } = render(
 			<I18nProvider i18n={i18n}>{backup ? <VerifyTwoFactorBackupPage /> : <VerifyTwoFactorPage />}</I18nProvider>,
@@ -229,7 +251,7 @@ describe("OAuth account creation", () => {
 		await waitFor(() => expect(screen.getByText(/>=8/)).toBeDefined());
 		expect(mocks.signup).not.toHaveBeenCalled();
 	});
-	it("continues a create prompt only after successful signup", async () => {
+	it("continues a create prompt only after successful signup with a trimmed one-character name", async () => {
 		mocks.callbackURL += "&prompt=create";
 		mocks.signup.mockResolvedValueOnce({ data: { token: "session" }, error: null });
 		mocks.continueOAuth.mockResolvedValueOnce({
@@ -242,7 +264,7 @@ describe("OAuth account creation", () => {
 			</I18nProvider>,
 		);
 		for (const [name, value] of Object.entries({
-			name: "New User",
+			name: " A ",
 			username: "newuser",
 			email: "new@example.com",
 			password: "password123",
@@ -258,5 +280,6 @@ describe("OAuth account creation", () => {
 			expect(mocks.continueOAuth).toHaveBeenCalledWith({ created: true, oauth_query: mocks.callbackURL.split("?")[1] }),
 		);
 		expect(mocks.signup.mock.calls[0]?.[0]).not.toHaveProperty("oauth_query");
+		expect(mocks.signup).toHaveBeenCalledWith(expect.objectContaining({ name: "A" }));
 	});
 });

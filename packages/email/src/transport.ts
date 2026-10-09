@@ -28,6 +28,10 @@ const getTransport = () => {
 
 export const sendEmail = async ({ to, subject, react }: SendEmailOptions) => {
 	const transport = getTransport();
+	if (!transport && process.env.NODE_ENV === "production") {
+		console.info("SMTP not configured; skipping email send.", { to, subject });
+		return;
+	}
 	const payload: SendMailOptions = {
 		to,
 		from: env.SMTP_FROM,
@@ -48,8 +52,9 @@ export const sendEmail = async ({ to, subject, react }: SendEmailOptions) => {
 
 	try {
 		await transport.sendMail(payload);
-	} catch (error) {
-		console.error("There was an error sending mail.", error);
+	} catch {
+		// SMTP errors can contain credentials or authentication links.
+		console.error("There was an error sending mail.");
 	}
 };
 
