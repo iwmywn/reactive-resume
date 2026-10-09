@@ -1,6 +1,6 @@
 import { toJsonSchemaCompat } from "@modelcontextprotocol/sdk/server/zod-json-schema-compat.js";
 import z from "zod";
-import { createResumeDataJsonSchema } from "@reactive-resume/schema/resume/json-schema";
+import { resumeDataSchema } from "@reactive-resume/schema/resume/data";
 import { writableResumeDataSchema } from "@reactive-resume/schema/resume/write";
 
 type DiscoveryOptions = NonNullable<Parameters<typeof toJsonSchemaCompat>[1]>;
@@ -46,13 +46,22 @@ const fileOutputSchema = z.object({
 	size: z.number().int().nonnegative(),
 });
 
+// The full resume schema (~28k tokens) is published once as the resume://_meta/schema resource.
+// Inlining it made tools/list ~1.9 MB; the API procedures still validate resume data in full.
+const resumeDataReference = {
+	type: "object",
+	additionalProperties: true,
+	description:
+		"Reactive Resume data (basics, summary, sections, customSections, metadata). Full JSON Schema: the resume://_meta/schema MCP resource, also served at /schema.json on this server.",
+} as const;
+
 /** MCP JSON values retain the API's native dates and files through explicit wire forms. */
 export function wireJsonSchema(schema: z.ZodType, io: "input" | "output" = "output") {
 	return z.toJSONSchema(schema, {
 		io,
 		reused: "inline",
 		unrepresentable: ({ zodSchema }) => {
-			if (zodSchema === writableResumeDataSchema) return createResumeDataJsonSchema();
+			if (zodSchema === writableResumeDataSchema) return { ...resumeDataReference };
 			if (zodSchema._zod.def.type === "transform") return "any";
 			if (zodSchema._zod.def.type === "date") return { type: "string", format: "date-time", "x-mcp-native": "date" };
 			if (zodSchema._zod.def.type === "void" || zodSchema._zod.def.type === "undefined") return { type: "null" };
@@ -61,6 +70,10 @@ export function wireJsonSchema(schema: z.ZodType, io: "input" | "output" = "outp
 			throw new Error(`Unsupported MCP schema: ${zodSchema._zod.def.type}`);
 		},
 		override: ({ zodSchema, jsonSchema }) => {
+			if (zodSchema === resumeDataSchema) {
+				for (const key of Object.keys(jsonSchema)) delete jsonSchema[key];
+				Object.assign(jsonSchema, resumeDataReference);
+			}
 			if (zodSchema._zod.def.type === "pipe") {
 				const definition = zodSchema._zod.def;
 				const represented = definition.in._zod.def.type === "transform" ? definition.out : definition.in;

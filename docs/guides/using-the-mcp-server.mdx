@@ -157,21 +157,21 @@ The server keeps the original 43 tool names and adds API-derived tools for the r
 
 ### Resumes
 
-| Tool                    | What it does                                                                                                                                                  |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `list_resumes`          | Lists your resumes (ID, name, slug, tags, public and locked status, dates). Filter by `tags`, sort by `lastUpdatedAt`, `createdAt` or `name`.                 |
-| `list_resume_tags`      | Lists every tag used across your resumes.                                                                                                                     |
-| `read_resume`           | Returns full data, with ID, name and `updatedAt` in `structuredContent`.                                                                                      |
-| `download_resume_pdf`   | Returns a signed PDF download link that expires in 10 minutes.                                                                                                |
-| `create_resume`         | Creates a resume with a `name` and `slug`, empty or with sample content (`withSampleData`).                                                                   |
-| `import_resume`         | Creates a resume from a full resume data object, such as a JSON export.                                                                                       |
-| `duplicate_resume`      | Copies a resume under a new `name` and `slug`.                                                                                                                |
-| `apply_resume_patch`    | Changes content with JSON Patch; supply `expectedUpdatedAt` from `read_resume` to reject stale edits. See [Using the patch API](/guides/using-the-patch-api). |
-| `update_resume`         | Changes the name, slug, tags or public setting, and returns the public address. Use `api_resume_set_password` for passwords.                                  |
-| `delete_resume`         | Moves a resume to Trash, where it stays for 30 days.                                                                                                          |
-| `lock_resume`           | Locks a resume so it can't be edited or deleted.                                                                                                              |
-| `unlock_resume`         | Unlocks a resume.                                                                                                                                             |
-| `get_resume_statistics` | Returns view and download counts, and when the resume was last viewed and downloaded.                                                                         |
+| Tool                    | What it does                                                                                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `list_resumes`          | Lists your resumes (ID, name, slug, tags, public and locked status, dates). Filter by `tags`, sort by `lastUpdatedAt`, `createdAt` or `name`.                      |
+| `list_resume_tags`      | Lists every tag used across your resumes.                                                                                                                          |
+| `read_resume`           | Returns full data, with ID, name and `updatedAt` in `structuredContent`.                                                                                           |
+| `download_resume_pdf`   | Returns a signed PDF download link that expires in 10 minutes.                                                                                                     |
+| `create_resume`         | Creates a resume with a `name` and `slug`, empty or with sample content (`withSampleData`).                                                                        |
+| `import_resume`         | Creates a resume from a full resume data object, such as a JSON export.                                                                                            |
+| `duplicate_resume`      | Copies a resume under a new `name` and `slug`.                                                                                                                     |
+| `apply_resume_patch`    | Changes content with JSON Patch; supply `expectedUpdatedAt` from `read_resume` to reject stale edits. See [Using the patch API](/guides/using-the-patch-api).      |
+| `update_resume`         | Changes the name, slug, tags or public setting, and returns the public address. To set a share password, `api_resume_set_password` opens the resume in the editor. |
+| `delete_resume`         | Moves a resume to Trash, where it stays for 30 days.                                                                                                               |
+| `lock_resume`           | Locks a resume so it can't be edited or deleted.                                                                                                                   |
+| `unlock_resume`         | Unlocks a resume.                                                                                                                                                  |
+| `get_resume_statistics` | Returns view and download counts, and when the resume was last viewed and downloaded.                                                                              |
 
 ### Cover letters
 
@@ -221,7 +221,7 @@ Additional tools use `api_` followed by the API router path in snake case. Input
 
 | Area                       | Examples                                                                                       | Coverage                                                                                                                  |
 | -------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Resume history and sharing | `api_resume_list_versions`, `api_resume_restore_version`, `api_resume_set_password`            | List/read/create/rename/delete/restore versions; passwords, slug availability, public reads and daily statistics          |
+| Resume history and sharing | `api_resume_list_versions`, `api_resume_restore_version`, `api_resume_set_password`            | List/read/create/rename/delete/restore versions; password removal, slug availability, public reads and daily statistics   |
 | Letter history and drafts  | `api_cover_letters_get_version`, `api_cover_letters_draft`                                     | All version actions; draft, shorter and personal variants; existing update tool accepts complete style fields             |
 | Document library           | `api_documents_list`, `api_documents_copy_for_job`, `api_documents_purge_expired`              | Counts, names, tags, locks, application links, Trash, restore, permanent deletion and expired Trash cleanup               |
 | Files and exports          | `api_rest_document_exports_resume`, `api_rest_document_exports_letter`, `api_rest_file_upload` | PDF, DOCX, Markdown and JSON exports; file upload/delete and supported file imports                                       |
@@ -254,9 +254,9 @@ The server reads storage directly and verifies the account prefix and path segme
 
 ### Browser and streaming workflows
 
-`open_account_settings` opens profile, security, API keys, preferences or account settings. Provider creation/update and web credential entry return their authenticated settings page. Account deletion, password changes, passkeys, two-factor authentication and provider credentials require user interaction in that browser. Browser preferences, local undo and document selection remain browser workflows; durable edits and history are available through MCP.
+`open_account_settings` opens profile, security, API keys, preferences or account settings. Provider creation/update and web credential entry return their authenticated settings page. `api_resume_set_password` returns the resume's editor link, where you set, change or remove its share password, and `api_resume_verify_password` returns a password-protected public resume's link, where a visitor enters the password. Account deletion, password changes, passkeys, two-factor authentication and provider credentials require user interaction in that browser. Browser preferences, local undo and document selection remain browser workflows; durable edits and history are available through MCP.
 
-MCP is stateless and accepts POST requests with JSON responses. GET/DELETE return 405; there is no standalone SSE subscription. Draft/message streams are collected up to 500,000 characters; `truncated` identifies longer responses. Read the assistant thread for persisted replies. `api_resume_updates_subscribe` returns an owned snapshot; poll its `updatedAt` for changes. `api_resume_verify_password` returns a resource cookie capability; pass it as `resourceCookie` to `api_resume_get_by_slug`. It expires server-side after ten minutes and cannot authenticate an account.
+MCP is stateless and accepts POST requests with JSON responses. GET/DELETE return 405; there is no standalone SSE subscription. Draft/message streams are collected up to 500,000 characters; `truncated` identifies longer responses. Read the assistant thread for persisted replies. `api_resume_updates_subscribe` returns an owned snapshot; poll its `updatedAt` for changes.
 
 The installed SDK uses its supported MCP 1.x protocol negotiation, including `2025-11-25`. Protocol revisions beyond that require a separate SDK/compatibility upgrade; this server does not claim support for untested future versions.
 
@@ -274,10 +274,10 @@ Prompts are ready-made instructions your client can start from. Each takes a res
 
 ## Resources
 
-| URI                     | Contents                                                                                                                |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `resume://_meta/schema` | The resume data JSON Schema, listed in `resources/list`. Clients use it to build valid patches.                         |
-| `resume://{id}`         | One resume's full data as JSON. This is a resource template (`resources/templates/list`); find IDs with `list_resumes`. |
+| URI                     | Contents                                                                                                                                                                            |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `resume://_meta/schema` | The resume data JSON Schema, listed in `resources/list` and also served at `/schema.json`. Clients use it to build valid patches; tool schemas point to it instead of repeating it. |
+| `resume://{id}`         | One resume's full data as JSON. This is a resource template (`resources/templates/list`); find IDs with `list_resumes`.                                                             |
 
 Your instance also publishes a server card at `/.well-known/mcp/server-card.json` that summarizes the tools, prompts and resources, for clients that discover servers without connecting.
 
