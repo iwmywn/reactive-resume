@@ -182,6 +182,7 @@
 							"guides/json-resume-schema",
 							"guides/using-the-mcp-server",
 							"guides/managing-applications-with-mcp",
+							"guides/using-agent-skills",
 							"guides/large-rpc-requests"
 						]
 					},
