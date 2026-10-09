@@ -269,7 +269,7 @@ The server reads storage directly and verifies the account prefix and path segme
 
 `open_account_settings` opens profile, security, API keys, preferences or account settings. Provider creation/update and web credential entry return their authenticated settings page. `api_resume_set_password` returns the resume's editor link, where you set, change or remove its share password, and `api_resume_verify_password` returns a password-protected public resume's link, where a visitor enters the password. Account deletion, password changes, passkeys, two-factor authentication and provider credentials require user interaction in that browser. Browser preferences, local undo and document selection remain browser workflows; durable edits and history are available through MCP.
 
-MCP is stateless and accepts POST requests with JSON responses. GET/DELETE return 405; there is no standalone SSE subscription. Draft/message streams are collected up to 500,000 characters; `truncated` identifies longer responses. Read the assistant thread for persisted replies. `api_resume_updates_subscribe` returns an owned snapshot; poll its `updatedAt` for changes.
+MCP is stateless and accepts POST requests with JSON responses. GET/DELETE return 405; there is no standalone SSE subscription. Draft/message streams are collected up to 500,000 characters; `truncated` identifies longer responses. Read the assistant thread for persisted replies. To watch a resume for changes, poll `read_resume` and compare `updatedAt`.
 
 The installed SDK uses its supported MCP 1.x protocol negotiation, including `2025-11-25`. Protocol revisions beyond that require a separate SDK/compatibility upgrade; this server does not claim support for untested future versions.
 
