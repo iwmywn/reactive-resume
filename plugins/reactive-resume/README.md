@@ -23,7 +23,7 @@ The plugin connects to `https://rxresu.me/mcp`. The first time a skill needs you
 
 Data goes only to your Reactive Resume account, under its [privacy policy](https://docs.rxresu.me/legal/privacy-policy). Tools that use AI (match scores, tailored summaries, drafted messages) run on the AI provider you configured in Reactive Resume, and the skills ask before calling them.
 
-Self-hosting Reactive Resume? Connect your own server instead: `claude mcp add --transport http reactive-resume <your-app-url>/mcp`.
+Self-hosting Reactive Resume? Install the skills on their own and connect your own server instead: `npx add-mcp <your-app-url>/mcp --name reactive-resume`.
 
 ## Install
 

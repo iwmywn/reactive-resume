@@ -79,7 +79,7 @@ The Reactive Resume plugin installs all eight skills and connects the [MCP serve
   </Tab>
 </Tabs>
 
-The plugin connects to the hosted instance at `https://rxresu.me/mcp`. If you self-host, install the skills on their own (below) and connect your own instance's `/mcp` address instead.
+The plugin connects to the hosted instance at `https://rxresu.me/mcp`. If you self-host, install the skills on their own (below) and connect your own instance with `npx add-mcp <your-app-url>/mcp --name reactive-resume`.
 
 ### With the skills CLI
 
@@ -188,7 +188,13 @@ gemini skills install https://github.com/reactive-resume/reactive-resume.git --p
 
 ### Connect the MCP server (optional)
 
-To let the skills read and update your resumes and applications, connect your agent to `https://rxresu.me/mcp` (or your own instance's `/mcp` address). See [Using the MCP server](/guides/using-the-mcp-server). Without it, the skills work from what you paste into the chat.
+To let the skills read and update your resumes and applications, connect your agent to the Reactive Resume MCP server:
+
+```sh
+npx add-mcp https://rxresu.me/mcp --name reactive-resume
+```
+
+If you self-host, use your own instance's `/mcp` address. Then sign in from your agent; [Using the MCP server](/guides/using-the-mcp-server) has the steps for each client. Without the server, the skills work from what you paste into the chat.
 
 ## The skills
 
