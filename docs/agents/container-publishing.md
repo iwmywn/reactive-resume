@@ -35,11 +35,11 @@ the current main HEAD updates the moving `nightly` alias. Architecture-specific 
 outputs use `sha-<full-commit>-amd64` and `sha-<full-commit>-arm64`.
 
 Release tags must be `vMAJOR.MINOR.PATCH`, optionally with a prerelease suffix, and match
-`package.json` at the tagged commit. Promotion resolves that commit's
-`sha-<full-commit>` image independently in each enabled registry, validates both architectures,
-and copies the complete image index within that registry. It adds no annotations and checks
-that each resulting alias has the source digest. Embedded SBOM/provenance manifests and
-existing digest-addressed signatures stay intact; the workflow also signs the promoted digest.
+`package.json` at the tagged commit. Promotion resolves that commit's GHCR
+`sha-<full-commit>` image, validates both architectures, and copies the complete image index
+within GHCR. It adds no annotations and checks that each resulting alias has the source digest.
+Embedded SBOM/provenance manifests and existing digest-addressed signatures stay intact; the
+workflow also signs the promoted digest.
 
 If the main build is still running, promotion waits up to 35 minutes for the source images.
 Missing images or incomplete indexes fail before aliases move; promotion never falls back to
@@ -75,10 +75,14 @@ gh workflow run docker-build.yml --repo reactive-resume/reactive-resume --ref ma
 ```
 
 Published images retain SBOMs, maximum provenance, and Cosign signatures. GHCR always uses
-the destination repository's `GITHUB_TOKEN` with `packages: write`. Docker Hub publishing
-is enabled only when both `DOCKER_USERNAME` and `DOCKER_PASSWORD` secrets are present;
-otherwise login, publishing, signing, and verification target GHCR only. Image references
-are normalized to lowercase. New GHCR packages need public visibility, repository linkage,
+the destination repository's `GITHUB_TOKEN` with `packages: write`. GHCR is the primary
+registry: builds, indexes, promotion, signing, anonymous-pull verification, and production
+deployment depend on it alone. Docker Hub is a best-effort mirror, enabled only when both
+`DOCKER_USERNAME` and `DOCKER_PASSWORD` secrets are present. After GHCR is published and
+verified, the workflow copies the GHCR index to Docker Hub under the same tags (same digest)
+and signs it there; Docker Hub login or mirror failures show as failed steps but never fail
+the run. Rerun the workflow to retry a missed mirror. Image references are normalized to
+lowercase. New GHCR packages need public visibility, repository linkage,
 and Actions access before consumers can pull anonymously.
 
 ## Verification and historical images

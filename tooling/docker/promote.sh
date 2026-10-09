@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Retag complete indexes within each registry. No rebuilds or annotation changes:
+# Retag complete GHCR indexes. No rebuilds or annotation changes:
 # attestations stay embedded, and digest-addressed Cosign signatures stay valid.
 source_tag="sha-${COMMIT_SHA:?}"
 images=()
@@ -52,9 +52,5 @@ for index in "${!images[@]}"; do
       exit 1
     fi
   done
-  if [[ "$image" == "$GHCR_IMAGE" ]]; then
-    echo "ghcr_digest=$digest" >> "$GITHUB_OUTPUT"
-  else
-    echo "docker_digest=$digest" >> "$GITHUB_OUTPUT"
-  fi
+  echo "ghcr_digest=$digest" >> "$GITHUB_OUTPUT"
 done

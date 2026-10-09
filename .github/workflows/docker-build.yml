@@ -114,29 +114,13 @@ jobs:
           set -euo pipefail
 
           dockerhub=false
-          ghcr_image="${GHCR_IMAGE,,}"
-          docker_image="${DOCKER_IMAGE,,}"
-          images="$ghcr_image"
-          if [[ -n "$DOCKER_USERNAME" && -n "$DOCKER_PASSWORD" ]]; then
-            dockerhub=true
-            images="${images}"$'\n'"$docker_image"
-          fi
+          if [[ -n "$DOCKER_USERNAME" && -n "$DOCKER_PASSWORD" ]]; then dockerhub=true; fi
 
           {
-            echo "ghcr_image=$ghcr_image"
-            echo "docker_image=$docker_image"
-            echo "images<<EOF"
-            echo "$images"
-            echo "EOF"
+            echo "ghcr_image=${GHCR_IMAGE,,}"
+            echo "docker_image=${DOCKER_IMAGE,,}"
             echo "dockerhub=$dockerhub"
           } >> "$GITHUB_OUTPUT"
-
-      - name: Login to Docker Hub
-        if: ${{ steps.registries.outputs.dockerhub == 'true' }}
-        uses: docker/login-action@v4
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v4
@@ -149,7 +133,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ${{ steps.registries.outputs.images }}
+          images: ${{ steps.registries.outputs.ghcr_image }}
           tags: |
             type=raw,value=sha-${{ steps.source.outputs.sha }}-${{ matrix.arch }}
 
@@ -263,13 +247,6 @@ jobs:
 
       - *registries
 
-      - name: Login to Docker Hub
-        if: ${{ steps.registries.outputs.dockerhub == 'true' }}
-        uses: docker/login-action@v4
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v4
         with:
@@ -291,7 +268,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ${{ steps.registries.outputs.images }}
+          images: ${{ steps.registries.outputs.ghcr_image }}
           flavor: latest=false
           tags: |
             type=raw,value=sha-${{ steps.version.outputs.sha }},enable=${{ needs.mode.outputs.release != 'true' }}
@@ -342,13 +319,11 @@ jobs:
 
           # Get the digest of the multi-arch manifest
           GHCR_DIGEST=$(docker buildx imagetools inspect "${{ steps.registries.outputs.ghcr_image }}:${FINAL_TAG}" --format '{{json .Manifest.Digest}}' | tr -d '"')
-          echo "final_tag=$FINAL_TAG" >> "$GITHUB_OUTPUT"
-          echo "ghcr_digest=$GHCR_DIGEST" >> "$GITHUB_OUTPUT"
-
-          if [[ "${{ steps.registries.outputs.dockerhub }}" == "true" ]]; then
-            DOCKER_DIGEST=$(docker buildx imagetools inspect "${{ steps.registries.outputs.docker_image }}:${FINAL_TAG}" --format '{{json .Manifest.Digest}}' | tr -d '"')
-            echo "docker_digest=$DOCKER_DIGEST" >> "$GITHUB_OUTPUT"
-          fi
+          {
+            echo "final_tag=$FINAL_TAG"
+            echo "ghcr_digest=$GHCR_DIGEST"
+            echo "tags=${tags[*]}"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Promote existing SHA image
         id: promotion
@@ -363,7 +338,6 @@ jobs:
         env:
           BUILD_TAG: ${{ steps.manifest.outputs.final_tag }}
           GHCR_DIGEST: ${{ steps.manifest.outputs.ghcr_digest || steps.promotion.outputs.ghcr_digest }}
-          DOCKER_DIGEST: ${{ steps.manifest.outputs.docker_digest || steps.promotion.outputs.docker_digest }}
           VERSION: ${{ steps.version.outputs.version }}
           PRERELEASE: ${{ steps.version.outputs.prerelease }}
         run: |
@@ -374,28 +348,16 @@ jobs:
           {
             echo "final_tag=$final_tag"
             echo "ghcr_digest=$GHCR_DIGEST"
-            echo "docker_digest=$DOCKER_DIGEST"
           } >> "$GITHUB_OUTPUT"
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
 
-      - name: Sign images with Cosign
-        run: |
-          # Sign GHCR image
-          cosign sign --yes ${{ steps.registries.outputs.ghcr_image }}@${{ steps.published.outputs.ghcr_digest }}
-
-          if [[ "${{ steps.registries.outputs.dockerhub }}" == "true" ]]; then
-            # Sign Docker Hub image
-            cosign sign --yes ${{ steps.registries.outputs.docker_image }}@${{ steps.published.outputs.docker_digest }}
-          fi
+      - name: Sign image with Cosign
+        run: cosign sign --yes ${{ steps.registries.outputs.ghcr_image }}@${{ steps.published.outputs.ghcr_digest }}
 
       - name: Inspect image
-        run: |
-          docker buildx imagetools inspect ${{ steps.registries.outputs.ghcr_image }}:${{ steps.published.outputs.final_tag }}
-          if [[ "${{ steps.registries.outputs.dockerhub }}" == "true" ]]; then
-            docker buildx imagetools inspect ${{ steps.registries.outputs.docker_image }}:${{ steps.published.outputs.final_tag }}
-          fi
+        run: docker buildx imagetools inspect ${{ steps.registries.outputs.ghcr_image }}:${{ steps.published.outputs.final_tag }}
 
       - name: Verify anonymous pulls on both architectures
         run: |
@@ -403,17 +365,41 @@ jobs:
           registry_config=$(mktemp -d)
           trap 'rm -rf "$registry_config"' EXIT
           # Prevent Docker from discovering a system credential helper.
-          printf '%s\n' '{"auths":{"ghcr.io":{},"https://index.docker.io/v1/":{}}}' > "$registry_config/config.json"
-          images=("${{ steps.registries.outputs.ghcr_image }}")
-          if [[ "${{ steps.registries.outputs.dockerhub }}" == "true" ]]; then
-            images+=("${{ steps.registries.outputs.docker_image }}")
-          fi
-          for image in "${images[@]}"; do
-            for platform in linux/amd64 linux/arm64; do
-              docker --config "$registry_config" pull --quiet --platform "$platform" \
-                "$image:${{ steps.published.outputs.final_tag }}"
-            done
+          printf '%s\n' '{"auths":{"ghcr.io":{}}}' > "$registry_config/config.json"
+          for platform in linux/amd64 linux/arm64; do
+            docker --config "$registry_config" pull --quiet --platform "$platform" \
+              "${{ steps.registries.outputs.ghcr_image }}:${{ steps.published.outputs.final_tag }}"
           done
+
+      # Docker Hub is a best-effort mirror of the published GHCR index: its failures show as failed
+      # steps but never fail the job. A single-source copy keeps the GHCR digest and attestations.
+      - name: Login to Docker Hub
+        id: dockerhub-login
+        if: ${{ steps.registries.outputs.dockerhub == 'true' }}
+        continue-on-error: true
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Mirror to Docker Hub
+        if: ${{ steps.dockerhub-login.outcome == 'success' }}
+        continue-on-error: true
+        timeout-minutes: 15
+        env:
+          GHCR_IMAGE: ${{ steps.registries.outputs.ghcr_image }}
+          DOCKER_IMAGE: ${{ steps.registries.outputs.docker_image }}
+          DIGEST: ${{ steps.published.outputs.ghcr_digest }}
+          TAGS: ${{ steps.manifest.outputs.tags }}
+        run: |
+          set -euo pipefail
+          # Builds pass the tags they actually pushed; promotions move every metadata tag.
+          if [[ -z "$TAGS" ]]; then TAGS=$(jq -r '.tags | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON"); fi
+          args=()
+          for tag in $TAGS; do args+=(--tag "$DOCKER_IMAGE:${tag#"$GHCR_IMAGE:"}"); done
+          docker buildx imagetools create "${args[@]}" "$GHCR_IMAGE@$DIGEST"
+          cosign sign --yes "$DOCKER_IMAGE@$DIGEST"
+          docker buildx imagetools inspect "$DOCKER_IMAGE:${{ steps.published.outputs.final_tag }}"
 
       - name: Redeploy Stack
         if: ${{ needs.mode.outputs.release == 'true' && steps.version.outputs.prerelease != 'true' && env.DEPLOY == 'true' }}
