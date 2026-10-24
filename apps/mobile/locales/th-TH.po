@@ -747,6 +747,10 @@ msgstr "หน้านี้ถูกหมุน"
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "การแจ้งเตือนให้เช็คอิน ซึ่งจะแสดงเป็นขั้นตอนถัดไปจนกว่าคุณจะเช็คอิน"
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "มีเรซูเม่ที่มี slug นี้อยู่แล้ว"
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "บทบาทไม่มีคำอธิบาย"
@@ -9484,6 +9488,10 @@ msgstr "โควต้าการบริการหมดแล้ว"
 msgid "The service rejected the credentials."
 msgstr "บริการปฏิเสธข้อมูลรับรอง"
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug ต้องมีเฉพาะตัวอักษรพิมพ์เล็กและตัวเลข คั่นด้วยเครื่องหมายยัติภังค์เดี่ยว"
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "การทดสอบไม่ทำงาน"
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "ประวัติย่อนี้ถูกล็อก สามารถตรวจสอบได้ แต่แก้ไขไม่ได้"
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "ประวัติย่อ นี้ถูกล็อค ปลดล็อคก่อนเพื่อทำการเปลี่ยนแปลง"
 
@@ -10270,6 +10279,10 @@ msgstr "ใช้ลิงก์ http หรือ https"
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "ใช้ขนาดตัวอักษรอย่างน้อย 9pt"
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "ใช้ตัวอักษรสูงสุด 64 ตัว"
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

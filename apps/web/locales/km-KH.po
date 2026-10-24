@@ -963,6 +963,10 @@ msgstr "ការប្រកាសការងារដែលបានបិទ
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "ការរំលឹកឱ្យចូល បង្ហាញជាជំហានបន្ទាប់ រហូតដល់អ្នកធ្វើ។"
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "មានប្រវត្តិរូបសង្ខេបដែលមាន slug នេះរួចហើយ។"
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "តួនាទីមិនមានការពិពណ៌នាទេ។"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "មានបញ្ហាកើតឡើងពេលចូល។ សូមព្យាយាមម្តងទៀត។"
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "មាន​អ្វីមួយ​ខុសប្រក្រតី។ សូម​ព្យាយាម​ម្ដង​ទៀត។"
 
@@ -11673,6 +11677,10 @@ msgstr "កូតាសេវាកម្មត្រូវបានអស់។
 msgid "The service rejected the credentials."
 msgstr "សេវាកម្មបានបដិសេធព័ត៌មានបញ្ជាក់អត្តសញ្ញាណ។"
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug ត្រូវតែមានតែអក្សរតូច និងលេខប៉ុណ្ណោះ ដោយបំបែកដោយសហសញ្ញាតែមួយ។"
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "ការធ្វើតេស្តមិនបានដំណើរការទេ។"
@@ -11885,6 +11893,10 @@ msgstr "PDF នេះត្រូវបានការពារដោយពា�
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "ប្រវត្តិរូប​នេះ​ត្រូវ​បាន​ចាក់សោ ហើយ​មិន​អាច​បច្ចុប្បន្នភាព​បាន​ទេ។"
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "ប្រវត្តិរូបសង្ខេបនេះត្រូវបានចាក់សោ។ សូមដោះសោវាជាមុនសិនដើម្បីធ្វើការផ្លាស់ប្តូរ។"
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "ប្រើទំហំ A4 ឬ US Letter ដើម្បីឱ្យប
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "ប្រើយ៉ាងតិច 9pt។"
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "ប្រើច្រើនបំផុត ៦៤ តួអក្សរ។"
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

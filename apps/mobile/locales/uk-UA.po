@@ -747,6 +747,10 @@ msgstr "Сторінка повернута."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Нагадування про реєстрацію, яке відображається як наступний крок, доки ви це не зробите."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Резюме з цим слагом уже існує."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Роль не має опису"
@@ -9484,6 +9488,10 @@ msgstr "Квота послуг вичерпана."
 msgid "The service rejected the credentials."
 msgstr "Служба відхилила облікові дані."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Слаг повинен містити лише малі літери та цифри, розділені окремими дефісами."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Тест не пройшов."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Це резюме заблоковано. Перевірки доступні, редагування вимкнено."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Це резюме заблоковано. Щоб внести зміни, спочатку розблокуйте його."
 
@@ -10270,6 +10279,10 @@ msgstr "Використовуйте посилання http або https."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Використовуйте щонайменше 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Використовуйте не більше 64 символів."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

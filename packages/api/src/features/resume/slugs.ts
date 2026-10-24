@@ -18,9 +18,16 @@ function pickFreeSlug(stem: string, taken: ReadonlySet<string>) {
 	}
 }
 
+/** Slugs cannot exceed 64 chars. */
+export const MAX_SLUG_LENGTH = 64;
+
+// Slugs cannot exceed 64 chars. Keep base stem short enough so numerical suffixes stay within 64.
+export const MAX_STEM_LENGTH = 56;
+
 /** A slug made from `name` that none of the user's resumes uses yet. */
 export async function findFreeSlug(client: DbOrTx, userId: string, name: string) {
-	const stem = slugify(name) || "resume";
+	const rawStem = slugify(name) || "resume";
+	const stem = rawStem.slice(0, MAX_STEM_LENGTH).replace(/-+$/, "") || "resume";
 	const rows = await client
 		.select({ slug: schema.resume.slug })
 		.from(schema.resume)
@@ -33,8 +40,11 @@ export async function findFreeSlug(client: DbOrTx, userId: string, name: string)
 
 /** Whether a slug can be this resume's address, and if not, why and what would work instead. */
 export async function checkSlug(input: { userId: string; resumeId: string; slug: string }) {
-	if (!SLUG_PATTERN.test(input.slug)) {
-		const suggestion = slugify(input.slug);
+	if (input.slug.length > MAX_SLUG_LENGTH || !SLUG_PATTERN.test(input.slug)) {
+		const rawSuggestion = slugify(input.slug);
+		const suggestion = rawSuggestion
+			? rawSuggestion.slice(0, MAX_SLUG_LENGTH).replace(/-+$/, "") || undefined
+			: undefined;
 		return { status: "invalid" as const, ...(suggestion && suggestion !== input.slug ? { suggestion } : {}) };
 	}
 

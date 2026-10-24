@@ -747,6 +747,10 @@ msgstr "有一页被旋转了。"
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "签到提醒，在您签到之前显示为下一步。"
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "已存在具有此别名（slug）的简历。"
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "角色没有描述"
@@ -9484,6 +9488,10 @@ msgstr "服务配额已用完。"
 msgid "The service rejected the credentials."
 msgstr "该服务拒绝了凭据。"
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "别名（slug）只能包含小写字母和数字，并用单个连字符分隔。"
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "测试没有运行。"
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "此简历已锁定。可进行检查，无法编辑。"
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "该简历已被锁定。首先将其解锁才能进行更改。"
 
@@ -10270,6 +10279,10 @@ msgstr "使用 http 或 https 链接。"
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "至少使用 9pt。"
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "最多使用 64 个字符。"
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

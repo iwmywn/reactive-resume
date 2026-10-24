@@ -747,6 +747,10 @@ msgstr "یک صفحه چرخانده شده است."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "یادآوری برای اعلام حضور، به عنوان مرحله بعدی تا زمانی که انجام دهید نشان داده می‌شود."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "رزومه‌ای با این شناسه (slug) از قبل وجود دارد."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "یک نقش توصیفی ندارد"
@@ -9484,6 +9488,10 @@ msgstr "سهمیه خدمت تمام شده است."
 msgid "The service rejected the credentials."
 msgstr "این سرویس اعتبارنامه را رد کرد."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "شناسه (slug) باید فقط شامل حروف کوچک و اعداد باشد که با خط تیره تکی جدا شده‌اند."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "تست اجرا نشد"
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "این رزومه قفل است. بررسی‌ها در دسترس‌اند؛ ویرایش غیرفعال است."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "این رزومه قفل شده است. برای ایجاد تغییرات ابتدا قفل آن را باز کنید."
 
@@ -10270,6 +10279,10 @@ msgstr "از لینک http یا https استفاده کنید."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "حداقل از اندازهٔ ۹pt استفاده کنید."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "حداکثر از ۶۴ کاراکتر استفاده کنید."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

@@ -963,6 +963,10 @@ msgstr "'n Geplakte posplasing kan daarna as 'n werksaansoek gestoor word."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "'n Herinnering om in te meld, gewys as die volgende stap totdat jy dit doen."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "'n CV met hierdie slug bestaan reeds."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "'n Rol het geen beskrywing nie"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Iets het verkeerd geloop tydens jou aanmelding. Probeer asseblief weer."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Iets het verkeerd geloop. Probeer asseblief weer."
 
@@ -11673,6 +11677,10 @@ msgstr "Die dienskwota is uitgeput."
 msgid "The service rejected the credentials."
 msgstr "Die diens het die geloofsbriewe verwerp."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Die slug mag slegs kleinletters en syfers bevat, geskei deur enkel koppeltekens."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Die toets het nie geloop nie."
@@ -11885,6 +11893,10 @@ msgstr "Hierdie PDF is wagwoordbeskerm. Stoor 'n onbeskermde kopie en probeer we
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Hierdie CV is gesluit en kan nie bygewerk word nie."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Hierdie CV is gesluit. Ontsluit dit eers om veranderinge aan te bring."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Gebruik A4 of US Letter sodat die uitleg oorleef wanneer dit weer weerge
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Gebruik ten minste 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Gebruik hoogstens 64 karakters."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

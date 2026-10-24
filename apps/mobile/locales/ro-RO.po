@@ -747,6 +747,10 @@ msgstr "O pagină este rotită."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Un memento pentru a vă înregistra, afișat ca pas următor până când o faceți."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Există deja un CV cu acest slug."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Un rol nu are descriere"
@@ -9484,6 +9488,10 @@ msgstr "Cota de servicii este epuizată."
 msgid "The service rejected the credentials."
 msgstr "Serviciul a respins acreditările."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug-ul trebuie să conțină doar litere mici și cifre, separate prin cratime simple."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Testul nu a derulat."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Acest CV este blocat. Cecurile sunt disponibile; editarea este dezactivată."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Acest CV este blocat. Deblocați-l mai întâi pentru a face modificări."
 
@@ -10270,6 +10279,10 @@ msgstr "Utilizați un link http sau https."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Folosiți cel puțin 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Utilizați cel mult 64 de caractere."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

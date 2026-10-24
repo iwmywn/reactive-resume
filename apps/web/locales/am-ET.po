@@ -963,6 +963,10 @@ msgstr "የተለጠፈ የሥራ ማስታወቂያ በኋላ እንደ የሥ�
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "የመግባት አስታዋሽ፣ እስከሚያደርጉት ድረስ እንደ ቀጣዩ ደረጃ ይታያል።"
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "በዚህ slug የስራ ልምድ ማስረጃ አስቀድሞ አለ።"
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "ሚና መግለጫ የለውም"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "ስንገባዎት የሆነ ችግር ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።"
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "የተሳሳተ ነገር ተፈጥሯል። እባክዎን ደግመው ይሞክሩ።"
 
@@ -11673,6 +11677,10 @@ msgstr "የአገልግሎት ኮታው ተሟጧል።"
 msgid "The service rejected the credentials."
 msgstr "አገልግሎቱ ምስክርነቱን አልተቀበለውም።"
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "slug መያዝ ያለበት ትናንሽ ፊደላትን እና ቁጥሮችን ብቻ ሲሆን፣ በአንድ ሰረዝ የተለዩ መሆን አለባቸው።"
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "ፈተናው አልሄደም።"
@@ -11885,6 +11893,10 @@ msgstr "ይህ PDF በይለፍ ቃል የተጠበቀ ነው። ያልተጠበ
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "ይህ የየታሪክ ማቅረቢያ ተቆልፏል እና ማዘመን አይቻልም።"
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "ይህ የስራ ልምድ ማስረጃ ተቆልፏል። ለውጦችን ለማድረግ መጀመሪያ ይክፈቱት።"
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "እቅዱ እንደገና ሲታይ እንዲቆይ A4 ወይም US Lett
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "ቢያንስ 9pt ይጠቀሙ።"
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "ቢበዛ 64 ቁምፊዎችን ይጠቀሙ።"
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

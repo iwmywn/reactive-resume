@@ -963,6 +963,10 @@ msgstr "Vložený pracovní inzerát lze následně uložit jako žádost o zam�
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Připomenutí, že se máte ohlásit, se zobrazuje jako další krok, dokud to neuděláte."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Životopis s tímto slugem již existuje."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Role nemá žádný popis"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Při přihlašování se něco pokazilo. Zkuste to prosím znovu."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Něco se pokazilo. Zkuste to prosím znovu."
 
@@ -11673,6 +11677,10 @@ msgstr "Kvóta služby je vyčerpána."
 msgid "The service rejected the credentials."
 msgstr "Služba odmítla přihlašovací údaje."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug smí obsahovat pouze malá písmena a číslice, oddělené jednoduchými pomlčkami."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Test neproběhl."
@@ -11885,6 +11893,10 @@ msgstr "Toto PDF je chráněno heslem. Uložte nechráněnou kopii a zkuste to z
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Tento životopis je uzamčen a nelze ho aktualizovat."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Tento životopis je uzamčen. Chcete-li provést změny, nejprve jej odemkněte."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Použijte formát A4 nebo US Letter, aby rozvržení přežilo opětovn�
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Použijte alespoň 9 bodů."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Použijte nejvýše 64 znaků."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

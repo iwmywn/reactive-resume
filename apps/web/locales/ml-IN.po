@@ -963,6 +963,10 @@ msgstr "ഒട്ടിച്ച ജോലി പോസ്റ്റിംഗ് 
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "ചെക്ക് ഇൻ ചെയ്യാനുള്ള ഒരു ഓർമ്മപ്പെടുത്തൽ, നിങ്ങൾ ചെയ്യുന്നത് വരെ അടുത്ത ഘട്ടമായി കാണിക്കുന്നു."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "ഈ slug ഉള്ള ഒരു റെസ്യൂമെ ഇതിനകം നിലവിലുണ്ട്."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "ഒരു വേഷത്തിന് വിവരണമില്ല"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "നിങ്ങളെ സൈൻ ഇൻ ചെയ്യുമ്പോൾ എന്തോ കുഴപ്പം സംഭവിച്ചു. ദയവായി വീണ്ടും ശ്രമിക്കുക."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "എന്തോ പിശക് സംഭവിച്ചു. ദയവായി വീണ്ടും ശ്രമിക്കുക."
 
@@ -11673,6 +11677,10 @@ msgstr "സേവന ക്വാട്ട തീർന്നു."
 msgid "The service rejected the credentials."
 msgstr "സേവനം യോഗ്യതാപത്രങ്ങൾ നിരസിച്ചു."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug-ൽ ചെറിയ അക്ഷരങ്ങളും അക്കങ്ങളും മാത്രമേ ഉണ്ടാകാവൂ, അവ ഒറ്റ ഡാഷുകളാൽ വേർതിരിച്ചിരിക്കണം."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "പരീക്ഷണം നടന്നില്ല."
@@ -11885,6 +11893,10 @@ msgstr "ഈ PDF പാസ്‌വേഡ് സംരക്ഷിതമാണ്
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "ഈ റിസ്യൂം ലോക്ക് ചെയ്തതിനാൽ ഇതിനെ അപ്‌ഡേറ്റ് ചെയ്യാനോ ഡിലീറ്റ് ചെയ്യാനോ കഴിയില്ല."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "ഈ റെസ്യൂമെ ലോക്ക് ചെയ്‌തിരിക്കുന്നു. മാറ്റങ്ങൾ വരുത്താൻ ആദ്യം അത് അൺലോക്ക് ചെയ്യുക."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "ലേഔട്ട് വീണ്ടും റെൻഡർ ചെയ്
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "കുറഞ്ഞത് 9pt ഉപയോഗിക്കുക."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "പരമാവധി 64 പ്രതീകങ്ങൾ ഉപയോഗിക്കുക."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

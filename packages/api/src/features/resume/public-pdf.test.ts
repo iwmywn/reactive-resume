@@ -147,6 +147,7 @@ describe("createPublicResumePdf", () => {
 			createPublicResumePdf(
 				{ ...input, slug: "old-slug" },
 				{
+					resolveCurrentUserId: vi.fn().mockResolvedValue(undefined),
 					rateLimiter: { consume: vi.fn() },
 					renderPdf: vi.fn(),
 				},

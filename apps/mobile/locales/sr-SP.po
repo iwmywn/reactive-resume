@@ -747,6 +747,10 @@ msgstr "Страница је ротирана."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Подсетник да се пријавите, приказан као следећи корак док то не учините."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Резиме са овом URL ознаком већ постоји."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Улога нема опис"
@@ -9484,6 +9488,10 @@ msgstr "Квота услуге је исцрпљена."
 msgid "The service rejected the credentials."
 msgstr "Служба је одбила акредитиве."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Слаг мора садржати само мала слова и бројеве, раздвојене појединачним цртицама."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Тест није покренут."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Овај резиме је закључан. Провере су доступне; уређивање је онемогућено."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Овај резиме је закључан. Прво га откључајте да бисте извршили промене."
 
@@ -10270,6 +10279,10 @@ msgstr "Користите хттп или хттпс везу."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Користите бар 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Користите највише 64 знака."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

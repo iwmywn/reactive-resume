@@ -747,6 +747,10 @@ msgstr "Страница е завъртяна."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Напомняне да се регистрирате, показва се като следваща стъпка, докато не го направите."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Вече съществува автобиография с този slug."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Ролята няма описание"
@@ -9484,6 +9488,10 @@ msgstr "Квотата за услуга е изчерпана."
 msgid "The service rejected the credentials."
 msgstr "Услугата отхвърли идентификационните данни."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Слугът (slug) трябва да съдържа само малки букви и цифри, разделени с единични тирета."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Тестът не се проведе."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Тази автобиография е заключена. Проверките са достъпни; редактирането е изключено."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Тази автобиография е заключена. Първо я отключете, за да направите промени."
 
@@ -10270,6 +10279,10 @@ msgstr "Използвайте http или https връзка."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Използвайте поне 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Използвайте най-много 64 знака."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

@@ -747,6 +747,10 @@ msgstr "ఒక పేజీ తిప్పబడింది."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "చెక్ ఇన్ చేయడానికి రిమైండర్, మీరు చేసే వరకు తదుపరి దశగా చూపబడుతుంది."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "ఈ slug తో కూడిన రెజ్యూమ్ ఇప్పటికే ఉంది."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "పాత్రకు వివరణ లేదు"
@@ -9484,6 +9488,10 @@ msgstr "సర్వీస్ కోటా అయిపోయింది."
 msgid "The service rejected the credentials."
 msgstr "సేవ ఆధారాలను తిరస్కరించింది."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug లో చిన్న అಕ್ಷరాలు మరియు సంఖ్యలు మాత్రమే ఉండాలి, సింగిల్ డాష్‌ల ద్వారా వేరు చేయబడాలి."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "పరీక్ష అమలు కాలేదు."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "ఈ రెజ్యూమ్ లాక్ చేయబడింది. తనిఖీలు అందుబాటులో ఉన్నాయి; సవరణలు నిలిపివేయబడ్డాయి."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "ఈ రెజ్యూమ్ లాక్ చేయబడింది. మార్పులు చేయడానికి ముందుగా దాన్ని అన్‌లాక్ చేయండి."
 
@@ -10270,6 +10279,10 @@ msgstr "http లేదా https లింక్‌ని ఉపయోగిం�
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "కనీసం 9pt ఉపయోగించండి."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "గరిష్టంగా 64 అಕ್ಷరాలను ఉపయోగించండి."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

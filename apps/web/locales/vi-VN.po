@@ -963,6 +963,10 @@ msgstr "Sau đó, một tin tuyển dụng đã dán có thể được lưu dư
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Lời nhắc đăng ký, được hiển thị dưới dạng bước tiếp theo cho đến khi bạn thực hiện."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Hồ sơ với đường dẫn này đã tồn tại."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Một vai trò không có mô tả"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Đã xảy ra lỗi khi đăng nhập cho bạn. Vui lòng thử lại."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Đã xảy ra lỗi. Vui lòng thử lại."
 
@@ -11673,6 +11677,10 @@ msgstr "Hạn ngạch dịch vụ đã hết."
 msgid "The service rejected the credentials."
 msgstr "Dịch vụ đã từ chối thông tin xác thực."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Đường dẫn chỉ được chứa chữ cái thường và số, phân tách bằng dấu gạch ngang đơn."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Bài kiểm tra không chạy."
@@ -11885,6 +11893,10 @@ msgstr "PDF này được bảo vệ bằng mật khẩu. Hãy lưu một bản 
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Hồ sơ này đã bị khóa và không thể cập nhật."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Hồ sơ này đã bị khóa. Hãy mở khóa trước để thực hiện thay đổi."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Sử dụng khổ A4 hoặc US Letter để bố cục không bị lỗi
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Sử dụng cỡ chữ tối thiểu 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Sử dụng tối đa 64 ký tự."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

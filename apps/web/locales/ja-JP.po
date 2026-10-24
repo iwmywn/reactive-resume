@@ -963,6 +963,10 @@ msgstr "貼り付けた求人情報は、後から求人応募書として保存
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "チェックインするまで次のステップとして表示される、チェックインするためのリマインダー。"
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "このスラッグのレジュメは既に存在します。"
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "役割には説明がありません"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "サインイン中に問題が発生しました。もう一度お試しください。"
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "問題が発生しました。もう一度お試しください。"
 
@@ -11673,6 +11677,10 @@ msgstr "サービス割り当てが枯渇しています。"
 msgid "The service rejected the credentials."
 msgstr "サービスは資格情報を拒否しました。"
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "スラッグには半角英小文字と数字のみを使用し、単一のハイフンで区切る必要があります。"
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "テストは実行されませんでした。"
@@ -11885,6 +11893,10 @@ msgstr "このPDFはパスワードで保護されています。保護されて
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "このレジュメはロックされているため、更新できません。"
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "このレジュメはロックされています。変更するには、まずロックを解除してください。"
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "A4またはUSレターを使用すると、再描画してもレイア�
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "最低9pt以上を使用してください。"
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "最大 64 文字を使用してください。"
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

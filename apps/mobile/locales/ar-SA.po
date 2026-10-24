@@ -747,6 +747,10 @@ msgstr "صفحة مُدوَّرة."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "تذكير بتسجيل الوصول، يظهر كخطوة تالية حتى تقوم بذلك."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "توجد سيرة ذاتية بهذا المعرّف (slug) بالفعل."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "الدور ليس له وصف"
@@ -9484,6 +9488,10 @@ msgstr "تم استنفاد حصة الخدمة."
 msgid "The service rejected the credentials."
 msgstr "رفضت الخدمة بيانات الاعتماد."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "يجب أن يحتوي المعرّف (slug) على أحرف صغيرة وأرقام فقط، مفصولة بشرطات مفردة."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "لم يتم تشغيل الاختبار."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "هذه السيرة الذاتية مقفلة. يمكنك تشغيل عمليات الفحص، لكن لا يمكنك تحريرها."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "هذه السيرة الذاتية مقفلة. افتحه أولاً لإجراء التغييرات."
 
@@ -10270,6 +10279,10 @@ msgstr "استخدم رابط http أو https."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "استخدم حجم خط 9 نقاط على الأقل."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "استخدم 64 حرفًا كحد أقصى."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

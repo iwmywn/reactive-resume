@@ -963,6 +963,10 @@ msgstr "Prilepljeno delovno mesto lahko pozneje shranite kot prošnjo za zaposli
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Opomnik za prijavo, prikazan kot naslednji korak, dokler tega ne storite."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Življenjepis s tem slugom že obstaja."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Vloga nima opisa"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Pri prijavi je prišlo do napake. Poskusite znova."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Nekaj je šlo narobe. Prosimo, poskusite znova."
 
@@ -11673,6 +11677,10 @@ msgstr "Storitvena kvota je izčrpana."
 msgid "The service rejected the credentials."
 msgstr "Storitev je zavrnila poverilnice."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug lahko vsebuje samo male črke in številke, ločene z enojnimi vezaji."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Test ni uspel."
@@ -11885,6 +11893,10 @@ msgstr "Ta PDF je zaščiten z geslom. Shranite nezaščiteno kopijo in poskusit
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Ta življenjepis je zaklenjen in ga ni mogoče posodobiti."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Ta življenjepis je zaklenjen. Za uveljavitev sprememb ga najprej odklenite."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Uporabite A4 ali US Letter, da postavitev preživi ponovno upodabljanje.
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Uporabite vsaj 9 pik."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Uporabite največ 64 znakov."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

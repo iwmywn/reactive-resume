@@ -747,6 +747,10 @@ msgstr "Səhifə döndərilib."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Yoxlama üçün xatırlatma, siz edənə qədər növbəti addım olaraq göstərilir."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Bu URL identifikatoru ilə CV artıq mövcuddur."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Rolun təsviri yoxdur"
@@ -9484,6 +9488,10 @@ msgstr "Xidmət kvotası tükənib."
 msgid "The service rejected the credentials."
 msgstr "Xidmət etimadnamələri rədd etdi."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug yalnız kiçik hərflərdən və rəqəmlərdən ibarət olmalı və tək defislərlə ayrılmalıdır."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Test keçmədi."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Bu CV kilidlidir. Doğrulama mövcuddur, lakin redaktə deaktivdir."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Bu CV kilidlidir. Dəyişikliklər etmək üçün əvvəlcə kilidini açın."
 
@@ -10270,6 +10279,10 @@ msgstr "Http və ya https linkindən istifadə edin."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Ən azı 9pt istifadə edin."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Ən çox 64 simvoldan istifadə edin."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

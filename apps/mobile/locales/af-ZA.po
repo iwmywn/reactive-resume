@@ -747,6 +747,10 @@ msgstr "'n Bladsy is gedraai."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "'n Herinnering om in te meld, gewys as die volgende stap totdat jy dit doen."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "'n CV met hierdie slug bestaan reeds."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "'n Rol het geen beskrywing nie"
@@ -9484,6 +9488,10 @@ msgstr "Die dienskwota is uitgeput."
 msgid "The service rejected the credentials."
 msgstr "Die diens het die geloofsbriewe verwerp."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Die slug mag slegs kleinletters en syfers bevat, geskei deur enkel koppeltekens."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Die toets het nie geloop nie."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Hierdie CV is gesluit. Kontroles is beskikbaar; redigering is gedeaktiveer."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Hierdie CV is gesluit. Ontsluit dit eers om veranderinge aan te bring."
 
@@ -10270,6 +10279,10 @@ msgstr "Gebruik 'n http- of https-skakel."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Gebruik ten minste 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Gebruik hoogstens 64 karakters."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

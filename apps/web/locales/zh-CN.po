@@ -963,6 +963,10 @@ msgstr "粘贴的职位发布之后可以保存为职位申请。"
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "签到提醒，在您签到之前显示为下一步。"
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "已存在具有此别名（slug）的简历。"
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "角色没有描述"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "登录时出错。请重试。"
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "出现了一些问题。请重试。"
 
@@ -11673,6 +11677,10 @@ msgstr "服务配额已用完。"
 msgid "The service rejected the credentials."
 msgstr "该服务拒绝了凭据。"
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "别名（slug）只能包含小写字母和数字，并用单个连字符分隔。"
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "测试没有运行。"
@@ -11885,6 +11893,10 @@ msgstr "此 PDF 受密码保护。请保存一份不受保护的副本后重试�
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "这份简历已被锁定，无法更新。"
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "这份简历已被锁定。请先解锁后再进行更改。"
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "使用 A4 或美国信纸尺寸，让版面在重新渲染后依然保�
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "至少使用 9pt。"
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "最多使用 64 个字符。"
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

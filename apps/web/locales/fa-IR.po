@@ -963,6 +963,10 @@ msgstr "یک آگهی شغلی چسبانده شده را می توان پس ا�
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "یادآوری برای اعلام حضور، به عنوان مرحله بعدی تا زمانی که انجام دهید نشان داده می‌شود."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "رزومه‌ای با این شناسه (slug) از قبل وجود دارد."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "یک نقش توصیفی ندارد"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "هنگام ورود شما مشکلی پیش آمد. لطفاً دوباره تلاش کنید."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "مشکلی پیش آمد. لطفاً دوباره تلاش کنید."
 
@@ -11673,6 +11677,10 @@ msgstr "سهمیه خدمت تمام شده است."
 msgid "The service rejected the credentials."
 msgstr "این سرویس اعتبارنامه را رد کرد."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "شناسه (slug) باید فقط شامل حروف کوچک و اعداد باشد که با خط تیره تکی جدا شده‌اند."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "تست اجرا نشد"
@@ -11885,6 +11893,10 @@ msgstr "این PDF با رمز عبور محافظت شده است. یک نسخ�
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "این رزومه قفل شده و قابل به‌روزرسانی نیست."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "این رزومه قفل است. برای اعمال تغییرات ابتدا آن را باز کنید."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "از قطع A4 یا US Letter استفاده کنید تا چیدمان 
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "حداقل از اندازهٔ ۹pt استفاده کنید."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "حداکثر از ۶۴ کاراکتر استفاده کنید."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

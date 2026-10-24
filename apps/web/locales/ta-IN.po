@@ -963,6 +963,10 @@ msgstr "ஒட்டப்பட்ட வேலை இடுகை பின்
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "செக்-இன் செய்வதற்கான நினைவூட்டல், நீங்கள் செய்யும் வரை அடுத்த படியாகக் காட்டப்படும்."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "இந்த slug கொண்ட ஒரு ரெஸ்யூம் ஏற்கனவே உள்ளது."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "ஒரு பாத்திரத்திற்கு விளக்கம் இல்லை"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "உங்களை உள்நுழைக்கும்போது ஏதோ தவறு நடந்தது. மீண்டும் முயற்சிக்கவும்."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "ஏதோ தவறு நடந்துள்ளது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்."
 
@@ -11673,6 +11677,10 @@ msgstr "சேவை ஒதுக்கீடு தீர்ந்துவி�
 msgid "The service rejected the credentials."
 msgstr "சேவை நற்சான்றிதழ்களை நிராகரித்தது."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug-ல் சிறிய எழுத்துக்கள் மற்றும் எண்கள் மட்டுமே இருக்க வேண்டும், அவை ஒற்றை ஹைபன்களால் பிரிக்கப்பட்டிருக்க வேண்டும்."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "சோதனை ஓடவில்லை."
@@ -11885,6 +11893,10 @@ msgstr "இந்த PDF கடவுச்சொல் பாதுகாப்
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "இந்த ரெஸ்யூமி பூட்டப்பட்டுள்ளது மற்றும் புதுப்பிக்க முடியாது."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "இந்த ரெஸ்யூம் பூட்டப்பட்டுள்ளது. மாற்றங்களைச் செய்ய முதலில் அதைத் திறக்கவும்."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12479,6 +12491,10 @@ msgstr "தளவமைப்பு மீண்டும் காட்டப�
 msgid "Use at least 9pt."
 msgstr "குறைந்தது 9pt பயன்படுத்தவும்."
 
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "அதிகபட்சம் 64 எழுத்துகளைப் பயன்படுத்தவும்."
+
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."
 msgstr "6 முதல் 64 எழுத்துக்கள் வரை பயன்படுத்தவும்."
@@ -12507,7 +12523,7 @@ msgstr "ஆலோசனையில் பயன்படுத்து: {excer
 
 #: src/features/resume/share/link-tab.tsx
 msgid "Use lowercase letters, numbers and single dashes."
-msgstr "சிறிய எழுத்துக்கள், எண்கள் மற்றும் ஒற்றை கோடுகளைப் பயன்படுத்தவும்."
+msgstr "சிறிய எழுத்துக்கள், எண்கள் மற்றும் ஒற்றை ஹைபன்களைப் பயன்படுத்தவும்."
 
 #: src/features/career/knowledge/search-regions-field.tsx
 msgid "Use my time zone"

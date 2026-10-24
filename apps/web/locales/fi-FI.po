@@ -963,6 +963,10 @@ msgstr "Liimattu työpaikkailmoitus voidaan tallentaa myöhemmin työhakemukseks
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Muistutus sisäänkirjautumisesta, näytetään seuraavana vaiheena, kunnes teet sen."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Ansioluettelo tällä slugilla on jo olemassa."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Roolilla ei ole kuvausta"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Kirjautumisessa tapahtui virhe. Yritä uudelleen."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Jokin meni pieleen. Yritä uudelleen."
 
@@ -11673,6 +11677,10 @@ msgstr "Palvelukiintiö on käytetty loppuun."
 msgid "The service rejected the credentials."
 msgstr "Palvelu hylkäsi valtuustiedot."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slugin tulee sisältää vain pieniä kirjaimia ja numeroita yksittäisillä yhdysmerkeillä erotettuina."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Testi ei sujunut."
@@ -11885,6 +11893,10 @@ msgstr "Tämä PDF on salasanasuojattu. Tallenna suojaamaton kopio ja yritä uud
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Tämä ansioluettelo on lukittu eikä sitä voi päivittää."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Tämä ansioluettelo on lukittu. Avaa se ensin tehdäksesi muutoksia."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Käytä A4- tai US Letter -kokoa, jotta asettelu säilyy uudelleenrender
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Käytä vähintään 9 pt:n kokoa."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Käytä enintään 64 merkkiä."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

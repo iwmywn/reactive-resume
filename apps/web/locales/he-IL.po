@@ -963,6 +963,10 @@ msgstr "ניתן לשמור מודעה מודבקת כבקשת עבודה לאח
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "תזכורת לצ'ק-אין, מוצגת כשלב הבא עד שתעשה זאת."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "קורות חיים עם מזהה (slug) זה כבר קיימים."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "לתפקיד אין תיאור"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "משהו השתבש בזמן ההתחברות שלך. נסה שוב."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "משהו השתבש. נא לנסות שוב."
 
@@ -11673,6 +11677,10 @@ msgstr "מכסת השירות נגמרה."
 msgid "The service rejected the credentials."
 msgstr "השירות דחה את האישורים."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "המזהה (slug) חייב להכיל רק אותיות קטנות ומספרים, מופרדים במקפים בודדים."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "הבדיקה לא רצה."
@@ -11885,6 +11893,10 @@ msgstr "ה־PDF הזה מוגן בסיסמה. שמור עותק לא מוגן ו
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "קורות חיים אלה נעולים ולא ניתן לעדכן אותם."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "קורות חיים אלה נעולים. בטל את הנעילה תחילה כדי לבצע שינויים."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "השתמש ב־A4 או ב־US Letter כדי שהפריסה תישמר ב
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "השתמש בגודל של 9pt לפחות."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "השתמש ב-64 תווים לכל היותר."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

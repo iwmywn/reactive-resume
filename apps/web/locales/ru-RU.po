@@ -963,6 +963,10 @@ msgstr "Вставленное объявление о вакансии впос
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Напоминание о необходимости зарегистрироваться, показываемое как следующий шаг, пока вы этого не сделаете."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Резюме с таким слагом уже существует."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Роль не имеет описания"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "При входе что-то пошло не так. Попробуйте ещё раз."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Что-то пошло не так. Пожалуйста, попробуйте еще раз."
 
@@ -11673,6 +11677,10 @@ msgstr "Квота на обслуживание исчерпана."
 msgid "The service rejected the credentials."
 msgstr "Служба отклонила учетные данные."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Слаг должен содержать только строчные буквы и цифры, разделенные одинарными дефисами."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Тест не запустился."
@@ -11885,6 +11893,10 @@ msgstr "Этот PDF защищён паролем. Сохраните неза�
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Это резюме заблокировано и не может быть обновлено."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Это резюме заблокировано. Сначала разблокируйте его, чтобы внести изменения."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Используйте A4 или US Letter, чтобы макет сох
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Используйте кегль не менее 9 пунктов."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Используйте не более 64 символов."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

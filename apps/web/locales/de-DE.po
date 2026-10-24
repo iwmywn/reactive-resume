@@ -963,6 +963,10 @@ msgstr "Eine eingefügte Stellenausschreibung kann anschließend als Bewerbung g
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Eine Erinnerung zum Einchecken, die als nächster Schritt angezeigt wird, bis Sie dies tun."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Ein Lebenslauf mit diesem Slug existiert bereits."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Eine Rolle hat keine Beschreibung"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Bei der Anmeldung ist etwas schiefgelaufen. Bitte versuchen Sie es erneut."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
 
@@ -11673,6 +11677,10 @@ msgstr "Das Servicekontingent ist ausgeschöpft."
 msgid "The service rejected the credentials."
 msgstr "Der Dienst hat die Anmeldeinformationen abgelehnt."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Der Slug darf nur Kleinbuchstaben und Zahlen enthalten, getrennt durch einzelne Bindestriche."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Der Test wurde nicht ausgeführt."
@@ -11885,6 +11893,10 @@ msgstr "Dieses PDF ist passwortgeschützt. Speichern Sie eine ungeschützte Kopi
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Dieser Lebenslauf ist gesperrt und kann nicht aktualisiert werden."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Dieser Lebenslauf ist gesperrt. Entsperren Sie ihn zuerst, um Änderungen vorzunehmen."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Verwenden Sie A4 oder US Letter, damit das Layout ein erneutes Rendern �
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Verwenden Sie mindestens 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Verwenden Sie höchstens 64 Zeichen."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

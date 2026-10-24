@@ -963,6 +963,10 @@ msgstr "Вставлене оголошення про роботу можна �
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Нагадування про реєстрацію, яке відображається як наступний крок, доки ви це не зробите."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Резюме з цим слагом уже існує."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Роль не має опису"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Під час входу сталася помилка. Спробуйте ще раз."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Щось пішло не так. Будь ласка, спробуйте ще раз."
 
@@ -11673,6 +11677,10 @@ msgstr "Квота послуг вичерпана."
 msgid "The service rejected the credentials."
 msgstr "Служба відхилила облікові дані."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Слаг повинен містити лише малі літери та цифри, розділені окремими дефісами."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Тест не пройшов."
@@ -11885,6 +11893,10 @@ msgstr "Цей PDF захищений паролем. Збережіть нез�
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Це резюме заблоковано і не може бути оновлене."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Це резюме заблоковано. Спочатку розблокуйте його, щоб внести зміни."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Використовуйте A4 або US Letter, щоб макет зб
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Використовуйте щонайменше 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Використовуйте не більше 64 символів."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

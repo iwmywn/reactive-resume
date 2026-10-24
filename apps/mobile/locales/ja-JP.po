@@ -747,6 +747,10 @@ msgstr "ページが回転しています。"
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "チェックインするまで次のステップとして表示される、チェックインするためのリマインダー。"
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "このスラッグのレジュメは既に存在します。"
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "役割には説明がありません"
@@ -9484,6 +9488,10 @@ msgstr "サービス割り当てが枯渇しています。"
 msgid "The service rejected the credentials."
 msgstr "サービスは資格情報を拒否しました。"
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "スラッグには半角英小文字と数字のみを使用し、単一のハイフンで区切る必要があります。"
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "テストは実行されませんでした。"
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "このレジュメはロックされています。検証は可能ですが、編集は無効になっています。"
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "このレジュメはロックされています。変更を加えるには、まずロックを解除してください。"
 
@@ -10270,6 +10279,10 @@ msgstr "http または https リンクを使用します。"
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "最低9pt以上を使用してください。"
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "最大 64 文字を使用してください。"
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

@@ -27,7 +27,7 @@ import {
 } from "./access-policy";
 import { publishResumeUpdated } from "./events";
 import { parseStoredResumeData, parseWritableResumeData } from "./resume-data-validation";
-import { checkSlug, findFreeSlug, matchesSlug, recordSlugChange, SLUG_PATTERN } from "./slugs";
+import { checkSlug, findFreeSlug, matchesSlug, MAX_SLUG_LENGTH, recordSlugChange, SLUG_PATTERN } from "./slugs";
 import {
 	deleteVersion,
 	getVersion,
@@ -603,6 +603,10 @@ export const resumeService = {
 		const data = parseWritableResumeData(structuredClone(input.data ?? defaultResumeData));
 		data.metadata.page.locale = input.locale;
 
+		if (input.slug !== undefined && (input.slug.length > MAX_SLUG_LENGTH || !SLUG_PATTERN.test(input.slug))) {
+			throw new ORPCError("INVALID_SLUG", { status: 400 });
+		}
+
 		try {
 			const slug = input.slug ?? (await findFreeSlug(db, input.userId, input.name));
 			await db.transaction(async (tx) => {
@@ -636,6 +640,8 @@ export const resumeService = {
 
 			return id;
 		} catch (error) {
+			if (error instanceof ORPCError) throw error;
+
 			const constraint = uniqueConstraint(error);
 
 			if (constraint === "resume_slug_user_id_unique") {
@@ -682,7 +688,7 @@ export const resumeService = {
 
 				// A new address must follow the pattern; existing ones that don't keep working until changed.
 				const renamed = input.slug !== undefined && input.slug !== existing.slug;
-				if (renamed && !SLUG_PATTERN.test(input.slug as string)) {
+				if (renamed && ((input.slug as string).length > MAX_SLUG_LENGTH || !SLUG_PATTERN.test(input.slug as string))) {
 					throw new ORPCError("INVALID_SLUG", { status: 400 });
 				}
 				if (renamed) {

@@ -963,6 +963,10 @@ msgstr "Μια επικολλημένη ανάρτηση εργασίας μπο
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Μια υπενθύμιση για check in, που εμφανίζεται ως το επόμενο βήμα μέχρι να το κάνετε."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Υπάρχει ήδη ένα βιογραφικό σημείωμα με αυτό το slug."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Ένας ρόλος δεν έχει περιγραφή"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Κάτι πήγε στραβά κατά τη σύνδεσή σας. Δοκιμάστε ξανά."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Κάτι πήγε στραβά. Παρακαλώ δοκιμάστε ξανά."
 
@@ -11673,6 +11677,10 @@ msgstr "Η ποσόστωση υπηρεσιών έχει εξαντληθεί."
 msgid "The service rejected the credentials."
 msgstr "Η υπηρεσία απέρριψε τα διαπιστευτήρια."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Το slug πρέπει να περιέχει μόνο πεζά γράμματα και αριθμούς, διαχωρισμένα με μεμονωμένες παύλες."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Το τεστ δεν έγινε."
@@ -11885,6 +11893,10 @@ msgstr "Αυτό το PDF προστατεύεται με κωδικό πρόσ�
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Αυτό το βιογραφικό σημείωμα είναι κλειδωμένο και δεν μπορεί να ενημερωθεί."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Αυτό το βιογραφικό σημείωμα είναι κλειδωμένο. Ξεκλειδώστε το πρώτα για να κάνετε αλλαγές."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Χρησιμοποιήστε A4 ή US Letter ώστε η διάταξη 
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Χρησιμοποιήστε τουλάχιστον 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Χρησιμοποιήστε το πολύ 64 χαρακτήρες."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

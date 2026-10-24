@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 const dbMock = vi.hoisted(() => ({ insert: vi.fn(), delete: vi.fn(), select: vi.fn() }));
 vi.mock("@reactive-resume/db/client", () => ({ db: dbMock }));
 
-const { matchesSlug, recordSlugChange } = await import("./slugs");
+const { checkSlug, findFreeSlug, matchesSlug, recordSlugChange } = await import("./slugs");
 
 beforeEach(() => {
 	for (const mock of Object.values(dbMock)) mock.mockReset();
@@ -43,5 +43,48 @@ describe("matchesSlug", () => {
 		expect(query.sql).toContain('"resume_slug_redirect"."user_id" = "resume"."user_id"');
 		expect(query.sql).toContain('"resume_slug_redirect"."expires_at" > now()');
 		expect(query.params).toEqual(["old-slug", "old-slug"]);
+	});
+});
+
+describe("findFreeSlug", () => {
+	it("truncates long names so generated slug never exceeds 64 characters even with suffix", async () => {
+		const longName = "Very Long Resume Name ".repeat(5);
+		const baseStem = "very-long-resume-name-very-long-resume-name-very-long-re";
+		const selectWhere = vi.fn().mockResolvedValue([{ slug: baseStem }]);
+		dbMock.select.mockReturnValue({ from: () => ({ where: selectWhere }) });
+
+		const slug = await findFreeSlug(dbMock as never, "u1", longName);
+
+		expect(slug).toBe(`${baseStem}-2`);
+		expect(slug.length).toBeLessThanOrEqual(64);
+		expect(slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+	});
+});
+
+describe("checkSlug", () => {
+	it("truncates invalid slug suggestion to 64 characters without trailing dash", async () => {
+		const input = "ä".repeat(50);
+		const result = await checkSlug({ userId: "u1", resumeId: "r1", slug: input });
+
+		expect(result.status).toBe("invalid");
+		expect(result.suggestion).toBeDefined();
+		expect(result.suggestion?.length).toBeLessThanOrEqual(64);
+		expect(result.suggestion).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+	});
+
+	it("treats slug longer than 64 characters as invalid and suggests truncated version", async () => {
+		const longSlug = "a".repeat(70);
+		const result = await checkSlug({ userId: "u1", resumeId: "r1", slug: longSlug });
+
+		expect(result.status).toBe("invalid");
+		expect(result.suggestion).toBe("a".repeat(64));
+	});
+
+	it("returns available when no other resume uses the slug", async () => {
+		const selectWhere = vi.fn().mockResolvedValue([]);
+		dbMock.select.mockReturnValue({ from: () => ({ where: selectWhere }) });
+
+		const result = await checkSlug({ userId: "u1", resumeId: "r1", slug: "valid-slug" });
+		expect(result).toEqual({ status: "available" });
 	});
 });

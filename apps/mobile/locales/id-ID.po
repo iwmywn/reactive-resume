@@ -747,6 +747,10 @@ msgstr "Sebuah halaman diputar."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Pengingat untuk check-in, ditampilkan sebagai langkah berikutnya sampai Anda melakukannya."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Resume dengan slug ini sudah ada."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Sebuah peran tidak memiliki deskripsi"
@@ -9484,6 +9488,10 @@ msgstr "Kuota layanan telah habis."
 msgid "The service rejected the credentials."
 msgstr "Layanan menolak kredensial."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug hanya boleh berisi huruf kecil dan angka, dipisahkan oleh tanda hubung tunggal."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Tes tidak berjalan."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "CV ini terkunci. Cek tersedia; pengeditan dinonaktifkan."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "CV ini terkunci. Buka kuncinya terlebih dahulu untuk melakukan perubahan."
 
@@ -10270,6 +10279,10 @@ msgstr "Gunakan tautan http atau https."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Gunakan setidaknya 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Gunakan maksimal 64 karakter."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

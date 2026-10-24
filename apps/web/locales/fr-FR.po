@@ -963,6 +963,10 @@ msgstr "Une offre d’emploi collée peut ensuite être enregistrée en tant que
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Un rappel pour vous enregistrer, affiché comme étape suivante jusqu'à ce que vous le fassiez."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Un CV avec ce slug existe déjà."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Un rôle n'a pas de description"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Une erreur s'est produite lors de votre connexion. Veuillez réessayer."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Une erreur s'est produite. Veuillez réessayer."
 
@@ -11673,6 +11677,10 @@ msgstr "Le quota de service est épuisé."
 msgid "The service rejected the credentials."
 msgstr "Le service a rejeté les informations d'identification."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Le slug ne doit contenir que des lettres minuscules et des chiffres, séparés par des tirets simples."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Le test n'a pas fonctionné."
@@ -11885,6 +11893,10 @@ msgstr "Ce PDF est protégé par mot de passe. Enregistrez une copie non protég
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Ce CV est verrouillé et ne peut pas être modifié."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Ce CV est verrouillé. Débloquez-le d'abord pour apporter des modifications."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Utilisez le format A4 ou US Letter pour que la mise en page survive au r
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Utilisez au moins 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Utilisez au maximum 64 caractères."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

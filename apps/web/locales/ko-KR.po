@@ -963,6 +963,10 @@ msgstr "붙여넣은 채용 공고는 나중에 채용 지원서로 저장할 �
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "체크인 알림은 체크인할 때까지 다음 단계로 표시됩니다."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "이 슬러그를 사용하는 이력서가 이미 존재합니다."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "역할에는 설명이 없습니다."
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "로그인하는 중에 문제가 발생했습니다. 다시 시도해 주세요."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "문제가 발생했습니다. 다시 시도해 주세요."
 
@@ -11673,6 +11677,10 @@ msgstr "서비스 할당량이 소진되었습니다."
 msgid "The service rejected the credentials."
 msgstr "서비스가 자격 증명을 거부했습니다."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "슬러그에는 소문자와 숫자만 사용할 수 있으며, 단일 하이픈(-)으로 구분해야 합니다."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "테스트가 실행되지 않았습니다."
@@ -11885,6 +11893,10 @@ msgstr "이 PDF는 비밀번호로 보호되어 있습니다. 보호되지 않�
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "이 이력서는 잠겨 있어 수정할 수 없습니다."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "이 이력서는 잠겨 있습니다. 변경하려면 먼저 잠금을 해제하세요."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "레이아웃이 다시 렌더링되어도 유지되도록 A4 또는 US L
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "최소 9pt 이상을 사용하세요."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "최대 64자를 사용하세요."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

@@ -747,6 +747,10 @@ msgstr "Stran je zasukana."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Opomnik za prijavo, prikazan kot naslednji korak, dokler tega ne storite."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Življenjepis s tem slugom že obstaja."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Vloga nima opisa"
@@ -9484,6 +9488,10 @@ msgstr "Storitvena kvota je izčrpana."
 msgid "The service rejected the credentials."
 msgstr "Storitev je zavrnila poverilnice."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug lahko vsebuje samo male črke in številke, ločene z enojnimi vezaji."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Test ni uspel."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Ta življenjepis je zaklenjen. Preverjanja so na voljo; urejanje je onemogočeno."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Ta življenjepis je zaklenjen. Za spremembe ga najprej odklenite."
 
@@ -10270,6 +10279,10 @@ msgstr "Uporabite povezavo http ali https."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Uporabite vsaj 9 pik."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Uporabite največ 64 znakov."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

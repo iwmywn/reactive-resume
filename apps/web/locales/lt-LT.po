@@ -963,6 +963,10 @@ msgstr "Įklijuotą darbo skelbimą vėliau galima išsaugoti kaip darbo paraiš
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Priminimas užsiregistruoti, rodomas kaip kitas veiksmas, kol to nepadarysite."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Gyvenimo aprašymas su šiuo adresu jau egzistuoja."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Vaidmuo neturi aprašymo"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Jungiant įvyko klaida. Bandykite dar kartą."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Kažkas nepavyko. Bandykite dar kartą."
 
@@ -11673,6 +11677,10 @@ msgstr "Paslaugų kvota išnaudota."
 msgid "The service rejected the credentials."
 msgstr "Tarnyba atmetė įgaliojimus."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Adrese gali būti tik mažosios raidės ir skaičiai, atskirti pavieniais brūkšneliais."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Testas neįvyko."
@@ -11885,6 +11893,10 @@ msgstr "Šis PDF apsaugotas slaptažodžiu. Išsaugokite neapsaugotą kopiją ir
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Šis gyvenimo aprašymas užrakintas ir negali būti atnaujintas."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Šis gyvenimo aprašymas yra užrakintas. Norėdami atlikti pakeitimus, pirmiausia jį atrakinkite."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Naudokite A4 arba US Letter formatą, kad maketas išliktų teisingas at
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Naudokite bent 9pt dydį."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Naudokite ne daugiau kaip 64 simbolius."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

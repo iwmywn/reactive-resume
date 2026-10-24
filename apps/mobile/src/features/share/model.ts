@@ -1,5 +1,6 @@
+export const MAX_SLUG_LENGTH = 64;
 /** Same address grammar as the public-link API. */
-export const validSlug = (slug: string) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug);
+export const validSlug = (slug: string) => slug.length <= MAX_SLUG_LENGTH && /^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug);
 export const normalizeSlug = (slug: string) => slug.toLowerCase().replace(/\s+/g, "-");
 
 const timeUnits = [

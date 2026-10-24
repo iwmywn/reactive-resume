@@ -747,6 +747,10 @@ msgstr "Egy oldal el van forgatva."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Emlékeztető a bejelentkezésre, amely a következő lépésként jelenik meg, amíg meg nem teszi."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Már létezik önéletrajz ezzel a sluggal."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Egy szerepnek nincs leírása"
@@ -9484,6 +9488,10 @@ msgstr "A szolgáltatási kvóta kimerült."
 msgid "The service rejected the credentials."
 msgstr "A szolgáltatás elutasította a hitelesítő adatokat."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "A slug csak kisbetűket és számokat tartalmazhat, egyetlen kötőjellel elválasztva."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "A teszt nem futott le."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Ez az önéletrajz zárolva van. Az ellenőrzések elérhetők; a szerkesztés le van tiltva."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Ez az önéletrajz zárolva van. Először oldja fel a zárolást a módosításokhoz."
 
@@ -10271,6 +10280,10 @@ msgstr "Használjon http vagy https hivatkozást."
 msgid "Use at least 9pt."
 msgstr "Használj legalább 9pt-os méretet."
 
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Legfeljebb 64 karaktert használjon."
+
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"
 msgstr "Használja a {color} színt."
@@ -10290,7 +10303,7 @@ msgstr "Használat minden jelentkezéshez"
 #: src/features/document-menu/index.tsx
 #: src/features/share/link.tsx
 msgid "Use lowercase letters, numbers and single dashes."
-msgstr "Használjon kisbetűket, számokat és kötőjeleket."
+msgstr "Használjon kisbetűket, számokat és egyetlen kötőjelet."
 
 #: src/features/career/search-regions-field.tsx
 msgid "Use my time zone"

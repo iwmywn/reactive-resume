@@ -747,6 +747,10 @@ msgstr "Sivu on käännetty."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Muistutus sisäänkirjautumisesta, näytetään seuraavana vaiheena, kunnes teet sen."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Ansioluettelo tällä slugilla on jo olemassa."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Roolilla ei ole kuvausta"
@@ -9484,6 +9488,10 @@ msgstr "Palvelukiintiö on käytetty loppuun."
 msgid "The service rejected the credentials."
 msgstr "Palvelu hylkäsi valtuustiedot."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slugin tulee sisältää vain pieniä kirjaimia ja numeroita yksittäisillä yhdysmerkeillä erotettuina."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Testi ei sujunut."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Tämä ansioluettelo on lukittu. Tarkistukset ovat käytettävissä, muokkaus ei."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Tämä ansioluettelo on lukittu. Avaa se ensin tehdäksesi muutoksia."
 
@@ -10270,6 +10279,10 @@ msgstr "Käytä http- tai https-linkkiä."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Käytä vähintään 9 pt:n kokoa."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Käytä enintään 64 merkkiä."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

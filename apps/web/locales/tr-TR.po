@@ -963,6 +963,10 @@ msgstr "Yapıştırılan bir iş ilanı daha sonra iş başvurusu olarak kaydedi
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Check-in yapana kadar bir sonraki adım olarak gösterilen bir hatırlatıcı."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Bu URL kısa adına sahip bir özgeçmiş zaten var."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Bir rolün açıklaması yok"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Oturumunuz açılırken bir sorun oluştu. Lütfen tekrar deneyin."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Bir hata oluştu. Lütfen tekrar deneyin."
 
@@ -11673,6 +11677,10 @@ msgstr "Hizmet kotası doldu."
 msgid "The service rejected the credentials."
 msgstr "Hizmet kimlik bilgilerini reddetti."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "URL kısa adı yalnızca küçük harfler ve sayılar içermeli, tek tire ile ayrılmalıdır."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Test çalışmadı."
@@ -11885,6 +11893,10 @@ msgstr "Bu PDF parola korumalı. Korumasız bir kopya kaydedip tekrar deneyin."
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Bu özgeçmiş kilitli ve güncellenemez."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Bu özgeçmiş kilitli. Değişiklik yapmak için önce kilidini açın."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Düzenin yeniden oluşturulduğunda bozulmaması için A4 veya US Letter
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "En az 9pt kullanın."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "En fazla 64 karakter kullanın."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

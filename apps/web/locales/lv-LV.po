@@ -963,6 +963,10 @@ msgstr "Ielīmētu darba sludinājumu pēc tam var saglabāt kā darba pieteikum
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Atgādinājums par reģistrēšanos, kas tiek rādīts kā nākamā darbība, līdz to izdarīsiet."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "CV ar šo adresi jau pastāv."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Lomai nav apraksta"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Piesakoties radās kļūda. Lūdzu, mēģiniet vēlreiz."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz."
 
@@ -11673,6 +11677,10 @@ msgstr "Pakalpojuma kvota ir izsmelta."
 msgid "The service rejected the credentials."
 msgstr "Pakalpojums noraidīja akreditācijas datus."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Adrese drīkst saturēt tikai mazos burtus un ciparus, kas atdalīti ar vienu defisi."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Pārbaude nedarbojās."
@@ -11885,6 +11893,10 @@ msgstr "Šis PDF ir aizsargāts ar paroli. Saglabājiet neaizsargātu kopiju un 
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Šis CV ir bloķēts un to nevar atjaunināt."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Šis CV ir bloķēts. Lai veiktu izmaiņas, vispirms to atbloķējiet."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Izmantojiet A4 vai US Letter formātu, lai izkārtojums saglabātos atk�
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Izmantojiet vismaz 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Izmantojiet ne vairāk kā 64 rakstzīmes."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

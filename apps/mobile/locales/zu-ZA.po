@@ -747,6 +747,10 @@ msgstr ""
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr ""
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr ""
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr ""
@@ -9484,6 +9488,10 @@ msgstr ""
 msgid "The service rejected the credentials."
 msgstr ""
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr ""
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr ""
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr ""
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr ""
 
@@ -10269,6 +10278,10 @@ msgstr ""
 
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
+msgstr ""
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
 msgstr ""
 
 #: src/features/design/advanced.tsx

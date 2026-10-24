@@ -963,6 +963,10 @@ msgstr "En innlimt stillingsannonse kan lagres som en jobbsøknad i etterkant."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "En påminnelse om å sjekke inn, vist som neste trinn til du gjør det."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "En CV med denne slugen finnes allerede."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "En rolle har ingen beskrivelse"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Noe gikk galt under innloggingen. Prøv igjen."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Noe gikk galt. Vennligst prøv igjen."
 
@@ -11673,6 +11677,10 @@ msgstr "Tjenestekvoten er oppbrukt."
 msgid "The service rejected the credentials."
 msgstr "Tjenesten avviste legitimasjonen."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slugen må kun inneholde små bokstaver og tall, atskilt med enkle bindestreker."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Testen gikk ikke."
@@ -11885,6 +11893,10 @@ msgstr "Denne PDF-en er passordbeskyttet. Lagre en ubeskyttet kopi og prøv igje
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Denne CV-en er låst og kan ikke oppdateres."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Denne CV-en er låst. Lås den opp først for å gjøre endringer."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Bruk A4 eller US Letter, slik at oppsettet overlever ny gjengivelse."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Bruk minst 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Bruk høyst 64 tegn."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

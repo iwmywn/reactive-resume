@@ -747,6 +747,10 @@ msgstr "Lapa ir pagriezta."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Atgādinājums par reģistrēšanos, kas tiek rādīts kā nākamā darbība, līdz to izdarīsiet."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "CV ar šo adresi jau pastāv."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Lomai nav apraksta"
@@ -9484,6 +9488,10 @@ msgstr "Pakalpojuma kvota ir izsmelta."
 msgid "The service rejected the credentials."
 msgstr "Pakalpojums noraidīja akreditācijas datus."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Adrese drīkst saturēt tikai mazos burtus un ciparus, kas atdalīti ar vienu defisi."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Pārbaude nedarbojās."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Šis CV ir bloķēts. Jūs varat veikt pārbaudes, bet nevarat to rediģēt."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Šis CV ir bloķēts. Vispirms atbloķējiet to, lai veiktu izmaiņas."
 
@@ -10270,6 +10279,10 @@ msgstr "Izmantojiet http vai https saiti."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Izmantojiet vismaz 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Izmantojiet ne vairāk kā 64 rakstzīmes."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

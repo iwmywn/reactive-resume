@@ -963,6 +963,10 @@ msgstr "A beillesztett álláshirdetés utólag elmenthető álláspályázatké
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Emlékeztető a bejelentkezésre, amely a következő lépésként jelenik meg, amíg meg nem teszi."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Már létezik önéletrajz ezzel a sluggal."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Egy szerepnek nincs leírása"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Hiba történt a bejelentkezés során. Kérjük, próbálja újra."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Valami hiba történt. Kérjük, próbáld újra."
 
@@ -11673,6 +11677,10 @@ msgstr "A szolgáltatási kvóta kimerült."
 msgid "The service rejected the credentials."
 msgstr "A szolgáltatás elutasította a hitelesítő adatokat."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "A slug csak kisbetűket és számokat tartalmazhat, egyetlen kötőjellel elválasztva."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "A teszt nem futott le."
@@ -11885,6 +11893,10 @@ msgstr "Ez a PDF jelszóval védett. Mentsd el egy nem védett másolatként, é
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Ez az önéletrajz zárolva van, és nem frissíthető."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Ez az önéletrajz zárolva van. A módosításokhoz először oldja fel."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12479,6 +12491,10 @@ msgstr "Használj A4-es vagy US Letter méretet, hogy az elrendezés túlélje a
 msgid "Use at least 9pt."
 msgstr "Használj legalább 9pt-os méretet."
 
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Legfeljebb 64 karaktert használjon."
+
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."
 msgstr "6 és 64 karakter közötti hosszúságot használjon."
@@ -12507,7 +12523,7 @@ msgstr "Használat a coachingban: {excerpt}"
 
 #: src/features/resume/share/link-tab.tsx
 msgid "Use lowercase letters, numbers and single dashes."
-msgstr "Használjon kisbetűket, számokat és kötőjeleket."
+msgstr "Használjon kisbetűket, számokat és egyetlen kötőjelet."
 
 #: src/features/career/knowledge/search-regions-field.tsx
 msgid "Use my time zone"

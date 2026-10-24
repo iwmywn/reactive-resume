@@ -747,6 +747,10 @@ msgstr "Strona jest obrócona."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Przypomnienie o konieczności zameldowania się będzie wyświetlane jako kolejny krok, dopóki tego nie zrobisz."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "CV z tym slugiem już istnieje."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Rola nie ma opisu"
@@ -9484,6 +9488,10 @@ msgstr "Limit usług został wyczerpany."
 msgid "The service rejected the credentials."
 msgstr "Usługa odrzuciła dane uwierzytelniające."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug może zawierać tylko małe litery i cyfry, oddzielone pojedynczymi myślnikami."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Test nie przebiegł."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "To CV jest zablokowane. Kontrole są dostępne; edycja jest wyłączona."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "To CV jest zablokowane. Odblokuj je przed wprowadzeniem zmian."
 
@@ -10270,6 +10279,10 @@ msgstr "Użyj łącza http lub https."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Użyj rozmiaru co najmniej 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Użyj maksymalnie 64 znaków."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

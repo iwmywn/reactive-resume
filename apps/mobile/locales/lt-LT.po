@@ -747,6 +747,10 @@ msgstr "Puslapis yra pasuktas."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Priminimas užsiregistruoti, rodomas kaip kitas veiksmas, kol to nepadarysite."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Gyvenimo aprašymas su šiuo adresu jau egzistuoja."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Vaidmuo neturi aprašymo"
@@ -9484,6 +9488,10 @@ msgstr "Paslaugų kvota išnaudota."
 msgid "The service rejected the credentials."
 msgstr "Tarnyba atmetė įgaliojimus."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Adrese gali būti tik mažosios raidės ir skaičiai, atskirti pavieniais brūkšneliais."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Testas neįvyko."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Šis gyvenimo aprašymas užrakintas. Patikros veikia, redaguoti negalima."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Šis gyvenimo aprašymas užrakintas. Norėdami keisti, pirmiausia atrakinkite."
 
@@ -10270,6 +10279,10 @@ msgstr "Naudokite http arba https nuorodą."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Naudokite bent 9pt dydį."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Naudokite ne daugiau kaip 64 simbolius."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

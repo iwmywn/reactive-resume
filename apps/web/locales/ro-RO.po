@@ -963,6 +963,10 @@ msgstr "O postare de angajare lipită poate fi salvată ulterior ca cerere de an
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Un memento pentru a vă înregistra, afișat ca pas următor până când o faceți."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Există deja un CV cu acest slug."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Un rol nu are descriere"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "A apărut o problemă la conectare. Încearcă din nou."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Ceva nu a funcționat. Vă rugăm să încercați din nou."
 
@@ -11673,6 +11677,10 @@ msgstr "Cota de servicii este epuizată."
 msgid "The service rejected the credentials."
 msgstr "Serviciul a respins acreditările."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug-ul trebuie să conțină doar litere mici și cifre, separate prin cratime simple."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Testul nu a derulat."
@@ -11885,6 +11893,10 @@ msgstr "Acest PDF este protejat cu parolă. Salvați o copie neprotejată și î
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Acest CV este blocat și nu poate fi actualizat."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Acest CV este blocat. Deblochează-l mai întâi pentru a face modificări."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Folosiți A4 sau US Letter, astfel încât aspectul să reziste unei noi
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Folosiți cel puțin 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Utilizați cel mult 64 de caractere."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

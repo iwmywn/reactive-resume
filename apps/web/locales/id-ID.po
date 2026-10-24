@@ -963,6 +963,10 @@ msgstr "Postingan pekerjaan yang ditempel dapat disimpan sebagai lamaran pekerja
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Pengingat untuk check-in, ditampilkan sebagai langkah berikutnya sampai Anda melakukannya."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Resume dengan slug ini sudah ada."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Sebuah peran tidak memiliki deskripsi"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Terjadi kesalahan saat memasukkan Anda. Silakan coba lagi."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Terjadi sesuatu yang salah. Silakan coba lagi."
 
@@ -11673,6 +11677,10 @@ msgstr "Kuota layanan telah habis."
 msgid "The service rejected the credentials."
 msgstr "Layanan menolak kredensial."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug hanya boleh berisi huruf kecil dan angka, dipisahkan oleh tanda hubung tunggal."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Tes tidak berjalan."
@@ -11885,6 +11893,10 @@ msgstr "PDF ini dilindungi kata sandi. Simpan salinan yang tidak dilindungi dan 
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Resume ini dikunci dan tidak dapat diperbarui."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Resume ini dikunci. Buka kuncinya terlebih dahulu untuk membuat perubahan."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Gunakan ukuran A4 atau US Letter agar tata letak tetap utuh saat dirende
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Gunakan setidaknya 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Gunakan maksimal 64 karakter."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

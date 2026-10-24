@@ -747,6 +747,10 @@ msgstr "एउटा पृष्ठ घुमाइएको छ।"
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "चेक इन गर्नको लागि रिमाइन्डर, तपाईंले नगरुन्जेल अर्को चरणको रूपमा देखाइन्छ।"
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "यो slug भएको बायोडाटा पहिले नै अवस्थित छ।"
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "भूमिकाको कुनै वर्णन हुँदैन"
@@ -9484,6 +9488,10 @@ msgstr "सेवा कोटा सकिएको छ।"
 msgid "The service rejected the credentials."
 msgstr "सेवाले प्रमाणहरू अस्वीकार गर्यो।"
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug मा केवल साना अक्षरहरू र संख्याहरू मात्र हुनुपर्छ, एकल ड्यासद्वारा छुट्याइएको हुनुपर्छ।"
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "परीक्षा चलेन ।"
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "यो बायोडाटा लक गरिएको छ। जाँच गर्न मिल्छ; सम्पादन बन्द छ।"
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "यो बायोडाटा लक छ। परिवर्तनहरू गर्न पहिले यसलाई अनलक गर्नुहोस्।"
 
@@ -10270,6 +10279,10 @@ msgstr "http वा https लिङ्क प्रयोग गर्नुह�
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "कम्तीमा 9pt प्रयोग गर्नुहोस्।"
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "बढीमा ६४ अक्षरहरू प्रयोग गर्नुहोस्।"
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

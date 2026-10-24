@@ -747,6 +747,10 @@ msgstr "Stránka je otočená."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Připomenutí, že se máte ohlásit, se zobrazuje jako další krok, dokud to neuděláte."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Životopis s tímto slugem již existuje."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Role nemá žádný popis"
@@ -9484,6 +9488,10 @@ msgstr "Kvóta služby je vyčerpána."
 msgid "The service rejected the credentials."
 msgstr "Služba odmítla přihlašovací údaje."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug smí obsahovat pouze malá písmena a číslice, oddělené jednoduchými pomlčkami."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Test neproběhl."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Tento životopis je uzamčen. Šeky jsou k dispozici; editace je zakázána."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Tento životopis je uzamčen. Chcete-li provést změny, nejprve jej odemkněte."
 
@@ -10270,6 +10279,10 @@ msgstr "Použijte odkaz http nebo https."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Použijte alespoň 9 bodů."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Použijte nejvýše 64 znaků."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

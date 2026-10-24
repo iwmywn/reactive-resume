@@ -963,6 +963,10 @@ msgstr "Një postim pune i ngjitur mund të ruhet si një aplikim pune më pas."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Një kujtesë për t'u regjistruar, e shfaqur si hapi tjetër derisa ta bëni këtë."
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "Një CV me këtë slug ekziston tashmë."
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "Një rol nuk ka përshkrim"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "Diçka shkoi keq gjatë hyrjes suaj. Ju lutemi provoni sërish."
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "Diçka shkoi keq. Ju lutemi provoni përsëri."
 
@@ -11673,6 +11677,10 @@ msgstr "Kuota e shërbimit është shteruar."
 msgid "The service rejected the credentials."
 msgstr "Shërbimi refuzoi kredencialet."
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug-u duhet të përmbajë vetëm shkronja të vogla dhe numra, të ndarë me viza të vetme lidhëse."
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "Testi nuk u krye."
@@ -11885,6 +11893,10 @@ msgstr "Ky PDF është i mbrojtur me fjalëkalim. Ruani një kopje të pambrojtu
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "Kjo CV është e kyçur dhe nuk mund të përditësohet."
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "Kjo CV është e kyçur. Zhbllokojeni së pari për të bërë ndryshime."
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "Përdorni A4 ose US Letter që struktura t'i mbijetojë rikthimit."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Përdorni të paktën 9pt."
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "Përdorni më së shumti 64 karaktere."
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

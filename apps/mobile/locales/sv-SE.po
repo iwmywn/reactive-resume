@@ -747,6 +747,10 @@ msgstr "En sida är roterad."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "En påminnelse om att checka in, visas som nästa steg tills du gör det."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Ett CV med detta URL-namn finns redan."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "En roll har ingen beskrivning"
@@ -9484,6 +9488,10 @@ msgstr "Tjänstekvoten är slut."
 msgid "The service rejected the credentials."
 msgstr "Tjänsten avvisade legitimationen."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "URL-namnet får endast innehålla små bokstäver och siffror, åtskilda av enkla bindestreck."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Testet gick inte."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Detta CV är låst. Checkar finns tillgängliga; redigering är inaktiverad."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Detta CV är låst. Lås upp den först för att göra ändringar."
 
@@ -10270,6 +10279,10 @@ msgstr "Använd en http- eller https-länk."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Använd minst 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Använd högst 64 tecken."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

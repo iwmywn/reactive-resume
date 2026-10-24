@@ -747,6 +747,10 @@ msgstr "En side er roteret."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "En påmindelse om at tjekke ind, vist som næste trin, indtil du gør det."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Der findes allerede et CV med dette slug."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "En rolle har ingen beskrivelse"
@@ -9484,6 +9488,10 @@ msgstr "Servicekvoten er opbrugt."
 msgid "The service rejected the credentials."
 msgstr "Tjenesten afviste legitimationsoplysningerne."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slugget må kun indeholde små bogstaver og tal, adskilt af enkelte bindestreger."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Testen kørte ikke."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Dette CV er låst. Du kan køre tjek, men ikke redigere."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Dette CV er låst. Lås den først op for at foretage ændringer."
 
@@ -10270,6 +10279,10 @@ msgstr "Brug et http- eller https-link."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Brug mindst 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Brug højst 64 tegn."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

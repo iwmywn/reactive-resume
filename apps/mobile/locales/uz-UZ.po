@@ -747,6 +747,10 @@ msgstr "Sahifa aylantirilgan."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Roʻyxatdan oʻtish uchun eslatma, siz bajarguningizcha keyingi qadam sifatida koʻrsatiladi."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Ushbu slug bilan rezyume allaqachon mavjud."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Rolning tavsifi yo'q"
@@ -9484,6 +9488,10 @@ msgstr "Xizmat kvotasi tugadi."
 msgid "The service rejected the credentials."
 msgstr "Xizmat hisob ma'lumotlarini rad etdi."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug faqat kichik harflar va raqamlardan iborat boʻlishi, bitta chiziqcha bilan ajratilishi kerak."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Sinov o'tmadi."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Bu rezyume qulflangan. Cheklar mavjud; tahrirlash o'chirilgan."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Bu rezyume qulflangan. O'zgartirishlar kiritish uchun avval uni qulfdan chiqaring."
 
@@ -10270,6 +10279,10 @@ msgstr "Http yoki https havolasidan foydalaning."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Kamida 9pt dan foydalaning."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Ko'pi bilan 64 ta belgi ishlating."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

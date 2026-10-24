@@ -52,10 +52,11 @@ export function getOrpcErrorMessage(
 export function getResumeErrorMessage(error: unknown): string {
 	return getOrpcErrorMessage(error, {
 		byCode: {
-			RESUME_SLUG_ALREADY_EXISTS: "A resume with this slug already exists.",
-			RESUME_LOCKED: "This resume is locked. Unlock it first to make changes.",
+			RESUME_SLUG_ALREADY_EXISTS: t`A resume with this slug already exists.`,
+			RESUME_LOCKED: t`This resume is locked. Unlock it first to make changes.`,
+			INVALID_SLUG: t`The slug must contain only lowercase letters and numbers, separated by single dashes.`,
 		},
-		fallback: "Something went wrong. Please try again.",
+		fallback: t`Something went wrong. Please try again.`,
 	});
 }
 

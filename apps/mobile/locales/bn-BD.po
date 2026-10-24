@@ -747,6 +747,10 @@ msgstr "একটি পৃষ্ঠা ঘোরানো আছে।"
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "চেক ইন করার জন্য একটি অনুস্মারক, আপনি না করা পর্যন্ত পরবর্তী পদক্ষেপ হিসাবে দেখানো হয়েছে৷"
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "এই slug সহ একটি জীবনবৃত্তান্ত ইতিমধ্যে বিদ্যমান।"
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "একটি ভূমিকার কোন বর্ণনা নেই"
@@ -9484,6 +9488,10 @@ msgstr "সেবার কোটা ফুরিয়ে গেছে।"
 msgid "The service rejected the credentials."
 msgstr "পরিষেবা শংসাপত্রগুলি প্রত্যাখ্যান করেছে৷"
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug-এ শুধুমাত্র ছোট হাতের অক্ষর এবং সংখ্যা থাকতে হবে, যা একক হাইফেন দ্বারা পৃথক করা থাকবে।"
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "পরীক্ষা চলল না।"
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "এই জীবনবৃত্তান্ত লক করা আছে. পঠনযোগ্যতা চেক উপলব্ধ; সম্পাদনা নিষ্ক্রিয়।"
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "এই জীবনবৃত্তান্ত লক করা আছে. পরিবর্তন করতে প্রথমে এটি আনলক করুন।"
 
@@ -10270,6 +10279,10 @@ msgstr "একটি http বা https লিঙ্ক ব্যবহার ক
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "কমপক্ষে 9pt ব্যবহার করুন।"
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "সর্বোচ্চ ৬৪টি অক্ষর ব্যবহার করুন।"
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

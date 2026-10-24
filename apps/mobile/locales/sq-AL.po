@@ -747,6 +747,10 @@ msgstr "Një faqe është e rrotulluar."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "Një kujtesë për t'u regjistruar, e shfaqur si hapi tjetër derisa ta bëni këtë."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "Një CV me këtë slug ekziston tashmë."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "Një rol nuk ka përshkrim"
@@ -9484,6 +9488,10 @@ msgstr "Kuota e shërbimit është shteruar."
 msgid "The service rejected the credentials."
 msgstr "Shërbimi refuzoi kredencialet."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug-u duhet të përmbajë vetëm shkronja të vogla dhe numra, të ndarë me viza të vetme lidhëse."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "Testi nuk u krye."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "Kjo CV është e kyçur. Kontrollet e lexueshmërisë janë të disponueshme; redaktimi është i çaktivizuar."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "Kjo CV është e kyçur. Zhbllokoni fillimisht për të bërë ndryshime."
 
@@ -10270,6 +10279,10 @@ msgstr "Përdorni një lidhje http ose https."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "Përdorni të paktën 9pt."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "Përdorni më së shumti 64 karaktere."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"

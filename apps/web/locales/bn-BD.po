@@ -963,6 +963,10 @@ msgstr "একটি আটকানো চাকরির পোস্টিং
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "চেক ইন করার জন্য একটি অনুস্মারক, আপনি না করা পর্যন্ত পরবর্তী পদক্ষেপ হিসাবে দেখানো হয়েছে৷"
 
+#: src/libs/error-message.ts
+msgid "A resume with this slug already exists."
+msgstr "এই slug সহ একটি জীবনবৃত্তান্ত ইতিমধ্যে বিদ্যমান।"
+
 #: src/features/resume/editor/check/issues.ts
 msgid "A role has no description"
 msgstr "একটি ভূমিকার কোন বর্ণনা নেই"
@@ -10708,7 +10712,7 @@ msgid "Something went wrong while signing you in. Please try again."
 msgstr "আপনাকে সাইন ইন করানোর সময় কিছু ভুল হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।"
 
 #: src/features/resume/builder/password-dialog.tsx
-#: src/features/resume/share/link-tab.tsx
+#: src/libs/error-message.ts
 msgid "Something went wrong. Please try again."
 msgstr "কিছু একটা ভুল হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।"
 
@@ -11673,6 +11677,10 @@ msgstr "সেবার কোটা ফুরিয়ে গেছে।"
 msgid "The service rejected the credentials."
 msgstr "পরিষেবা শংসাপত্রগুলি প্রত্যাখ্যান করেছে৷"
 
+#: src/libs/error-message.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "Slug-এ শুধুমাত্র ছোট হাতের অক্ষর এবং সংখ্যা থাকতে হবে, যা একক হাইফেন দ্বারা পৃথক করা থাকবে।"
+
 #: src/features/settings/ai/providers.tsx
 msgid "The test didn't run."
 msgstr "পরীক্ষা চলল না।"
@@ -11885,6 +11893,10 @@ msgstr "এই PDF-টি পাসওয়ার্ড সুরক্ষি�
 #: src/features/resume/builder/draft.ts
 msgid "This resume is locked and cannot be updated."
 msgstr "এই জীবনবৃত্তান্তটি লক করা আছে এবং হালনাগাদ করা যাবে না।"
+
+#: src/libs/error-message.ts
+msgid "This resume is locked. Unlock it first to make changes."
+msgstr "এই জীবনবৃত্তান্তটি লক করা আছে। পরিবর্তন করতে প্রথমে এটি আনলক করুন।"
 
 #: src/features/ats-checker/messages.ts
 msgid "This resume is long."
@@ -12478,6 +12490,10 @@ msgstr "A4 বা US Letter ব্যবহার করুন, যাতে প
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "কমপক্ষে 9pt ব্যবহার করুন।"
+
+#: src/features/resume/share/link-tab.tsx
+msgid "Use at most 64 characters."
+msgstr "সর্বোচ্চ ৬৪টি অক্ষর ব্যবহার করুন।"
 
 #: src/features/resume/builder/password-dialog.tsx
 msgid "Use between 6 and 64 characters."

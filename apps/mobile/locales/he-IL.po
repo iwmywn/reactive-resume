@@ -747,6 +747,10 @@ msgstr "עמוד מסובב."
 msgid "A reminder to check in, shown as the next step until you do."
 msgstr "תזכורת לצ'ק-אין, מוצגת כשלב הבא עד שתעשה זאת."
 
+#: src/features/documents/queries.ts
+msgid "A resume with this slug already exists."
+msgstr "קורות חיים עם מזהה (slug) זה כבר קיימים."
+
 #: src/features/check/issues.ts
 msgid "A role has no description"
 msgstr "לתפקיד אין תיאור"
@@ -9484,6 +9488,10 @@ msgstr "מכסת השירות נגמרה."
 msgid "The service rejected the credentials."
 msgstr "השירות דחה את האישורים."
 
+#: src/features/documents/queries.ts
+msgid "The slug must contain only lowercase letters and numbers, separated by single dashes."
+msgstr "המזהה (slug) חייב להכיל רק אותיות קטנות ומספרים, מופרדים במקפים בודדים."
+
 #: src/features/ai/error.ts
 msgid "The test didn't run."
 msgstr "הבדיקה לא רצה."
@@ -9748,6 +9756,7 @@ msgid "This resume is locked. Checks are available; editing is disabled."
 msgstr "קורות חיים אלה נעולים. הבדיקות זמינות; העריכה מושבתת."
 
 #: src/features/design/design-pane.tsx
+#: src/features/documents/queries.ts
 msgid "This resume is locked. Unlock it first to make changes."
 msgstr "קורות חיים אלה נעולים. בטל את הנעילה תחילה כדי לבצע שינויים."
 
@@ -10270,6 +10279,10 @@ msgstr "השתמש בקישור http או https."
 #: src/features/ats-checker/messages.ts
 msgid "Use at least 9pt."
 msgstr "השתמש בגודל של 9pt לפחות."
+
+#: src/features/share/link.tsx
+msgid "Use at most 64 characters."
+msgstr "השתמש ב-64 תווים לכל היותר."
 
 #: src/features/design/advanced.tsx
 msgid "Use color {color}"
