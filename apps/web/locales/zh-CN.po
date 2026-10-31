@@ -771,6 +771,10 @@ msgstr "{starCount, plural, other {在 GitHub 上为我们加星，目前 # 颗�
 msgid "{stars, plural, one {Star Reactive Resume on GitHub, # star} other {Star Reactive Resume on GitHub, # stars}}"
 msgstr "{stars, plural, other {在 GitHub 上为 Reactive Resume 加星，# 颗星}}"
 
+#: src/features/documents/page-navigation.tsx
+msgid "{start}–{end} of {total}"
+msgstr ""
+
 #: src/features/career/workspace/saved.tsx
 msgid "{stories, plural, one {# story} other {# stories}}"
 msgstr "{stories, plural, other {# 个故事}}"
@@ -1722,10 +1726,6 @@ msgstr "右对齐"
 msgid "All"
 msgstr "全部"
 
-#: src/features/documents/trash-page.tsx
-msgid "All {trashCount} documents in Trash will be deleted for good and can't be restored."
-msgstr ""
-
 #: src/features/career/knowledge/facts.tsx
 msgid "All applications"
 msgstr "所有申请"
@@ -1737,6 +1737,10 @@ msgstr "所有职位申请（包括已关闭的职位申请）"
 #: src/features/settings/account/data.tsx
 msgid "All documents and applications as JSON, in one zip"
 msgstr "所有文件和工作申请均以 JSON 形式压缩在一个 zip 中"
+
+#: src/features/documents/trash-page.tsx
+msgid "All documents in Trash will be deleted for good and can't be restored."
+msgstr ""
 
 #: src/features/career/workspace/answer-library.tsx
 msgid "All employers"
@@ -8066,6 +8070,10 @@ msgstr "新阶段颜色"
 msgid "New teams at Northwind were stalling in setup; most never got through."
 msgstr "Northwind 的新团队常卡在设置阶段，多数没能完成。"
 
+#: src/features/documents/page-navigation.tsx
+msgid "Next"
+msgstr ""
+
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Next issue"
 msgstr "下一期"
@@ -9019,6 +9027,10 @@ msgstr "页面阅读未完成。"
 msgid "Page view"
 msgstr "页面浏览量"
 
+#: src/features/documents/page-navigation.tsx
+msgid "Pagination"
+msgstr ""
+
 #: src/features/resume/editor/design/style-groups.tsx
 msgid "Paper"
 msgstr "纸"
@@ -9504,6 +9516,10 @@ msgstr "预览尺寸"
 #: src/routes/builder/letter/-components/letter-page.tsx
 msgid "Previewing {0} · click to apply"
 msgstr "预览 {0} · 点击应用"
+
+#: src/features/documents/page-navigation.tsx
+msgid "Previous"
+msgstr ""
 
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Previous issue"
@@ -11272,14 +11288,11 @@ msgstr "选择 {0}"
 msgid "Select {0} at {1}"
 msgstr "在 {1} 处选择 {0}"
 
-#: src/features/documents/documents-page.tsx
-msgid "Select all"
-msgstr "全选"
-
 #: src/features/settings/integrations/components/ai-provider-picker.tsx
 msgid "Select an AI provider"
 msgstr "选择一家人工智能提供商"
 
+#: src/features/documents/documents-page.tsx
 #: src/features/documents/trash-page.tsx
 msgid "Select this page"
 msgstr ""
@@ -12679,10 +12692,6 @@ msgstr "教练会保存您陈述的事实，并告诉您。您可以撤销。"
 #: src/features/documents/new-document-dialog.tsx
 msgid "The copy is linked to the application, so Check and the assistant use its posting."
 msgstr "该副本链接到职位申请，因此 Check 和助理可以使用其职位发布。"
-
-#: src/features/documents/trash-page.tsx
-msgid "The document in Trash will be deleted for good and can't be restored."
-msgstr ""
 
 #: src/features/resume/editor/write/dates-field.tsx
 msgid "The end is before the start."

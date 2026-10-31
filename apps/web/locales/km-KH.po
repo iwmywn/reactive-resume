@@ -771,6 +771,10 @@ msgstr "{starCount, plural, one {ដាក់ផ្កាយឱ្យយើង�
 msgid "{stars, plural, one {Star Reactive Resume on GitHub, # star} other {Star Reactive Resume on GitHub, # stars}}"
 msgstr "{stars, plural, one {ដាក់ផ្កាយឱ្យ Reactive Resume នៅលើ GitHub, # ផ្កាយ} other {ដាក់ផ្កាយឱ្យ Reactive Resume នៅលើ GitHub, # ផ្កាយ}}"
 
+#: src/features/documents/page-navigation.tsx
+msgid "{start}–{end} of {total}"
+msgstr ""
+
 #: src/features/career/workspace/saved.tsx
 msgid "{stories, plural, one {# story} other {# stories}}"
 msgstr "{stories, plural, other {រឿង #}}"
@@ -1722,10 +1726,6 @@ msgstr "តម្រឹមស្តាំ"
 msgid "All"
 msgstr "ទាំងអស់។"
 
-#: src/features/documents/trash-page.tsx
-msgid "All {trashCount} documents in Trash will be deleted for good and can't be restored."
-msgstr ""
-
 #: src/features/career/knowledge/facts.tsx
 msgid "All applications"
 msgstr "ពាក្យសុំទាំងអស់"
@@ -1737,6 +1737,10 @@ msgstr "ពាក្យសុំការងារទាំងអស់ (រួ�
 #: src/features/settings/account/data.tsx
 msgid "All documents and applications as JSON, in one zip"
 msgstr "ឯកសារ និងពាក្យសុំការងារទាំងអស់ជា JSON ក្នុងមួយ zip"
+
+#: src/features/documents/trash-page.tsx
+msgid "All documents in Trash will be deleted for good and can't be restored."
+msgstr ""
 
 #: src/features/career/workspace/answer-library.tsx
 msgid "All employers"
@@ -8066,6 +8070,10 @@ msgstr "ពណ៌ដំណាក់កាលថ្មី"
 msgid "New teams at Northwind were stalling in setup; most never got through."
 msgstr "ក្រុមថ្មីនៅ Northwind កំពុងជាប់គាំងក្នុងការរៀបចំដំបូង ហើយភាគច្រើនមិនបានឆ្លងកាត់ទេ។"
 
+#: src/features/documents/page-navigation.tsx
+msgid "Next"
+msgstr ""
+
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Next issue"
 msgstr "បញ្ហាបន្ទាប់"
@@ -9019,6 +9027,10 @@ msgstr "ការអានទំព័រមិនបានបញ្ចប់ទ
 msgid "Page view"
 msgstr "ទិដ្ឋភាពទំព័រ"
 
+#: src/features/documents/page-navigation.tsx
+msgid "Pagination"
+msgstr ""
+
 #: src/features/resume/editor/design/style-groups.tsx
 msgid "Paper"
 msgstr "ក្រដាស"
@@ -9504,6 +9516,10 @@ msgstr "ទំហំមើលជាមុន"
 #: src/routes/builder/letter/-components/letter-page.tsx
 msgid "Previewing {0} · click to apply"
 msgstr "ការមើល {0} · ចុចដើម្បីអនុវត្ត"
+
+#: src/features/documents/page-navigation.tsx
+msgid "Previous"
+msgstr ""
 
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Previous issue"
@@ -11272,14 +11288,11 @@ msgstr "ជ្រើសរើស {0}"
 msgid "Select {0} at {1}"
 msgstr "ជ្រើសរើស {0} នៅ {1}"
 
-#: src/features/documents/documents-page.tsx
-msgid "Select all"
-msgstr "ជ្រើសរើសទាំងអស់"
-
 #: src/features/settings/integrations/components/ai-provider-picker.tsx
 msgid "Select an AI provider"
 msgstr "ជ្រើសរើសអ្នកផ្តល់សេវា AI"
 
+#: src/features/documents/documents-page.tsx
 #: src/features/documents/trash-page.tsx
 msgid "Select this page"
 msgstr ""
@@ -12679,10 +12692,6 @@ msgstr "គ្រូបង្វឹករក្សាទុកការពិត
 #: src/features/documents/new-document-dialog.tsx
 msgid "The copy is linked to the application, so Check and the assistant use its posting."
 msgstr "ច្បាប់ចម្លងត្រូវបានភ្ជាប់ទៅនឹងពាក្យសុំការងារ ដូច្នេះ Check និងជំនួយការប្រើការប្រកាសការងាររបស់ខ្លួន។"
-
-#: src/features/documents/trash-page.tsx
-msgid "The document in Trash will be deleted for good and can't be restored."
-msgstr ""
 
 #: src/features/resume/editor/write/dates-field.tsx
 msgid "The end is before the start."

@@ -771,6 +771,10 @@ msgstr "{starCount, plural, one {GitHub मा हामीलाई स्ट�
 msgid "{stars, plural, one {Star Reactive Resume on GitHub, # star} other {Star Reactive Resume on GitHub, # stars}}"
 msgstr "{stars, plural, one {GitHub मा Reactive Resume लाई स्टार दिनुहोस्, # स्टार} other {GitHub मा Reactive Resume लाई स्टार दिनुहोस्, # स्टार}}"
 
+#: src/features/documents/page-navigation.tsx
+msgid "{start}–{end} of {total}"
+msgstr ""
+
 #: src/features/career/workspace/saved.tsx
 msgid "{stories, plural, one {# story} other {# stories}}"
 msgstr "{stories, plural, one {# कथा} other {# कथाहरू}}"
@@ -1722,10 +1726,6 @@ msgstr "दायाँ पङ्क्तिबद्ध गर्नुहो�
 msgid "All"
 msgstr "सबै"
 
-#: src/features/documents/trash-page.tsx
-msgid "All {trashCount} documents in Trash will be deleted for good and can't be restored."
-msgstr ""
-
 #: src/features/career/knowledge/facts.tsx
 msgid "All applications"
 msgstr "सबै आवेदनहरू"
@@ -1737,6 +1737,10 @@ msgstr "सबै रोजगार आवेदनहरू (बन्द स�
 #: src/features/settings/account/data.tsx
 msgid "All documents and applications as JSON, in one zip"
 msgstr "JSON को रूपमा सबै कागजातहरू र जागिरका आवेदनहरू, एउटै जिपमा"
+
+#: src/features/documents/trash-page.tsx
+msgid "All documents in Trash will be deleted for good and can't be restored."
+msgstr ""
 
 #: src/features/career/workspace/answer-library.tsx
 msgid "All employers"
@@ -8066,6 +8070,10 @@ msgstr "नयाँ चरणको रङ"
 msgid "New teams at Northwind were stalling in setup; most never got through."
 msgstr "Northwind का नयाँ टोलीहरू सेटअपमा अड्किरहेका थिए; धेरैजसो कहिल्यै पार गर्न सकेनन्।"
 
+#: src/features/documents/page-navigation.tsx
+msgid "Next"
+msgstr ""
+
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Next issue"
 msgstr "अर्को अंक"
@@ -9019,6 +9027,10 @@ msgstr "पृष्ठ पढाइ सकिएन।"
 msgid "Page view"
 msgstr "पृष्ठ दृश्य"
 
+#: src/features/documents/page-navigation.tsx
+msgid "Pagination"
+msgstr ""
+
 #: src/features/resume/editor/design/style-groups.tsx
 msgid "Paper"
 msgstr "कागज"
@@ -9504,6 +9516,10 @@ msgstr "पूर्वावलोकन आकार"
 #: src/routes/builder/letter/-components/letter-page.tsx
 msgid "Previewing {0} · click to apply"
 msgstr "{0} पूर्वावलोकन गर्दै · लागू गर्न क्लिक गर्नुहोस्"
+
+#: src/features/documents/page-navigation.tsx
+msgid "Previous"
+msgstr ""
 
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Previous issue"
@@ -11272,14 +11288,11 @@ msgstr "{0} चयन गर्नुहोस्"
 msgid "Select {0} at {1}"
 msgstr "{1} मा {0} चयन गर्नुहोस्"
 
-#: src/features/documents/documents-page.tsx
-msgid "Select all"
-msgstr "सबै चयन गर्नुहोस्"
-
 #: src/features/settings/integrations/components/ai-provider-picker.tsx
 msgid "Select an AI provider"
 msgstr "एआई प्रदायक छान्नुहोस्"
 
+#: src/features/documents/documents-page.tsx
 #: src/features/documents/trash-page.tsx
 msgid "Select this page"
 msgstr ""
@@ -12679,10 +12692,6 @@ msgstr "कोचले तपाईंले भनेका तथ्यहर
 #: src/features/documents/new-document-dialog.tsx
 msgid "The copy is linked to the application, so Check and the assistant use its posting."
 msgstr "प्रतिलिपि जागिरको आवेदनसँग लिङ्क गरिएको छ, त्यसैले जाँच गर्नुहोस् र सहायकले यसको जागिर पोस्टिङ प्रयोग गर्नुहोस्।"
-
-#: src/features/documents/trash-page.tsx
-msgid "The document in Trash will be deleted for good and can't be restored."
-msgstr ""
 
 #: src/features/resume/editor/write/dates-field.tsx
 msgid "The end is before the start."

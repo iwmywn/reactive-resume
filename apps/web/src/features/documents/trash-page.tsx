@@ -12,6 +12,7 @@ import { cn } from "@reactive-resume/utils/style";
 import { useBatchActions } from "./document-actions";
 import { DocumentRow } from "./document-card";
 import { LibraryError } from "./library-error";
+import { PageNavigation } from "./page-navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { useConfirm } from "@/hooks/use-confirm";
 import { orpc } from "@/libs/orpc/client";
@@ -24,39 +25,60 @@ const documentKey = (document: { type: string; id: string }) => `${document.type
  * trash is a separate server-side operation that covers every document in Trash, not only the loaded or selected IDs.
  */
 export function TrashPage() {
+	const [offset, setOffset] = useState(0);
 	const [selected, setSelected] = useState<ReadonlySet<string>>(() => new Set());
 	const [busy, setBusy] = useState(false);
 	const confirm = useConfirm();
 	const batch = useBatchActions();
 	const {
-		data: documents,
+		data: page,
 		isPending,
 		isError,
 		isFetching,
+		isPlaceholderData,
 		refetch,
-	} = useQuery(orpc.documents.list.queryOptions({ input: { trashed: true } }));
-	const counts = useQuery(orpc.documents.counts.queryOptions());
+	} = useQuery({
+		...orpc.documents.page.queryOptions({ input: { trashed: true, limit: 100, offset } }),
+		gcTime: 0,
+		placeholderData: (previous) => previous,
+	});
+	const [lastPage, setLastPage] = useState({ data: page, offset });
+	if (page && !isPlaceholderData && (page !== lastPage.data || offset !== lastPage.offset))
+		setLastPage({ data: page, offset });
+	const displayed = page ?? lastPage.data;
+	const displayedOffset = page && !isPlaceholderData ? offset : lastPage.offset;
+	const rowsCurrent = Boolean(page) && !isPlaceholderData && !isError;
+	if (page && !isPlaceholderData && offset > 0 && offset >= page.total) {
+		setOffset(Math.max(0, Math.floor((page.total - 1) / 100) * 100));
+		setSelected(new Set());
+	}
+	const documents = displayed?.items;
 	const all = documents ?? [];
-	const selection = all.filter((document) => selected.has(documentKey(document)));
+	const selection = rowsCurrent ? all.filter((document) => selected.has(documentKey(document))) : [];
 	const selecting = selection.length > 0;
 	const allSelected = all.length > 0 && selection.length === all.length;
-	const trashCount = counts.data?.trash ?? all.length;
 
 	const clearSelection = () => setSelected(new Set());
-	const selectAll = (on: boolean) => setSelected(new Set(on ? all.map(documentKey) : []));
-	const setSelectedFor = (document: (typeof all)[number], on: boolean) =>
+	const selectAll = (on: boolean) => {
+		if (on && !rowsCurrent) return;
+		setSelected(new Set(on ? all.map(documentKey) : []));
+	};
+	const setSelectedFor = (document: (typeof all)[number], on: boolean) => {
+		if (!rowsCurrent) return;
 		setSelected((current) => {
 			const next = new Set(current);
 			if (on) next.add(documentKey(document));
 			else next.delete(documentKey(document));
 			return next;
 		});
+	};
 
 	useHotkey("Escape", () => {
 		if (selecting && !busy) clearSelection();
 	});
 
 	const run = async (action: () => Promise<boolean>) => {
+		if (!rowsCurrent) return;
 		setBusy(true);
 		try {
 			// A partial or failed batch keeps the remaining selection so the user can retry it.
@@ -69,6 +91,7 @@ export function TrashPage() {
 	};
 
 	const purgeSelected = async () => {
+		if (!rowsCurrent || !selection.length) return;
 		const confirmed = await confirm(
 			selection.length === 1
 				? t`Delete “${selection[0]?.name ?? ""}” forever?`
@@ -92,10 +115,7 @@ export function TrashPage() {
 
 	const emptyTrash = async () => {
 		const confirmed = await confirm(t`Empty Trash?`, {
-			description:
-				trashCount === 1
-					? t`The document in Trash will be deleted for good and can't be restored.`
-					: t`All ${trashCount} documents in Trash will be deleted for good and can't be restored.`,
+			description: t`All documents in Trash will be deleted for good and can't be restored.`,
 			confirmText: t`Hold to delete`,
 			cancelText: t`Keep in Trash`,
 			hold: true,
@@ -123,7 +143,7 @@ export function TrashPage() {
 						<Button
 							variant="ghost"
 							size="sm"
-							disabled={busy}
+							disabled={busy || !rowsCurrent}
 							className="text-danger-text hover:bg-danger-soft"
 							onClick={() => void emptyTrash()}
 						>
@@ -155,6 +175,7 @@ export function TrashPage() {
 						<tr className="border-b border-line text-xs font-medium text-ink-3">
 							<th className="w-10 ps-3">
 								<Checkbox
+									disabled={!rowsCurrent}
 									checked={allSelected}
 									indeterminate={selecting && !allSelected}
 									onCheckedChange={(on) => selectAll(on)}
@@ -187,7 +208,8 @@ export function TrashPage() {
 								document={document}
 								onTags={noop}
 								onLink={noop}
-								selected={selected.has(documentKey(document))}
+								selected={rowsCurrent && selected.has(documentKey(document))}
+								disabled={!rowsCurrent}
 								onSelectedChange={(on) => setSelectedFor(document, on)}
 							/>
 						))}
@@ -195,6 +217,15 @@ export function TrashPage() {
 				</table>
 			)}
 
+			<PageNavigation
+				offset={displayedOffset}
+				total={displayed?.total ?? 0}
+				busy={isFetching || busy || !rowsCurrent}
+				onChange={(next) => {
+					clearSelection();
+					setOffset(next);
+				}}
+			/>
 			<TrashSelectionBar
 				selection={selection}
 				allSelected={allSelected}

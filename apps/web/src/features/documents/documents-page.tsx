@@ -4,6 +4,7 @@ import { Trans } from "@lingui/react/macro";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
+import { useDebounceValue } from "usehooks-ts";
 import { Button } from "@reactive-resume/ui/components/button";
 import { Checkbox } from "@reactive-resume/ui/components/checkbox";
 import {
@@ -24,8 +25,8 @@ import { Tabs, TabsCount, TabsList, TabsTrigger } from "@reactive-resume/ui/comp
 import { cn } from "@reactive-resume/utils/style";
 import { LinkApplicationDialog, TagsDialog, useBatchActions } from "./document-actions";
 import { DocumentCard, DocumentRow } from "./document-card";
-import { collectTags, filterDocuments } from "./filter";
 import { LibraryError } from "./library-error";
+import { PageNavigation } from "./page-navigation";
 import { useStartDocument } from "./use-start-document";
 import { PageHeader } from "@/components/layout/page-header";
 import { useDialogStore } from "@/dialogs/store";
@@ -59,13 +60,44 @@ export function DocumentsPage({ search, onSearchChange }: DocumentsPageProps) {
 	const [linkFor, setLinkFor] = useState<DocumentSummary | null>(null);
 	// Grid and list animate in only after a switch, never on the page's first render.
 	const [viewSwitched, setViewSwitched] = useState(false);
+	const searchText = search.q.slice(0, 500);
+	const [query] = useDebounceValue(searchText, 300);
+	const filterKey = JSON.stringify([search.type, searchText, search.tags, search.public, search.sort]);
+	const [page, setPage] = useState({ filterKey, offset: 0, total: 0 });
+	const offset = page.filterKey === filterKey ? page.offset : 0;
+	const changePage = (next: number) => {
+		setSelected(new Set());
+		setPage({ filterKey, offset: next, total: pageData?.total ?? page.total });
+	};
 	const {
-		data: documents,
+		data: pageData,
 		isPending,
 		isError,
 		isFetching,
+		isPlaceholderData,
 		refetch,
-	} = useQuery(orpc.documents.list.queryOptions({ input: { trashed: false } }));
+	} = useQuery({
+		gcTime: 0,
+		placeholderData: (previous) => previous,
+		...orpc.documents.page.queryOptions({
+			input: {
+				type: search.type,
+				q: query,
+				tags: search.tags,
+				sort: search.sort,
+				public: search.public ?? false,
+				trashed: false,
+				limit: 100,
+				offset,
+			},
+		}),
+	});
+	const [lastPage, setLastPage] = useState({ data: pageData, offset });
+	if (pageData && !isPlaceholderData && (pageData !== lastPage.data || offset !== lastPage.offset))
+		setLastPage({ data: pageData, offset });
+	const displayed = pageData ?? lastPage.data;
+	const displayedOffset = pageData && !isPlaceholderData ? offset : lastPage.offset;
+	const rowsCurrent = Boolean(pageData) && !isPlaceholderData && !isError && query === searchText;
 	// The library staggers in on its first appearance only; cards that appear later (filters, a new document) don't.
 	const [intro, setIntro] = useState(true);
 	useEffect(() => {
@@ -89,34 +121,54 @@ export function DocumentsPage({ search, onSearchChange }: DocumentsPageProps) {
 		searchRef.current?.focus();
 	});
 
-	const all = documents ?? [];
-	const failed = isError && !documents;
-	const firstRun = !isPending && all.length === 0;
-	const shown = filterDocuments(all, search);
-	const tags = collectTags(all);
-	const counts = {
-		all: all.length,
-		resume: all.filter((document) => document.type === "resume").length,
-		letter: all.filter((document) => document.type === "letter").length,
-	};
-	const hasPublic = all.some((document) => document.isPublic);
+	if (page.filterKey !== filterKey || (pageData && !isPlaceholderData && offset > 0 && offset >= pageData.total)) {
+		setPage({
+			filterKey,
+			total: pageData?.total ?? 0,
+			offset: page.filterKey !== filterKey ? 0 : Math.max(0, Math.floor(((pageData?.total ?? 0) - 1) / 100) * 100),
+		});
+		setSelected(new Set());
+		setTagsFor(null);
+		setLinkFor(null);
+	}
+
+	const shown = displayed?.items ?? [];
+	const failed = isError && !displayed;
 	const filtered = search.type !== "all" || search.q.trim() !== "" || search.tags.length > 0 || search.public === true;
+	const firstRun = rowsCurrent && !filtered && offset === 0 && pageData?.total === 0;
+	const tags = displayed?.tags ?? [];
+	const counts = {
+		all: (displayed?.counts.resume ?? 0) + (displayed?.counts.letter ?? 0),
+		resume: displayed?.counts.resume ?? 0,
+		letter: displayed?.counts.letter ?? 0,
+	};
+	const hasPublic = displayed?.hasPublic ?? false;
 	// Actions apply to the selected documents the filters show.
-	const selection = shown.filter((document) => selected.has(documentKey(document)));
+	const selection = rowsCurrent ? shown.filter((document) => selected.has(documentKey(document))) : [];
 	const selecting = selection.length > 0;
 	const allSelected = selecting && selection.length === shown.length;
-	const setSelectedFor = (document: DocumentSummary, on: boolean) =>
+	const setSelectedFor = (document: DocumentSummary, on: boolean) => {
+		if (!rowsCurrent) return;
 		setSelected((current) => {
 			const next = new Set(current);
 			if (on) next.add(documentKey(document));
 			else next.delete(documentKey(document));
 			return next;
 		});
-	const selectAll = (on: boolean) => setSelected(new Set(on ? shown.map(documentKey) : []));
+	};
+	const selectAll = (on: boolean) => {
+		if (on && !rowsCurrent) return;
+		setSelected(new Set(on ? shown.map(documentKey) : []));
+	};
 	const itemProps = (document: DocumentSummary) => ({
-		onTags: (document: DocumentSummary) => setTagsFor([document]),
-		onLink: setLinkFor,
-		selected: selected.has(documentKey(document)),
+		onTags: (document: DocumentSummary) => {
+			if (rowsCurrent) setTagsFor([document]);
+		},
+		onLink: (document: DocumentSummary) => {
+			if (rowsCurrent) setLinkFor(document);
+		},
+		selected: rowsCurrent && selected.has(documentKey(document)),
+		disabled: !rowsCurrent,
 		onSelectedChange: (on: boolean) => setSelectedFor(document, on),
 		selecting,
 	});
@@ -129,7 +181,7 @@ export function DocumentsPage({ search, onSearchChange }: DocumentsPageProps) {
 	return (
 		<div className="mx-auto grid w-full max-w-[1180px] content-start gap-5 px-8 py-8 max-sm:px-4 max-sm:py-5">
 			<PageHeader title={<Trans>Documents</Trans>}>
-				{!failed && !firstRun && (
+				{!firstRun && (
 					<>
 						<Tabs value={search.type} onValueChange={(type) => onSearchChange({ type: type as DocumentTypeFilter })}>
 							<TabsList variant="line" aria-label={t`Document type`}>
@@ -156,10 +208,11 @@ export function DocumentsPage({ search, onSearchChange }: DocumentsPageProps) {
 								<InputGroupInput
 									ref={searchRef}
 									type="search"
-									value={search.q}
+									value={searchText}
+									maxLength={500}
 									aria-label={t`Search documents`}
 									placeholder={t`Search`}
-									onChange={(event) => onSearchChange({ q: event.target.value })}
+									onChange={(event) => onSearchChange({ q: event.target.value.slice(0, 500) })}
 								/>
 								<InputGroupAddon align="inline-end" className="max-sm:hidden pointer-coarse:hidden">
 									<Kbd>/</Kbd>
@@ -193,7 +246,16 @@ export function DocumentsPage({ search, onSearchChange }: DocumentsPageProps) {
 				)}
 			</PageHeader>
 
-			{isError && <LibraryError retrying={isFetching} onRetry={() => void refetch()} />}
+			{isError && (
+				<div className="grid justify-items-start gap-2">
+					<LibraryError retrying={isFetching} onRetry={() => void refetch()} />
+					{filtered && (
+						<Button variant="secondary" onClick={() => onSearchChange({ q: "", tags: [], type: "all", public: false })}>
+							<Trans>Clear search and filters</Trans>
+						</Button>
+					)}
+				</div>
+			)}
 
 			{failed ? null : firstRun ? (
 				<FirstRun onChooseFile={() => openDialog("document.new", undefined)} />
@@ -210,31 +272,33 @@ export function DocumentsPage({ search, onSearchChange }: DocumentsPageProps) {
 						/>
 					)}
 
-					{isPending ? (
+					{isPending || (!rowsCurrent && !isError && shown.length === 0) ? (
 						<LibrarySkeleton view={view} />
 					) : shown.length === 0 ? (
-						<div className="grid justify-items-center gap-2 py-16 text-center">
-							<Icon name="magnifying-glass" size={28} className="text-ink-3" />
-							<p className="font-semibold">
-								{search.q.trim() ? (
-									<Trans>Nothing matches “{search.q.trim()}”</Trans>
-								) : (
-									<Trans>Nothing matches these filters</Trans>
+						isError ? null : (
+							<div className="grid justify-items-center gap-2 py-16 text-center">
+								<Icon name="magnifying-glass" size={28} className="text-ink-3" />
+								<p className="font-semibold">
+									{search.q.trim() ? (
+										<Trans>Nothing matches “{search.q.trim()}”</Trans>
+									) : (
+										<Trans>Nothing matches these filters</Trans>
+									)}
+								</p>
+								<p className="text-sm text-ink-2">
+									<Trans>Search covers titles, tags and linked applications.</Trans>
+								</p>
+								{filtered && (
+									<Button
+										variant="secondary"
+										className="mt-2"
+										onClick={() => onSearchChange({ q: "", tags: [], type: "all", public: false })}
+									>
+										<Trans>Clear search and filters</Trans>
+									</Button>
 								)}
-							</p>
-							<p className="text-sm text-ink-2">
-								<Trans>Search covers titles, tags and linked applications.</Trans>
-							</p>
-							{filtered && (
-								<Button
-									variant="secondary"
-									className="mt-2"
-									onClick={() => onSearchChange({ q: "", tags: [], type: "all", public: false })}
-								>
-									<Trans>Clear search and filters</Trans>
-								</Button>
-							)}
-						</div>
+							</div>
+						)
 					) : view === "list" ? (
 						<table className={cn("w-full table-fixed border-collapse", viewEnter)}>
 							<caption className="sr-only">
@@ -244,10 +308,11 @@ export function DocumentsPage({ search, onSearchChange }: DocumentsPageProps) {
 								<tr className="border-b border-line text-start text-xs font-medium text-ink-3">
 									<th className="w-10 ps-3">
 										<Checkbox
+											disabled={!rowsCurrent}
 											checked={allSelected}
 											indeterminate={selecting && !allSelected}
 											onCheckedChange={(on) => selectAll(on)}
-											aria-label={t`Select all`}
+											aria-label={t`Select this page`}
 										/>
 									</th>
 									<th className="h-10 ps-3 text-start font-medium">
@@ -300,7 +365,14 @@ export function DocumentsPage({ search, onSearchChange }: DocumentsPageProps) {
 				</>
 			)}
 
+			<PageNavigation
+				offset={displayedOffset}
+				total={displayed?.total ?? page.total}
+				busy={isFetching || !rowsCurrent}
+				onChange={changePage}
+			/>
 			<SelectionBar
+				key={`selection:${filterKey}:${offset}`}
 				selection={selection}
 				allSelected={allSelected}
 				onSelectAll={() => selectAll(true)}
@@ -308,8 +380,16 @@ export function DocumentsPage({ search, onSearchChange }: DocumentsPageProps) {
 				onTags={() => setTagsFor(selection)}
 			/>
 			<DropToImport />
-			<TagsDialog documents={tagsFor} onClose={() => setTagsFor(null)} />
-			<LinkApplicationDialog document={linkFor} onClose={() => setLinkFor(null)} />
+			<TagsDialog
+				key={`tags:${filterKey}:${offset}`}
+				documents={rowsCurrent ? tagsFor : null}
+				onClose={() => setTagsFor(null)}
+			/>
+			<LinkApplicationDialog
+				key={`link:${filterKey}:${offset}`}
+				document={rowsCurrent ? linkFor : null}
+				onClose={() => setLinkFor(null)}
+			/>
 		</div>
 	);
 }
@@ -423,7 +503,7 @@ function TagFilter({ tags, active, onChange, showPublic, publicOnly, onPublicCha
 						key={tag}
 						type="button"
 						aria-pressed={isActive}
-						onClick={() => onChange(isActive ? active.filter((known) => known !== tag) : [...active, tag])}
+						onClick={() => onChange(isActive ? active.filter((known) => known !== tag) : [...active, tag].slice(0, 20))}
 						className={chipClassName(isActive)}
 					>
 						#{tag}
@@ -448,6 +528,7 @@ function SelectionBar({ selection, allSelected, onSelectAll, onClear, onTags }: 
 	const [busy, setBusy] = useState(false);
 	const count = selection.length;
 	const run = async (action: () => Promise<unknown>, { clear = false } = {}) => {
+		if (!selection.length) return;
 		setBusy(true);
 		try {
 			await action();
@@ -473,7 +554,7 @@ function SelectionBar({ selection, allSelected, onSelectAll, onClear, onTags }: 
 			</span>
 			{!allSelected && (
 				<Button variant="ghost" size="sm" onClick={onSelectAll} className="max-sm:hidden">
-					<Trans>Select all</Trans>
+					<Trans>Select this page</Trans>
 				</Button>
 			)}
 			<Button variant="ghost" size="sm" disabled={busy} onClick={onTags}>

@@ -12,13 +12,13 @@ import { RefreshControl, I18nManager, Platform, Pressable, ScrollView, View, use
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import Animated from "react-native-reanimated";
 import { DocumentSheets } from "./document-sheets";
-import { collectTags, daysLeftInTrash, documentKey, documentRef, filterDocuments } from "./filter";
+import { daysLeftInTrash, documentKey, documentRef } from "./filter";
 import { isNewDocument, useNewDocuments } from "./new-documents";
 import { usePendingDocuments } from "./pending";
-import { useDocumentOperations, useDocuments } from "./queries";
+import { useDocumentOperations } from "./queries";
 import { Thumbnail } from "./thumbnail";
 import { client, orpc } from "@/api/client";
-import { useSession } from "@/auth/session";
+import { getAccountScope, useSession } from "@/auth/session";
 import { CollectionHeader } from "@/components/collection-header";
 import { routes } from "@/routes";
 import {
@@ -95,7 +95,8 @@ function DocumentItem({
 			<Pressable
 				accessibilityRole={selecting ? "checkbox" : "button"}
 				accessibilityLabel={selecting ? t`Select ${document.name}` : document.name}
-				accessibilityState={{ checked: selecting ? selected : undefined }}
+				accessibilityState={{ checked: selecting ? selected : undefined, disabled: busy }}
+				disabled={busy}
 				accessibilityHint={unsynced ? t`Unsynced on this device` : !selecting ? t`Long press to select` : undefined}
 				onPress={selecting ? onSelect : onOpen}
 				onLongPress={selecting ? undefined : onSelect}
@@ -161,28 +162,67 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 	const { fontScale } = useWindowDimensions();
 	const [width, setWidth] = useState(0);
 	const session = useSession();
-	const documents = useDocuments(trashed);
+	const scope = getAccountScope();
+	const pending = usePendingDocuments();
+	const countsOptions = orpc.documents.counts.queryOptions();
+	const counts = useQuery({
+		...countsOptions,
+		queryKey: [...countsOptions.queryKey, scope],
+		enabled: session.status === "signed-in",
+	});
+	const [q, setQ] = useState("");
+	const [query, setQuery] = useState(q);
+	useEffect(() => {
+		const timer = setTimeout(() => setQuery(q), 300);
+		return () => clearTimeout(timer);
+	}, [q]);
+	const [type, setType] = useState<DocumentTypeFilter>("all");
+	const [sort, setSort] = useState<DocumentSort>("edited");
+	const [tags, setTags] = useState<string[]>([]);
+	const [publicOnly, setPublicOnly] = useState(false);
+	const filterKey = JSON.stringify([trashed, q, type, tags, publicOnly, sort, scope]);
+	const [page, setPage] = useState({ filterKey, offset: 0, total: 0 });
+	const offset = page.filterKey === filterKey ? page.offset : 0;
+	const pageOptions = orpc.documents.page.queryOptions({
+		input: { trashed, q: query, type, tags, public: publicOnly, sort, limit: 100, offset },
+	});
+	const documents = useQuery({
+		...pageOptions,
+		gcTime: 0,
+		queryKey: [...pageOptions.queryKey, scope],
+		placeholderData: (previous, previousQuery) => (previousQuery?.queryKey.at(-1) === scope ? previous : undefined),
+		enabled: session.status === "signed-in",
+	});
+	const [lastPage, setLastPage] = useState({ scope, data: documents.data, offset });
+	if (
+		scope !== lastPage.scope ||
+		(documents.data && !documents.isPlaceholderData && (documents.data !== lastPage.data || offset !== lastPage.offset))
+	)
+		setLastPage({ scope, data: documents.data, offset });
+	const displayed = documents.data ?? (lastPage.scope === scope ? lastPage.data : undefined);
+	const displayedOffset = documents.data && !documents.isPlaceholderData ? offset : lastPage.offset;
+	const rowsCurrent =
+		session.status === "signed-in" &&
+		Boolean(documents.data) &&
+		!documents.isPlaceholderData &&
+		!documents.isError &&
+		q === query;
+	const operations = useDocumentOperations(rowsCurrent);
+	const changePage = (next: number) => {
+		setSelection([]);
+		setSheet(null);
+		setPurge(null);
+		setPage({ filterKey, offset: next, total: documents.data?.total ?? page.total });
+	};
 	const { markInteractive } = useObserve();
 	// Documents is the signed-in launch screen; only the first call per session is recorded.
 	useEffect(() => {
 		if (!trashed && !documents.isPending) markInteractive();
 	}, [trashed, documents.isPending, markInteractive]);
-	const pending = usePendingDocuments();
-	const countsOptions = orpc.documents.counts.queryOptions();
-	const counts = useQuery({
-		...countsOptions,
-		queryKey: [...countsOptions.queryKey, session.server],
-		enabled: session.status === "signed-in",
-	});
-	const operations = useDocumentOperations();
-	const [q, setQ] = useState("");
-	const [type, setType] = useState<DocumentTypeFilter>("all");
-	const [sort, setSort] = useState<DocumentSort>("edited");
-	const [tags, setTags] = useState<string[]>([]);
-	const [publicOnly, setPublicOnly] = useState(false);
 	const [view, setView] = useState<"list" | "grid" | null>(null);
 	const [selecting, setSelecting] = useState(false);
 	const [selection, setSelection] = useState<string[]>([]);
+	const [recoveryOffset, setRecoveryOffset] = useState(0);
 	const [sheet, setSheet] = useState<DocumentSheet | null>(null);
 	const [purge, setPurge] = useState<{ documents: DocumentSummary[]; all: boolean } | null>(null);
 	const [visible, setVisible] = useState<string[]>([]);
@@ -194,16 +234,31 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 	);
 	const grid = !trashed && (view ?? (width >= 768 ? "grid" : "list")) === "grid";
 	const columns = grid ? (width >= 1000 ? 3 : 2) : 1;
-	const all = session.status === "signed-in" ? (documents.data ?? []) : [];
-	const trashTotal = counts.data?.trash ?? all.length;
+	if (
+		page.filterKey !== filterKey ||
+		(documents.data && !documents.isPlaceholderData && offset > 0 && offset >= documents.data.total)
+	) {
+		setPage({
+			filterKey,
+			total: documents.data?.total ?? 0,
+			offset:
+				page.filterKey !== filterKey ? 0 : Math.max(0, Math.floor(((documents.data?.total ?? 0) - 1) / 100) * 100),
+		});
+		setSelection([]);
+		setSheet(null);
+		setPurge(null);
+		setRecoveryOffset(0);
+	}
+	const all = session.status === "signed-in" ? (displayed?.items ?? []) : [];
+	const trashTotal = counts.data?.trash ?? documents.data?.total ?? 0;
 	const purgeCount = purge?.all ? trashTotal : (purge?.documents.length ?? 0);
 	const pendingKeys = new Set(pending.map(documentKey));
-	const recoverable = trashed
-		? []
-		: pending.filter((document) => !all.some((saved) => documentKey(saved) === documentKey(document)));
-	const filtered = filterDocuments(all, { q, type, tags, sort, public: publicOnly });
+	// Device recovery is independent of which server page or filter happens to be open.
+	const recoveryStart = Math.min(recoveryOffset, Math.max(0, Math.floor((pending.length - 1) / 100) * 100));
+	const recoverable = trashed ? [] : pending.slice(recoveryStart, recoveryStart + 100);
+	const filtered = all;
 	const firstAppearance = useFirstAppearance(filtered.length > 0);
-	const selected = filtered.filter((document) => selection.includes(documentKey(document)));
+	const selected = rowsCurrent ? filtered.filter((document) => selection.includes(documentKey(document))) : [];
 	const { refetch: refetchDocuments } = documents;
 	const { refetch: refetchCounts } = counts;
 	const pull = usePullRefresh(async () => {
@@ -218,6 +273,7 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 		}, [session.status, refetchDocuments, refetchCounts]),
 	);
 	const toggle = (document: DocumentSummary) => {
+		if (!rowsCurrent) return;
 		if (!selecting) {
 			setSelecting(true);
 			haptics.light();
@@ -232,6 +288,7 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 		setSelection([]);
 	};
 	const open = (document: DocumentSummary) => {
+		if (!rowsCurrent) return;
 		if (trashed) {
 			setPurge(null);
 			setSheet({ kind: "menu", documents: [document] });
@@ -253,6 +310,7 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 			useNewDocuments.getState().markNew({ type: document.type, id });
 		});
 	const clearFilters = () => {
+		changePage(0);
 		setQ("");
 		setType("all");
 		setTags([]);
@@ -282,7 +340,8 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 						searchLabel={t`Search documents`}
 						placeholder={t`Names, tags or applications`}
 						value={q}
-						onChangeText={setQ}
+						maxLength={500}
+						onChangeText={(value) => setQ(value.slice(0, 500))}
 						actions={
 							<>
 								{selecting && <Button variant="ghost" label={t`Done`} onPress={finishSelection} />}
@@ -312,6 +371,25 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 									}
 								/>
 							))}
+							{pending.length > 100 && (
+								<View style={{ gap: space.s2 }}>
+									<Text>{t`${recoveryStart + 1}–${Math.min(recoveryStart + 100, pending.length)} of ${pending.length}`}</Text>
+									<View style={{ flexDirection: "row", gap: space.s2 }}>
+										<Button
+											label={t`Previous unsynced drafts`}
+											variant="secondary"
+											disabled={recoveryStart === 0}
+											onPress={() => setRecoveryOffset(Math.max(0, recoveryStart - 100))}
+										/>
+										<Button
+											label={t`Next unsynced drafts`}
+											variant="secondary"
+											disabled={recoveryStart + 100 >= pending.length}
+											onPress={() => setRecoveryOffset(recoveryStart + 100)}
+										/>
+									</View>
+								</View>
+							)}
 						</View>
 					)}
 					{(documents.isError || counts.isError) && (
@@ -336,17 +414,20 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 								label={t`Document type`}
 								onChange={setType}
 								options={[
-									{ value: "all", label: t`All (${all.length + recoverable.length})` },
+									{
+										value: "all",
+										label: t`All (${(displayed?.counts.resume ?? 0) + (displayed?.counts.letter ?? 0)})`,
+									},
 									{
 										value: "resume",
-										label: plural([...all, ...recoverable].filter((document) => document.type === "resume").length, {
+										label: plural(displayed?.counts.resume ?? 0, {
 											one: "Resume (#)",
 											other: "Resumes (#)",
 										}),
 									},
 									{
 										value: "letter",
-										label: plural([...all, ...recoverable].filter((document) => document.type === "letter").length, {
+										label: plural(displayed?.counts.letter ?? 0, {
 											one: "Letter (#)",
 											other: "Letters (#)",
 										}),
@@ -362,12 +443,14 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 							>
 								{fontScale <= 1.3 && sortControl}
 								<Chip label={t`Public`} selected={publicOnly} onPress={() => setPublicOnly(!publicOnly)} />
-								{collectTags(all).map((tag) => (
+								{(displayed?.tags ?? []).map((tag) => (
 									<Chip
 										key={tag}
 										label={tag}
 										selected={tags.includes(tag)}
-										onPress={() => setTags(tags.includes(tag) ? tags.filter((entry) => entry !== tag) : [...tags, tag])}
+										onPress={() =>
+											setTags(tags.includes(tag) ? tags.filter((entry) => entry !== tag) : [...tags, tag].slice(0, 20))
+										}
 									/>
 								))}
 								<IconButton
@@ -386,14 +469,17 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 								<Button
 									label={t`Select this page`}
 									variant="ghost"
-									onPress={() => setSelection(filtered.map(documentKey))}
+									disabled={!rowsCurrent}
+									onPress={() => {
+										if (rowsCurrent) setSelection(filtered.map(documentKey));
+									}}
 								/>
 								{trashed ? (
 									<>
 										<Button
 											label={t`Restore`}
 											variant="secondary"
-											disabled={!selected.length || operations.busy}
+											disabled={!rowsCurrent || !selected.length || operations.busy}
 											loading={operations.busy}
 											onPress={() =>
 												void operations.restoreSelected(selected).then((success) => {
@@ -435,7 +521,7 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 						<Button
 							label={t`Empty trash`}
 							variant="danger"
-							disabled={operations.busy}
+							disabled={!rowsCurrent || operations.busy}
 							onPress={() => setPurge({ documents: all, all: true })}
 						/>
 					)}
@@ -475,15 +561,21 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 							document={item}
 							visible={visible.includes(documentKey(item))}
 							grid={grid}
-							selected={selection.includes(documentKey(item))}
+							selected={rowsCurrent && selection.includes(documentKey(item))}
 							selecting={selecting}
-							busy={operations.busy}
+							busy={operations.busy || !rowsCurrent}
 							unsynced={!trashed && pendingKeys.has(documentKey(item))}
 							onOpen={() => open(item)}
 							onSelect={() => toggle(item)}
-							onMenu={() => setSheet({ kind: "menu", documents: [item] })}
-							onTrash={() => void operations.trash([item])}
-							onDuplicate={() => void duplicate(item)}
+							onMenu={() => {
+								if (rowsCurrent) setSheet({ kind: "menu", documents: [item] });
+							}}
+							onTrash={() => {
+								if (rowsCurrent) void operations.trash([item]);
+							}}
+							onDuplicate={() => {
+								if (rowsCurrent) void duplicate(item);
+							}}
 						/>
 					</Animated.View>
 				)}
@@ -494,25 +586,31 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 							title={t`Sign in to see your documents`}
 							action={{ label: t`Sign in`, onPress: () => router.push(routes.signIn()) }}
 						/>
-					) : recoverable.length > 0 ? undefined : documents.isPending ? (
+					) : recoverable.length > 0 ? undefined : documents.isPending || (!rowsCurrent && !documents.isError) ? (
 						<View style={{ gap: space.s3 }}>
 							<Skeleton height={size.row * 2} />
 							<Skeleton height={size.row * 2} />
 							<Skeleton height={size.row * 2} />
 						</View>
-					) : documents.isError && !documents.data ? undefined : (
+					) : documents.isError ? undefined : (
 						<EmptyState
 							icon={trashed ? "trash" : "file-text"}
-							title={all.length ? t`No matches` : trashed ? t`Trash is empty` : t`Let's start with what you have`}
+							title={
+								q || type !== "all" || tags.length || publicOnly || offset > 0
+									? t`No matches`
+									: trashed
+										? t`Trash is empty`
+										: t`Let's start with what you have`
+							}
 							message={
-								all.length
+								q || type !== "all" || tags.length || publicOnly || offset > 0
 									? t`Try another search or clear your filters.`
 									: trashed
 										? t`Documents you move here stay for 30 days.`
 										: t`Import your current resume, or start fresh with your name.`
 							}
 							action={
-								all.length
+								q || type !== "all" || tags.length || publicOnly || offset > 0
 									? { label: t`Clear filters`, onPress: clearFilters }
 									: trashed
 										? undefined
@@ -522,20 +620,47 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 					)
 				}
 				ListFooterComponent={
-					session.status === "signed-in" && !trashed && counts.data?.trash ? (
-						<Card style={{ paddingVertical: space.s3 / 2 }}>
-							<ListRow
-								title={t`Trash`}
-								subtitle={plural(counts.data.trash, { one: "# document", other: "# documents" })}
-								leading="trash"
-								chevron
-								onPress={() => router.push(routes.trash())}
-							/>
-						</Card>
-					) : undefined
+					<View style={{ gap: space.s3 }}>
+						{session.status === "signed-in" && (offset > 0 || (displayed?.total ?? page.total) > 100) && (
+							<View style={{ gap: space.s2 }}>
+								<Text accessibilityLiveRegion="polite">{t`${Math.min(displayedOffset + 1, displayed?.total ?? page.total)}–${Math.min(displayedOffset + 100, displayed?.total ?? page.total)} of ${displayed?.total ?? page.total}`}</Text>
+								<View style={{ flexDirection: "row", gap: space.s2 }}>
+									<Button
+										label={t`Previous`}
+										variant="secondary"
+										disabled={!rowsCurrent || documents.isFetching || operations.busy || offset === 0}
+										onPress={() => changePage(Math.max(0, offset - 100))}
+									/>
+									<Button
+										label={t`Next`}
+										variant="secondary"
+										disabled={
+											!rowsCurrent ||
+											documents.isFetching ||
+											operations.busy ||
+											offset + 100 >= (documents.data?.total ?? page.total)
+										}
+										onPress={() => changePage(offset + 100)}
+									/>
+								</View>
+							</View>
+						)}
+						{session.status === "signed-in" && !trashed && counts.data?.trash ? (
+							<Card style={{ paddingVertical: space.s3 / 2 }}>
+								<ListRow
+									title={t`Trash`}
+									subtitle={plural(counts.data.trash, { one: "# document", other: "# documents" })}
+									leading="trash"
+									chevron
+									onPress={() => router.push(routes.trash())}
+								/>
+							</Card>
+						) : undefined}
+					</View>
 				}
 			/>
 			{session.status === "signed-in" &&
+				rowsCurrent &&
 				sheet &&
 				(trashed ? (
 					<SheetForTrash
@@ -564,7 +689,7 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 					/>
 				))}
 			<ConfirmDialog
-				open={session.status === "signed-in" && purge !== null}
+				open={rowsCurrent && purge !== null}
 				title={
 					purge?.all
 						? t`Empty Trash?`
@@ -577,9 +702,7 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 				}
 				message={
 					purge?.all
-						? purgeCount === 1
-							? t`The document in Trash will be deleted for good and can't be restored.`
-							: t`All ${purgeCount} documents in Trash will be deleted for good and can't be restored.`
+						? t`All documents in Trash will be deleted for good and can't be restored.`
 						: purgeCount === 1
 							? t`“${purge?.documents[0]?.name}” will be deleted for good and can't be restored.`
 							: t`The selected documents will be deleted for good and can't be restored.`
@@ -591,7 +714,7 @@ export function DocumentsLibrary({ trashed = false }: DocumentsLibraryProps) {
 					if (!operations.busy) setPurge(null);
 				}}
 				onConfirm={() => {
-					if (!purge) return;
+					if (!rowsCurrent || !purge) return;
 					const action = purge.all ? operations.emptyTrash() : operations.purgeSelected(purge.documents);
 					void action.then((success) => {
 						if (!success) return;

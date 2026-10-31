@@ -265,7 +265,7 @@ msgstr "{0, plural, one {# 데이용} other {#일 동안}}"
 msgid "{0, plural, one {Knowledge · # fact} other {Knowledge · # facts}}"
 msgstr "{0, plural, other {지식 · 사실 #개}}"
 
-#. placeholder {0}: [...all, ...recoverable].filter((document) => document.type === "letter").length
+#. placeholder {0}: displayed?.counts.letter ?? 0
 #: src/features/documents/library.tsx
 msgid "{0, plural, one {Letter (#)} other {Letters (#)}}"
 msgstr "{0, plural, one {커버레터 (#)} other {커버레터 (#)}}"
@@ -275,7 +275,7 @@ msgstr "{0, plural, one {커버레터 (#)} other {커버레터 (#)}}"
 msgid "{0, plural, one {No reply in # day} other {No reply in # days}}"
 msgstr "{0, plural, one {#일에 응답이 없습니다.} other {#일 내에 응답이 없습니다.}}"
 
-#. placeholder {0}: [...all, ...recoverable].filter((document) => document.type === "resume").length
+#. placeholder {0}: displayed?.counts.resume ?? 0
 #: src/features/documents/library.tsx
 msgid "{0, plural, one {Resume (#)} other {Resumes (#)}}"
 msgstr "{0, plural, one {이력서 (#)} other {이력서 (#)}}"
@@ -423,6 +423,16 @@ msgstr ""
 #: src/features/share/download.tsx
 msgid "{0}-Resume"
 msgstr "{0}-이력서"
+
+#. placeholder {0}: Math.min(displayedOffset + 1, displayed?.total ?? page.total)
+#. placeholder {0}: recoveryStart + 1
+#. placeholder {1}: Math.min(displayedOffset + 100, displayed?.total ?? page.total)
+#. placeholder {1}: Math.min(recoveryStart + 100, pending.length)
+#. placeholder {2}: displayed?.total ?? page.total
+#. placeholder {2}: pending.length
+#: src/features/documents/library.tsx
+msgid "{0}–{1} of {2}"
+msgstr ""
 
 #. placeholder {0}: title || t`Untitled`
 #. placeholder {1}: row.index + 1
@@ -1340,18 +1350,18 @@ msgstr "알바니아어"
 msgid "All"
 msgstr "모두"
 
-#. placeholder {0}: all.length + recoverable.length
+#. placeholder {0}: (displayed?.counts.resume ?? 0) + (displayed?.counts.letter ?? 0)
 #: src/features/documents/library.tsx
 msgid "All ({0})"
 msgstr "모두({0})"
 
-#: src/features/documents/library.tsx
-msgid "All {purgeCount} documents in Trash will be deleted for good and can't be restored."
-msgstr ""
-
 #: src/features/career/facts.tsx
 msgid "All applications"
 msgstr "모든 지원 내역"
+
+#: src/features/documents/library.tsx
+msgid "All documents in Trash will be deleted for good and can't be restored."
+msgstr ""
 
 #: src/features/workspace/answer-library.tsx
 msgid "All employers"
@@ -6407,6 +6417,10 @@ msgstr "새로운 섹션"
 msgid "New STARR story"
 msgstr "새로운 STARR 스토리"
 
+#: src/features/documents/library.tsx
+msgid "Next"
+msgstr ""
+
 #: src/features/check/page.tsx
 msgid "Next issue"
 msgstr "다음호"
@@ -6435,6 +6449,10 @@ msgstr "다음 단계: {note}"
 #: src/features/workspace/tabs/messages.tsx
 msgid "Next step: {note}. Adds a reminder to Today."
 msgstr "다음 단계: {note}. 오늘에 알림을 추가합니다."
+
+#: src/features/documents/library.tsx
+msgid "Next unsynced drafts"
+msgstr ""
 
 #: src/shell/workspace-chrome.tsx
 msgid "Next workspace tabs"
@@ -7616,6 +7634,10 @@ msgstr "웹 페이지 미리 보기"
 msgid "Previewing {0} · tap to apply"
 msgstr "{0} 미리보기 중 · 적용하려면 탭하세요."
 
+#: src/features/documents/library.tsx
+msgid "Previous"
+msgstr ""
+
 #: src/features/check/page.tsx
 msgid "Previous issue"
 msgstr "이전 호"
@@ -7631,6 +7653,10 @@ msgstr "이전 페이지"
 #: src/features/check/parser.tsx
 msgid "Previous PDF result. It may not match your current draft."
 msgstr "이전 PDF 결과입니다. 현재 초안과 일치하지 않을 수 있습니다."
+
+#: src/features/documents/library.tsx
+msgid "Previous unsynced drafts"
+msgstr ""
 
 #: src/shell/workspace-chrome.tsx
 msgid "Previous workspace tabs"
@@ -10291,10 +10317,6 @@ msgstr "연결을 로드하거나 저장할 수 없습니다. 다시 시도해 �
 #: src/features/letters/share.tsx
 msgid "The current state will be saved as “Before restore” first."
 msgstr "현재 상태가 먼저 “복원 전”으로 저장됩니다."
-
-#: src/features/documents/library.tsx
-msgid "The document in Trash will be deleted for good and can't be restored."
-msgstr ""
 
 #: src/features/ats-checker/checker.tsx
 msgid "The editor opens on Check, which checks the imported resume again."

@@ -771,6 +771,10 @@ msgstr "{starCount, plural, one {GitHub'da bize yıldız verin, şu anda # yıld
 msgid "{stars, plural, one {Star Reactive Resume on GitHub, # star} other {Star Reactive Resume on GitHub, # stars}}"
 msgstr "{stars, plural, one {GitHub'da Reactive Resume'a yıldız verin, # yıldız} other {GitHub'da Reactive Resume'a yıldız verin, # yıldız}}"
 
+#: src/features/documents/page-navigation.tsx
+msgid "{start}–{end} of {total}"
+msgstr ""
+
 #: src/features/career/workspace/saved.tsx
 msgid "{stories, plural, one {# story} other {# stories}}"
 msgstr "{stories, plural, one {# hikaye} other {# hikaye}}"
@@ -1722,10 +1726,6 @@ msgstr "Sağa hizala"
 msgid "All"
 msgstr "Tüm"
 
-#: src/features/documents/trash-page.tsx
-msgid "All {trashCount} documents in Trash will be deleted for good and can't be restored."
-msgstr ""
-
 #: src/features/career/knowledge/facts.tsx
 msgid "All applications"
 msgstr "Tüm başvurular"
@@ -1737,6 +1737,10 @@ msgstr "Tüm iş başvuruları (kapalı olanlar dahil)"
 #: src/features/settings/account/data.tsx
 msgid "All documents and applications as JSON, in one zip"
 msgstr "Tüm belgeler ve iş başvuruları JSON olarak tek zipte"
+
+#: src/features/documents/trash-page.tsx
+msgid "All documents in Trash will be deleted for good and can't be restored."
+msgstr ""
 
 #: src/features/career/workspace/answer-library.tsx
 msgid "All employers"
@@ -8066,6 +8070,10 @@ msgstr "Yeni aşamanın rengi"
 msgid "New teams at Northwind were stalling in setup; most never got through."
 msgstr "Northwind'de yeni ekipler kurulumda takılıyordu; çoğu sonuna kadar gidemiyordu."
 
+#: src/features/documents/page-navigation.tsx
+msgid "Next"
+msgstr ""
+
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Next issue"
 msgstr "Sonraki sayı"
@@ -9019,6 +9027,10 @@ msgstr "Sayfa okuması bitmedi."
 msgid "Page view"
 msgstr "Sayfa görünümü"
 
+#: src/features/documents/page-navigation.tsx
+msgid "Pagination"
+msgstr ""
+
 #: src/features/resume/editor/design/style-groups.tsx
 msgid "Paper"
 msgstr "Kağıt"
@@ -9504,6 +9516,10 @@ msgstr "Önizleme boyutu"
 #: src/routes/builder/letter/-components/letter-page.tsx
 msgid "Previewing {0} · click to apply"
 msgstr "{0} önizleniyor · uygulamak için tıklayın"
+
+#: src/features/documents/page-navigation.tsx
+msgid "Previous"
+msgstr ""
 
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Previous issue"
@@ -11272,14 +11288,11 @@ msgstr "{0} öğesini seç"
 msgid "Select {0} at {1}"
 msgstr "{1}'da {0}'yu seçin"
 
-#: src/features/documents/documents-page.tsx
-msgid "Select all"
-msgstr "Tümünü seç"
-
 #: src/features/settings/integrations/components/ai-provider-picker.tsx
 msgid "Select an AI provider"
 msgstr "Bir yapay zeka sağlayıcısı seçin"
 
+#: src/features/documents/documents-page.tsx
 #: src/features/documents/trash-page.tsx
 msgid "Select this page"
 msgstr ""
@@ -12679,10 +12692,6 @@ msgstr "Koç belirttiğiniz bilgileri kaydeder ve size bildirir. Geri alabilirsi
 #: src/features/documents/new-document-dialog.tsx
 msgid "The copy is linked to the application, so Check and the assistant use its posting."
 msgstr "Kopya iş başvurusuna bağlı olduğundan Check ve asistan iş ilanını kullanır."
-
-#: src/features/documents/trash-page.tsx
-msgid "The document in Trash will be deleted for good and can't be restored."
-msgstr ""
 
 #: src/features/resume/editor/write/dates-field.tsx
 msgid "The end is before the start."

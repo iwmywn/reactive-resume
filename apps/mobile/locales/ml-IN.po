@@ -265,7 +265,7 @@ msgstr "{0, plural, one {# ദിവസത്തേക്ക്} other {# ദി
 msgid "{0, plural, one {Knowledge · # fact} other {Knowledge · # facts}}"
 msgstr "{0, plural, one {അറിവ് · # വസ്തുത} other {അറിവ് · # വസ്തുതകൾ}}"
 
-#. placeholder {0}: [...all, ...recoverable].filter((document) => document.type === "letter").length
+#. placeholder {0}: displayed?.counts.letter ?? 0
 #: src/features/documents/library.tsx
 msgid "{0, plural, one {Letter (#)} other {Letters (#)}}"
 msgstr "{0, plural, one {കവർ ലെറ്റർ (#)} other {കവർ ലെറ്ററുകൾ (#)}}"
@@ -275,7 +275,7 @@ msgstr "{0, plural, one {കവർ ലെറ്റർ (#)} other {കവർ ല�
 msgid "{0, plural, one {No reply in # day} other {No reply in # days}}"
 msgstr "{0, plural, one {# ദിവസത്തിൽ മറുപടിയില്ല} other {# ദിവസങ്ങളിൽ മറുപടിയില്ല}}"
 
-#. placeholder {0}: [...all, ...recoverable].filter((document) => document.type === "resume").length
+#. placeholder {0}: displayed?.counts.resume ?? 0
 #: src/features/documents/library.tsx
 msgid "{0, plural, one {Resume (#)} other {Resumes (#)}}"
 msgstr "{0, plural, one {റെസ്യൂമെ (#)} other {റെസ്യൂമെകൾ (#)}}"
@@ -423,6 +423,16 @@ msgstr ""
 #: src/features/share/download.tsx
 msgid "{0}-Resume"
 msgstr "{0}-റെസ്യൂമെ"
+
+#. placeholder {0}: Math.min(displayedOffset + 1, displayed?.total ?? page.total)
+#. placeholder {0}: recoveryStart + 1
+#. placeholder {1}: Math.min(displayedOffset + 100, displayed?.total ?? page.total)
+#. placeholder {1}: Math.min(recoveryStart + 100, pending.length)
+#. placeholder {2}: displayed?.total ?? page.total
+#. placeholder {2}: pending.length
+#: src/features/documents/library.tsx
+msgid "{0}–{1} of {2}"
+msgstr ""
 
 #. placeholder {0}: title || t`Untitled`
 #. placeholder {1}: row.index + 1
@@ -1340,18 +1350,18 @@ msgstr "അൽബേനിയൻ"
 msgid "All"
 msgstr "എല്ലാം"
 
-#. placeholder {0}: all.length + recoverable.length
+#. placeholder {0}: (displayed?.counts.resume ?? 0) + (displayed?.counts.letter ?? 0)
 #: src/features/documents/library.tsx
 msgid "All ({0})"
 msgstr "എല്ലാം ({0})"
 
-#: src/features/documents/library.tsx
-msgid "All {purgeCount} documents in Trash will be deleted for good and can't be restored."
-msgstr ""
-
 #: src/features/career/facts.tsx
 msgid "All applications"
 msgstr "എല്ലാ അപേക്ഷകളും"
+
+#: src/features/documents/library.tsx
+msgid "All documents in Trash will be deleted for good and can't be restored."
+msgstr ""
 
 #: src/features/workspace/answer-library.tsx
 msgid "All employers"
@@ -6407,6 +6417,10 @@ msgstr "പുതിയ വിഭാഗം"
 msgid "New STARR story"
 msgstr "പുതിയ STARR സ്റ്റോറി"
 
+#: src/features/documents/library.tsx
+msgid "Next"
+msgstr ""
+
 #: src/features/check/page.tsx
 msgid "Next issue"
 msgstr "അടുത്ത ലക്കം"
@@ -6435,6 +6449,10 @@ msgstr "അടുത്ത ഘട്ടം: {note}"
 #: src/features/workspace/tabs/messages.tsx
 msgid "Next step: {note}. Adds a reminder to Today."
 msgstr "അടുത്ത ഘട്ടം: {note}. ഇന്ന് എന്നതിലേക്ക് ഒരു ഓർമ്മപ്പെടുത്തൽ ചേർക്കുന്നു."
+
+#: src/features/documents/library.tsx
+msgid "Next unsynced drafts"
+msgstr ""
 
 #: src/shell/workspace-chrome.tsx
 msgid "Next workspace tabs"
@@ -7616,6 +7634,10 @@ msgstr "വെബ് പേജ് പ്രിവ്യൂ ചെയ്യുക
 msgid "Previewing {0} · tap to apply"
 msgstr "{0} പ്രിവ്യൂ ചെയ്യുന്നു · പ്രയോഗിക്കാൻ ടാപ്പ് ചെയ്യുക"
 
+#: src/features/documents/library.tsx
+msgid "Previous"
+msgstr ""
+
 #: src/features/check/page.tsx
 msgid "Previous issue"
 msgstr "മുൻ പ്രശ്നം"
@@ -7631,6 +7653,10 @@ msgstr "മുൻ പേജ്"
 #: src/features/check/parser.tsx
 msgid "Previous PDF result. It may not match your current draft."
 msgstr "മുമ്പത്തെ PDF ഫലം. ഇത് നിങ്ങളുടെ നിലവിലെ ഡ്രാഫ്റ്റുമായി പൊരുത്തപ്പെടുന്നില്ലായിരിക്കാം."
+
+#: src/features/documents/library.tsx
+msgid "Previous unsynced drafts"
+msgstr ""
 
 #: src/shell/workspace-chrome.tsx
 msgid "Previous workspace tabs"
@@ -10291,10 +10317,6 @@ msgstr "കണക്ഷൻ ലോഡ് ചെയ്യാനോ സംരക്
 #: src/features/letters/share.tsx
 msgid "The current state will be saved as “Before restore” first."
 msgstr "നിലവിലെ അവസ്ഥ ആദ്യം \"പുനഃസ്ഥാപിക്കുന്നതിന് മുമ്പ്\" ആയി സംരക്ഷിക്കപ്പെടും."
-
-#: src/features/documents/library.tsx
-msgid "The document in Trash will be deleted for good and can't be restored."
-msgstr ""
 
 #: src/features/ats-checker/checker.tsx
 msgid "The editor opens on Check, which checks the imported resume again."

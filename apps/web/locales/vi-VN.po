@@ -771,6 +771,10 @@ msgstr "{starCount, plural, other {Gắn sao cho chúng tôi trên GitHub, hiệ
 msgid "{stars, plural, one {Star Reactive Resume on GitHub, # star} other {Star Reactive Resume on GitHub, # stars}}"
 msgstr "{stars, plural, other {Gắn sao cho Reactive Resume trên GitHub, # sao}}"
 
+#: src/features/documents/page-navigation.tsx
+msgid "{start}–{end} of {total}"
+msgstr ""
+
 #: src/features/career/workspace/saved.tsx
 msgid "{stories, plural, one {# story} other {# stories}}"
 msgstr "{stories, plural, other {# câu chuyện}}"
@@ -1722,10 +1726,6 @@ msgstr "Căn phải"
 msgid "All"
 msgstr "Tất cả"
 
-#: src/features/documents/trash-page.tsx
-msgid "All {trashCount} documents in Trash will be deleted for good and can't be restored."
-msgstr ""
-
 #: src/features/career/knowledge/facts.tsx
 msgid "All applications"
 msgstr "Tất cả hồ sơ ứng tuyển"
@@ -1737,6 +1737,10 @@ msgstr "Tất cả các đơn xin việc (bao gồm cả đã đóng)"
 #: src/features/settings/account/data.tsx
 msgid "All documents and applications as JSON, in one zip"
 msgstr "Tất cả các tài liệu và đơn xin việc dưới dạng JSON, trong một zip"
+
+#: src/features/documents/trash-page.tsx
+msgid "All documents in Trash will be deleted for good and can't be restored."
+msgstr ""
 
 #: src/features/career/workspace/answer-library.tsx
 msgid "All employers"
@@ -8066,6 +8070,10 @@ msgstr "Màu giai đoạn mới"
 msgid "New teams at Northwind were stalling in setup; most never got through."
 msgstr "Các nhóm mới tại Northwind bị kẹt ở bước thiết lập; hầu hết không vượt qua được."
 
+#: src/features/documents/page-navigation.tsx
+msgid "Next"
+msgstr ""
+
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Next issue"
 msgstr "Số tiếp theo"
@@ -9019,6 +9027,10 @@ msgstr "Việc đọc trang chưa kết thúc."
 msgid "Page view"
 msgstr "Lượt xem trang"
 
+#: src/features/documents/page-navigation.tsx
+msgid "Pagination"
+msgstr ""
+
 #: src/features/resume/editor/design/style-groups.tsx
 msgid "Paper"
 msgstr "Giấy"
@@ -9504,6 +9516,10 @@ msgstr "Kích thước xem trước"
 #: src/routes/builder/letter/-components/letter-page.tsx
 msgid "Previewing {0} · click to apply"
 msgstr "Đang xem trước {0} · nhấp để áp dụng"
+
+#: src/features/documents/page-navigation.tsx
+msgid "Previous"
+msgstr ""
 
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Previous issue"
@@ -11272,14 +11288,11 @@ msgstr "Chọn {0}"
 msgid "Select {0} at {1}"
 msgstr "Chọn {0} tại {1}"
 
-#: src/features/documents/documents-page.tsx
-msgid "Select all"
-msgstr "Chọn tất cả"
-
 #: src/features/settings/integrations/components/ai-provider-picker.tsx
 msgid "Select an AI provider"
 msgstr "Chọn nhà cung cấp AI"
 
+#: src/features/documents/documents-page.tsx
 #: src/features/documents/trash-page.tsx
 msgid "Select this page"
 msgstr ""
@@ -12679,10 +12692,6 @@ msgstr "Cố vấn lưu các dữ kiện bạn nêu và thông báo cho bạn. B
 #: src/features/documents/new-document-dialog.tsx
 msgid "The copy is linked to the application, so Check and the assistant use its posting."
 msgstr "Bản sao được liên kết với đơn xin việc nên Check và trợ lý sẽ sử dụng tin tuyển dụng của nó."
-
-#: src/features/documents/trash-page.tsx
-msgid "The document in Trash will be deleted for good and can't be restored."
-msgstr ""
 
 #: src/features/resume/editor/write/dates-field.tsx
 msgid "The end is before the start."

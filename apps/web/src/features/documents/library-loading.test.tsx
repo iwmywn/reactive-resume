@@ -14,7 +14,7 @@ const { loadDocuments, loadCounts } = vi.hoisted(() => ({ loadDocuments: vi.fn()
 vi.mock("@/libs/orpc/client", () => ({
 	orpc: {
 		documents: {
-			list: { queryOptions: () => ({ queryKey: ["documents"], queryFn: loadDocuments }) },
+			page: { queryOptions: () => ({ queryKey: ["documents"], queryFn: loadDocuments }) },
 			counts: { queryOptions: () => ({ queryKey: ["documents", "counts"], queryFn: loadCounts }) },
 		},
 	},
@@ -36,7 +36,10 @@ vi.mock("@/hooks/use-confirm", () => ({ useConfirm: () => vi.fn(async () => true
 
 it.each(["documents", "trash"])("keeps %s load failures distinct from empty state and retries", async (page) => {
 	i18n.loadAndActivate({ locale: "en-US", messages: {} });
-	loadDocuments.mockReset().mockRejectedValueOnce(new Error("Network unavailable")).mockResolvedValue([]);
+	loadDocuments
+		.mockReset()
+		.mockRejectedValueOnce(new Error("Network unavailable"))
+		.mockResolvedValue({ items: [], total: 0, counts: { resume: 0, letter: 0 }, tags: [], hasPublic: false });
 	loadCounts.mockReset().mockResolvedValue({ resume: 0, letter: 0, trash: 0 });
 	const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
 	const view = render(
@@ -59,6 +62,28 @@ it.each(["documents", "trash"])("keeps %s load failures distinct from empty stat
 		await screen.findByText(page === "documents" ? "Let's start with what you have" : "Trash is empty"),
 	).toBeVisible();
 	expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+	view.unmount();
+	queryClient.clear();
+});
+
+it("offers clearing filters after a first-load failure without tag facets", async () => {
+	i18n.loadAndActivate({ locale: "en-US", messages: {} });
+	loadDocuments.mockReset().mockRejectedValue(new Error("Unavailable"));
+	const onSearchChange = vi.fn();
+	const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+	const view = render(
+		<I18nProvider i18n={i18n}>
+			<QueryClientProvider client={queryClient}>
+				<DocumentsPage
+					search={{ type: "all", q: "", tags: ["design"], sort: "edited" }}
+					onSearchChange={onSearchChange}
+				/>
+			</QueryClientProvider>
+		</I18nProvider>,
+	);
+	expect(await screen.findByRole("alert")).toBeVisible();
+	fireEvent.click(screen.getByRole("button", { name: "Clear search and filters" }));
+	expect(onSearchChange).toHaveBeenCalledWith({ q: "", tags: [], type: "all", public: false });
 	view.unmount();
 	queryClient.clear();
 });

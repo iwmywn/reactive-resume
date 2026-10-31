@@ -508,19 +508,46 @@ const { KnowledgeScreen } = load("features/career/knowledge.tsx", {
 	"@/ui": { ...ui, Screen: "Screen", Segmented: "Segmented" },
 });
 native.FlatList = "FlatList";
-const documentQuery = { data: [], isError: false, refetch() {} };
+const documentQuery = {
+	data: { items: [], total: 19500, counts: { resume: 19500, letter: 0 }, tags: [], hasPublic: false },
+	isError: false,
+	isPlaceholderData: false,
+	refetch() {},
+};
+let documentInput;
+let documentPlaceholder;
+let pendingDocuments = [];
+const documentPage = (input) => ({ queryKey: ["document-page", input] });
 const { DocumentsLibrary } = load("features/documents/library.tsx", {
 	"@legendapp/list/reanimated": { AnimatedLegendList: "FlatList" },
 	"./document-sheets": { DocumentSheets: "DocumentSheets" },
 	"./filter": load("features/documents/filter.ts"),
 	"./new-documents": {},
-	"./pending": { usePendingDocuments: () => [] },
-	"./queries": { useDocuments: () => documentQuery, useDocumentOperations: () => ({ busy: false }) },
+	"./pending": { usePendingDocuments: () => pendingDocuments },
+	"./queries": { useDocumentOperations: () => ({ busy: false }) },
 	"./thumbnail": { Thumbnail: "Thumbnail" },
-	"@/api/client": { client: {}, orpc: { documents: { counts: { queryOptions: () => ({ queryKey: [] }) } } } },
-	"@/auth/session": { useSession: () => ({ status: "signed-in", server: "fixture" }) },
+	"@/api/client": {
+		client: {},
+		orpc: {
+			documents: {
+				page: { queryOptions: ({ input }) => documentPage(input) },
+				counts: { queryOptions: () => ({ queryKey: ["counts"] }) },
+			},
+		},
+	},
+	"@/auth/session": {
+		useSession: () => ({ status: "signed-in", server: "fixture" }),
+		getAccountScope: () => "fixture",
+	},
 	"@/components/collection-header": { CollectionHeader: "CollectionHeader" },
-	"@tanstack/react-query": { useQuery: () => ({ data: { trash: 0 }, refetch() {} }) },
+	"@tanstack/react-query": {
+		useQuery: ({ queryKey, placeholderData }) => {
+			if (queryKey[0] !== "document-page") return { data: { trash: 0 }, refetch() {} };
+			documentInput = queryKey[1];
+			documentPlaceholder = placeholderData;
+			return documentQuery;
+		},
+	},
 	"expo-haptics": {},
 	"expo-router": { ...mocks["expo-router"], useFocusEffect() {} },
 	"@lingui/core/macro": { plural: (count, options) => options[count === 1 ? "one" : "other"].replace("#", count) },
@@ -649,6 +676,141 @@ for (const fontScale of [1, 1.95, 3.12]) {
 		}
 	}
 }
+
+// Tag filters never exceed the server limit, and selected chips stay removable.
+hooks.length = 0;
+documentQuery.isError = false;
+documentQuery.data.tags = Array.from({ length: 21 }, (_, index) => `tag${index}`);
+for (let index = 0; index < 21; index++) {
+	const tree = render(DocumentsLibrary);
+	nodes(nodes(tree).find((node) => node.type === "FlatList").props.ListHeaderComponent)
+		.find((node) => node.type === "Chip" && node.props.label === `tag${index}`)
+		.props.onPress();
+	render(DocumentsLibrary);
+	assert.ok(documentInput.tags.length <= 20, "Tag chip must not generate an invalid request");
+}
+nodes(nodes(render(DocumentsLibrary)).find((node) => node.type === "FlatList").props.ListHeaderComponent)
+	.find((node) => node.type === "Chip" && node.props.label === "tag0")
+	.props.onPress();
+render(DocumentsLibrary);
+assert.equal(documentInput.tags.length, 19);
+nodes(nodes(render(DocumentsLibrary)).find((node) => node.type === "FlatList").props.ListHeaderComponent)
+	.find((node) => node.type === "Chip" && node.props.label === "tag20")
+	.props.onPress();
+render(DocumentsLibrary);
+assert.ok(documentInput.tags.includes("tag20"));
+documentQuery.data.tags = [];
+console.log("PASS native tag filter bound and removal recovery");
+
+// A large library renders only its server page. Navigation replaces rows and filters restart at zero.
+hooks.length = 0;
+documentQuery.isError = false;
+documentQuery.data.items = Array.from({ length: 100 }, (_, index) => ({
+	id: `doc-${index}`,
+	type: "resume",
+	tags: [],
+}));
+let library = render(DocumentsLibrary);
+let list = nodes(library).find((node) => node.type === "FlatList");
+assert.equal(list.props.data.length, 100);
+assert.equal(documentInput.limit, 100);
+assert.equal(documentInput.offset, 0);
+nodes(list.props.ListFooterComponent)
+	.find((node) => node.props.label === "Next")
+	.props.onPress();
+library = render(DocumentsLibrary);
+assert.equal(documentInput.offset, 100);
+list = nodes(library).find((node) => node.type === "FlatList");
+nodes(list.props.ListHeaderComponent)
+	.find((node) => node.type === "CollectionHeader")
+	.props.onChangeText("design");
+render(DocumentsLibrary);
+assert.equal(documentInput.q, "");
+list = nodes(render(DocumentsLibrary)).find((node) => node.type === "FlatList");
+let retained = nodes(list.props.renderItem({ item: list.props.data[0], index: 0 })).find(
+	(node) => node.type.name === "DocumentItem",
+);
+assert.equal(retained.props.busy, true, "Raw search disables retained rows before debounce");
+retained.props.onSelect();
+retained.props.onMenu();
+retained.props.onTrash();
+retained.props.onDuplicate();
+list = nodes(render(DocumentsLibrary)).find((node) => node.type === "FlatList");
+retained = nodes(list.props.renderItem({ item: list.props.data[0], index: 0 })).find(
+	(node) => node.type.name === "DocumentItem",
+);
+assert.equal(retained.props.selecting, false, "Disabled selection callback cannot enter selection mode");
+await new Promise((resolve) => setTimeout(resolve, 350));
+render(DocumentsLibrary);
+assert.equal(documentInput.q, "design");
+assert.equal(documentInput.offset, 0);
+render(DocumentsLibrary);
+assert.equal(documentInput.offset, 0);
+pendingDocuments = [
+	{ type: "resume", id: "doc-0", name: "Visible queued work" },
+	{ type: "letter", id: "off-page", name: "Other queued work" },
+];
+list = nodes(render(DocumentsLibrary)).find((node) => node.type === "FlatList");
+for (const document of pendingDocuments)
+	assert.ok(
+		nodes(list.props.ListHeaderComponent).some((node) => node.type === "ListRow" && node.props.title === document.name),
+	);
+assert.equal(
+	documentPlaceholder(documentQuery.data, { queryKey: ["document-page", {}, "another-account"] }),
+	undefined,
+);
+assert.equal(
+	documentPlaceholder(documentQuery.data, { queryKey: ["document-page", {}, "fixture"] }),
+	documentQuery.data,
+);
+pendingDocuments = Array.from({ length: 201 }, (_, id) => ({ type: "letter", id: String(id), name: `Queued ${id}` }));
+list = nodes(render(DocumentsLibrary)).find((node) => node.type === "FlatList");
+assert.equal(
+	nodes(list.props.ListHeaderComponent).filter(
+		(node) => node.type === "ListRow" && node.props.title?.startsWith("Queued "),
+	).length,
+	100,
+);
+nodes(list.props.ListHeaderComponent)
+	.find((node) => node.props.label === "Next unsynced drafts")
+	.props.onPress();
+list = nodes(render(DocumentsLibrary)).find((node) => node.type === "FlatList");
+assert.ok(nodes(list.props.ListHeaderComponent).some((node) => node.props.title === "Queued 100"));
+assert.ok(!nodes(list.props.ListHeaderComponent).some((node) => node.props.title === "Queued 0"));
+pendingDocuments = [];
+console.log("PASS native large-library page bound, navigation, debounced filter reset and account-scoped recovery");
+
+for (const trashed of [false, true]) {
+	hooks.length = 0;
+	documentQuery.isPlaceholderData = false;
+	documentQuery.isError = false;
+	const previousPage = documentQuery.data;
+	list = nodes(render(DocumentsLibrary, { trashed })).find((node) => node.type === "FlatList");
+	documentQuery.isPlaceholderData = true;
+	list = nodes(render(DocumentsLibrary, { trashed })).find((node) => node.type === "FlatList");
+	retained = nodes(list.props.renderItem({ item: list.props.data[0], index: 0 })).find(
+		(node) => node.type.name === "DocumentItem",
+	);
+	assert.equal(retained.props.busy, true);
+	retained.props.onSelect();
+	retained.props.onTrash();
+	documentQuery.isPlaceholderData = false;
+	documentQuery.isError = true;
+	documentQuery.data = undefined;
+	list = nodes(render(DocumentsLibrary, { trashed })).find((node) => node.type === "FlatList");
+	assert.equal(list.props.data.length, 100, "Failed replacement retains last-successful rows");
+	assert.ok(nodes(list.props.ListHeaderComponent).some((node) => node.type === "CollectionHeader"));
+	retained = nodes(list.props.renderItem({ item: list.props.data[0], index: 0 })).find(
+		(node) => node.type.name === "DocumentItem",
+	);
+	assert.equal(retained.props.busy, true);
+	assert.equal(retained.props.selecting, false);
+	documentQuery.data = previousPage;
+}
+documentQuery.isError = false;
+console.log(
+	"PASS native live/Trash retained rows block callbacks during debounce, placeholders and failed replacement",
+);
 
 // A direct link to a later workspace tab must reveal its selection and offer overflow navigation.
 hooks.length = 0;

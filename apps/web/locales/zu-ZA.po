@@ -766,6 +766,10 @@ msgstr ""
 msgid "{stars, plural, one {Star Reactive Resume on GitHub, # star} other {Star Reactive Resume on GitHub, # stars}}"
 msgstr ""
 
+#: src/features/documents/page-navigation.tsx
+msgid "{start}–{end} of {total}"
+msgstr ""
+
 #: src/features/career/workspace/saved.tsx
 msgid "{stories, plural, one {# story} other {# stories}}"
 msgstr ""
@@ -1717,10 +1721,6 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: src/features/documents/trash-page.tsx
-msgid "All {trashCount} documents in Trash will be deleted for good and can't be restored."
-msgstr ""
-
 #: src/features/career/knowledge/facts.tsx
 msgid "All applications"
 msgstr ""
@@ -1731,6 +1731,10 @@ msgstr ""
 
 #: src/features/settings/account/data.tsx
 msgid "All documents and applications as JSON, in one zip"
+msgstr ""
+
+#: src/features/documents/trash-page.tsx
+msgid "All documents in Trash will be deleted for good and can't be restored."
 msgstr ""
 
 #: src/features/career/workspace/answer-library.tsx
@@ -8061,6 +8065,10 @@ msgstr ""
 msgid "New teams at Northwind were stalling in setup; most never got through."
 msgstr ""
 
+#: src/features/documents/page-navigation.tsx
+msgid "Next"
+msgstr ""
+
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Next issue"
 msgstr ""
@@ -9014,6 +9022,10 @@ msgstr ""
 msgid "Page view"
 msgstr ""
 
+#: src/features/documents/page-navigation.tsx
+msgid "Pagination"
+msgstr ""
+
 #: src/features/resume/editor/design/style-groups.tsx
 msgid "Paper"
 msgstr ""
@@ -9498,6 +9510,10 @@ msgstr ""
 #: src/routes/builder/$resumeId/-components/page-canvas.tsx
 #: src/routes/builder/letter/-components/letter-page.tsx
 msgid "Previewing {0} · click to apply"
+msgstr ""
+
+#: src/features/documents/page-navigation.tsx
+msgid "Previous"
 msgstr ""
 
 #: src/features/resume/editor/check/page-layer.tsx
@@ -11267,14 +11283,11 @@ msgstr ""
 msgid "Select {0} at {1}"
 msgstr ""
 
-#: src/features/documents/documents-page.tsx
-msgid "Select all"
-msgstr ""
-
 #: src/features/settings/integrations/components/ai-provider-picker.tsx
 msgid "Select an AI provider"
 msgstr ""
 
+#: src/features/documents/documents-page.tsx
 #: src/features/documents/trash-page.tsx
 msgid "Select this page"
 msgstr ""
@@ -12673,10 +12686,6 @@ msgstr ""
 
 #: src/features/documents/new-document-dialog.tsx
 msgid "The copy is linked to the application, so Check and the assistant use its posting."
-msgstr ""
-
-#: src/features/documents/trash-page.tsx
-msgid "The document in Trash will be deleted for good and can't be restored."
 msgstr ""
 
 #: src/features/resume/editor/write/dates-field.tsx

@@ -771,6 +771,10 @@ msgstr "{starCount, plural, one {امنحنا نجمة على GitHub، حالي�
 msgid "{stars, plural, one {Star Reactive Resume on GitHub, # star} other {Star Reactive Resume on GitHub, # stars}}"
 msgstr "{stars, plural, one {امنح Reactive Resume نجمة على GitHub، نجمة واحدة} two {امنح Reactive Resume نجمة على GitHub، نجمتان} few {امنح Reactive Resume نجمة على GitHub، # نجوم} many {امنح Reactive Resume نجمة على GitHub، # نجمة} other {امنح Reactive Resume نجمة على GitHub، # نجمة}}"
 
+#: src/features/documents/page-navigation.tsx
+msgid "{start}–{end} of {total}"
+msgstr ""
+
 #: src/features/career/workspace/saved.tsx
 msgid "{stories, plural, one {# story} other {# stories}}"
 msgstr "{stories, plural, zero {لا قصص} one {قصة واحدة} two {قصتان} few {# قصص} many {# قصة} other {# قصة}}"
@@ -1722,10 +1726,6 @@ msgstr "محاذاة لليمين"
 msgid "All"
 msgstr "الجميع"
 
-#: src/features/documents/trash-page.tsx
-msgid "All {trashCount} documents in Trash will be deleted for good and can't be restored."
-msgstr ""
-
 #: src/features/career/knowledge/facts.tsx
 msgid "All applications"
 msgstr "كل الطلبات"
@@ -1737,6 +1737,10 @@ msgstr "جميع طلبات العمل (بما في ذلك المغلقة)"
 #: src/features/settings/account/data.tsx
 msgid "All documents and applications as JSON, in one zip"
 msgstr "جميع المستندات وطلبات العمل بصيغة JSON، في ملف مضغوط واحد"
+
+#: src/features/documents/trash-page.tsx
+msgid "All documents in Trash will be deleted for good and can't be restored."
+msgstr ""
 
 #: src/features/career/workspace/answer-library.tsx
 msgid "All employers"
@@ -8066,6 +8070,10 @@ msgstr "لون المرحلة الجديدة"
 msgid "New teams at Northwind were stalling in setup; most never got through."
 msgstr "كانت الفرق الجديدة في Northwind تتعثّر في الإعداد؛ ومعظمها لم يُكمله."
 
+#: src/features/documents/page-navigation.tsx
+msgid "Next"
+msgstr ""
+
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Next issue"
 msgstr "العدد القادم"
@@ -9019,6 +9027,10 @@ msgstr "لم تنتهي قراءة الصفحة."
 msgid "Page view"
 msgstr "عرض الصفحة"
 
+#: src/features/documents/page-navigation.tsx
+msgid "Pagination"
+msgstr ""
+
 #: src/features/resume/editor/design/style-groups.tsx
 msgid "Paper"
 msgstr "ورق"
@@ -9504,6 +9516,10 @@ msgstr "حجم المعاينة"
 #: src/routes/builder/letter/-components/letter-page.tsx
 msgid "Previewing {0} · click to apply"
 msgstr "معاينة {0} · انقر للتطبيق"
+
+#: src/features/documents/page-navigation.tsx
+msgid "Previous"
+msgstr ""
 
 #: src/features/resume/editor/check/page-layer.tsx
 msgid "Previous issue"
@@ -11272,14 +11288,11 @@ msgstr "تحديد {0}"
 msgid "Select {0} at {1}"
 msgstr "حدد {0} في {1}"
 
-#: src/features/documents/documents-page.tsx
-msgid "Select all"
-msgstr "تحديد الكل"
-
 #: src/features/settings/integrations/components/ai-provider-picker.tsx
 msgid "Select an AI provider"
 msgstr "اختر مزودًا لخدمات الذكاء الاصطناعي"
 
+#: src/features/documents/documents-page.tsx
 #: src/features/documents/trash-page.tsx
 msgid "Select this page"
 msgstr ""
@@ -12679,10 +12692,6 @@ msgstr "يحفظ المدرّب الحقائق التي تذكرها، ويخب�
 #: src/features/documents/new-document-dialog.tsx
 msgid "The copy is linked to the application, so Check and the assistant use its posting."
 msgstr "يتم ربط النسخة بطلب الوظيفة، لذا يستخدم Check والمساعد إعلان الوظيفة الخاص به."
-
-#: src/features/documents/trash-page.tsx
-msgid "The document in Trash will be deleted for good and can't be restored."
-msgstr ""
 
 #: src/features/resume/editor/write/dates-field.tsx
 msgid "The end is before the start."
