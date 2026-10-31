@@ -20,6 +20,7 @@ const cancellationRedisMock = {
 	exists: vi.fn(async () => 1),
 };
 const messagesPersistenceMock = {
+	lockThreadMessages: vi.fn(),
 	applyStepToUiMessage: vi.fn((message: unknown) => message),
 	insertDraftAssistantMessage: vi.fn(),
 	upsertAssistantUiMessage: vi.fn(),
@@ -226,6 +227,11 @@ beforeEach(() => {
 	clearActiveAgentRunIfCurrentMock.mockReset();
 	claimActiveAgentRunMock.mockReset();
 	for (const mock of Object.values(messagesPersistenceMock)) mock.mockReset();
+	messagesPersistenceMock.lockThreadMessages.mockImplementation(async () =>
+		(await dbMock.select().from().where().orderBy()).toSorted((a: { id: string }, b: { id: string }) =>
+			a.id.localeCompare(b.id),
+		),
+	);
 	messagesPersistenceMock.applyStepToUiMessage.mockImplementation((message: unknown) => message);
 	messagesPersistenceMock.insertDraftAssistantMessage.mockResolvedValue({
 		rowId: "draft-row-1",
@@ -570,6 +576,7 @@ describe("agentService.messages.send", () => {
 		const rows = [
 			{
 				id: "old",
+				sequence: 0,
 				role: "user",
 				uiMessage: {
 					id: "old",
@@ -577,8 +584,8 @@ describe("agentService.messages.send", () => {
 					parts: [{ type: "text", text: "private-marker https://old.example/private" }],
 				},
 			},
-			{ id: "user-row", role: "user", uiMessage: user },
-			{ id: "assistant-row", role: "assistant", uiMessage: stored },
+			{ id: "user-row", sequence: 1, role: "user", uiMessage: user },
+			{ id: "assistant-row", sequence: 2, role: "assistant", uiMessage: stored },
 		];
 		dbMock.update.mockReturnValue({ set: vi.fn(() => ({ where: vi.fn(async () => undefined) })) });
 		claimActiveAgentRunMock.mockResolvedValue(true);
@@ -1139,15 +1146,17 @@ describe("agentService.messages.send", () => {
 				],
 			} as UIMessage;
 			const rows = [
-				{ id: "old-row", role: "assistant", status: "canceled", uiMessage: message },
+				{ id: "z-old-row", sequence: 0, role: "assistant", status: "canceled", uiMessage: message },
 				{
 					id: "new-user",
+					sequence: 1,
 					role: "user",
 					status: "completed",
 					uiMessage: { id: "new-user", role: "user", parts: [{ type: "text", text: "Another topic" }] },
 				},
 				{
-					id: "new-assistant",
+					id: "a-new-assistant",
+					sequence: 2,
 					role: "assistant",
 					status: "completed",
 					uiMessage: { id: "new-assistant", role: "assistant", parts: [{ type: "text", text: "Later reply" }] },
@@ -1155,7 +1164,12 @@ describe("agentService.messages.send", () => {
 			];
 			const before = structuredClone(rows);
 			dbMock.select.mockImplementation(() => ({
-				from: () => ({ where: () => ({ limit: async () => [activeThread], orderBy: async () => rows }) }),
+				from: () => ({
+					where: () => ({
+						limit: async () => [activeThread],
+						orderBy: async () => rows,
+					}),
+				}),
 			}));
 			claimActiveAgentRunMock.mockResolvedValue(true);
 			aiProvidersServiceMock.getRunnableById.mockResolvedValue({
@@ -1254,7 +1268,8 @@ describe("agentService.messages.send", () => {
 			.mockImplementationOnce(() => selectWhereResult([{ total: 4 }]))
 			.mockImplementationOnce(() =>
 				selectOrderByResult([firstUserMessage, unresolvedAssistantMessage, legacyAnswerMessage, retryMessage]),
-			);
+			)
+			.mockImplementationOnce(() => selectOrderByResult([unresolvedAssistantMessage]));
 
 		dbMock.insert.mockReturnValue({
 			values: vi.fn(() => ({ returning: vi.fn(async () => [retryMessage]) })),
